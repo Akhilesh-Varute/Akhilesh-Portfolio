@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { Download } from 'lucide-react';
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -21,9 +20,8 @@ const Navigation = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'glass py-4' : 'py-6'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'glass py-4' : 'py-6'
+        }`}
     >
       <nav className="container max-w-5xl mx-auto px-6 flex items-center justify-between">
         <a
@@ -32,7 +30,7 @@ const Navigation = () => {
         >
           AV
         </a>
-        
+
         <ul className="hidden md:flex items-center gap-8">
           {navItems.map((item, index) => (
             <li key={item.label}>
@@ -47,20 +45,11 @@ const Navigation = () => {
           ))}
           <li className="flex items-center gap-3">
             <a
-              href="https://emphasized-opera-f57.notion.site/Akhilesh-Varute-2d0c76b3595d80b59417c5bcf34458eb"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/Akhilesh_Varute_Resume.pdf"
+              download
               className="px-4 py-2 border border-primary text-primary text-sm font-mono rounded hover:bg-primary/10 transition-colors"
             >
               Resume
-            </a>
-            <a
-              href="/Akhilesh_Varute_Resume.pdf"
-              download
-              className="px-4 py-2 bg-primary text-primary-foreground text-sm font-mono rounded hover:bg-primary/90 transition-colors inline-flex items-center gap-2"
-            >
-              <Download size={14} />
-              Download CV
             </a>
           </li>
         </ul>
