@@ -8,7 +8,7 @@ const Experience = () => {
       points: [
         'Built production-grade GenAI chatbots that query infrastructure data in natural language, powered by LLMs and RAG pipelines.',
         'Architected RESTful APIs using Python/FastAPI with JWT authentication and data ingestion, handling thousands of daily requests.',
-        'Designed and implemented security monitoring system integrating multiple data sources for compliance analytics.',
+        'Integrated AWS APIs (Security Hub, CloudTrail, CloudWatch, S3) into AICloudInsights platform for real-time security monitoring and compliance analytics.',
         'Shipped a full-stack e-commerce platform (React + FastAPI + PostgreSQL) with Stripe payment integration for GPU rentals.',
         'Developed infrastructure-as-code orchestrator combining GenAI with Kubernetes for automated resource provisioning.',
       ],
