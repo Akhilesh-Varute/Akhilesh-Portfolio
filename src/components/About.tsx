@@ -1,3 +1,5 @@
+import profilePhoto from '@/assets/profile-photo.png';
+
 const About = () => {
   const technologies = [
     'Python',
@@ -56,9 +58,11 @@ const About = () => {
 
           <div className="relative group">
             <div className="relative z-10 rounded-lg overflow-hidden">
-              <div className="w-full aspect-square bg-gradient-to-br from-primary/20 to-secondary rounded-lg flex items-center justify-center">
-                <span className="text-6xl font-bold text-primary/30 font-mono">AV</span>
-              </div>
+              <img 
+                src={profilePhoto} 
+                alt="Akhilesh Verma" 
+                className="w-full aspect-square object-cover object-top rounded-lg"
+              />
               <div className="absolute inset-0 bg-primary/10 group-hover:bg-transparent transition-colors duration-300" />
             </div>
             <div className="absolute inset-0 border-2 border-primary rounded-lg translate-x-4 translate-y-4 -z-10 group-hover:translate-x-2 group-hover:translate-y-2 transition-transform duration-300" />
