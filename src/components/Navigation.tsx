@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Download } from 'lucide-react';
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -44,7 +45,7 @@ const Navigation = () => {
               </a>
             </li>
           ))}
-          <li>
+          <li className="flex items-center gap-3">
             <a
               href="https://emphasized-opera-f57.notion.site/Akhilesh-Varute-2d0c76b3595d80b59417c5bcf34458eb"
               target="_blank"
@@ -52,6 +53,14 @@ const Navigation = () => {
               className="px-4 py-2 border border-primary text-primary text-sm font-mono rounded hover:bg-primary/10 transition-colors"
             >
               Resume
+            </a>
+            <a
+              href="/Akhilesh_Varute_Resume.pdf"
+              download
+              className="px-4 py-2 bg-primary text-primary-foreground text-sm font-mono rounded hover:bg-primary/90 transition-colors inline-flex items-center gap-2"
+            >
+              <Download size={14} />
+              Download CV
             </a>
           </li>
         </ul>
