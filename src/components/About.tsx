@@ -61,7 +61,7 @@ const About = () => {
               <img 
                 src={profilePhoto} 
                 alt="Akhilesh Verma" 
-                className="w-full aspect-square object-cover object-top rounded-lg"
+                className="w-full aspect-[3/4] object-cover object-center rounded-lg"
               />
               <div className="absolute inset-0 bg-primary/10 group-hover:bg-transparent transition-colors duration-300" />
             </div>
