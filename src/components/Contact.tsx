@@ -16,9 +16,9 @@ const Contact = () => {
     },
     {
       name: 'GitHub',
-      href: 'https://github.com/akhileshvarute',
+      href: 'https://github.com/Akhilesh-Varute',
       icon: Github,
-      label: 'github.com/akhileshvarute',
+      label: 'github.com/Akhilesh-Varute',
     },
   ];
 
@@ -26,13 +26,13 @@ const Contact = () => {
     <section id="contact" className="py-24 px-6">
       <div className="container max-w-2xl mx-auto text-center">
         <p className="font-mono text-primary text-sm mb-4">04. What's Next?</p>
-        
+
         <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
           Get In Touch
         </h2>
-        
+
         <p className="text-muted-foreground text-lg mb-12 max-w-lg mx-auto">
-          I'm currently open to new opportunities and collaborations. Whether you have a 
+          I'm currently open to new opportunities and collaborations. Whether you have a
           question or just want to say hi, I'll do my best to get back to you!
         </p>
 

@@ -2,7 +2,7 @@ import { Github, Linkedin, Mail } from 'lucide-react';
 
 const SocialSidebar = () => {
   const socials = [
-    { icon: Github, href: 'https://github.com/akhileshvarute', label: 'GitHub' },
+    { icon: Github, href: 'https://github.com/Akhilesh-Varute', label: 'GitHub' },
     { icon: Linkedin, href: 'https://linkedin.com/in/akhileshvarute', label: 'LinkedIn' },
     { icon: Mail, href: 'mailto:akhileshvarute23@gmail.com', label: 'Email' },
   ];
