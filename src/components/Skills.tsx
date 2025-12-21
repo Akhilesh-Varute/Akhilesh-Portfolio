@@ -6,7 +6,7 @@ const Skills = () => {
     },
     {
       title: 'Backend',
-      skills: ['FastAPI', 'REST APIs', 'PostgreSQL', 'Node.js', 'Microservices'],
+      skills: ['FastAPI', 'REST APIs', 'PostgreSQL', 'MongoDB', 'Node.js', 'Microservices'],
     },
     {
       title: 'Frontend',
