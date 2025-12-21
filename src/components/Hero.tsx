@@ -12,13 +12,13 @@ const Hero = () => {
           </h1>
           
           <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold text-muted-foreground opacity-0 animate-fade-up stagger-3">
-            I build things for the cloud.
+            I build software that scales.
           </h2>
           
           <p className="max-w-xl text-muted-foreground text-lg leading-relaxed opacity-0 animate-fade-up stagger-4">
-            I'm a software engineer specializing in building scalable backend services, 
-            GenAI applications, and cloud-native solutions. Currently crafting intelligent 
-            cloud platforms at{' '}
+            I'm a software engineer who loves solving complex problems — from building 
+            high-performance backend APIs with Python and FastAPI, to crafting GenAI-powered 
+            applications and scalable infrastructure. Currently building intelligent platforms at{' '}
             <a 
               href="https://gpuoncloud.com" 
               target="_blank" 

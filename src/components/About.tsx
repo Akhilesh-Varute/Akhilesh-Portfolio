@@ -2,11 +2,11 @@ const About = () => {
   const technologies = [
     'Python',
     'FastAPI',
-    'React.js',
-    'AWS Services',
-    'Docker',
-    'PostgreSQL',
     'TypeScript',
+    'React.js',
+    'PostgreSQL',
+    'Docker',
+    'AWS',
     'Kubernetes',
   ];
 
@@ -22,22 +22,22 @@ const About = () => {
         <div className="grid md:grid-cols-3 gap-12">
           <div className="md:col-span-2 space-y-4 text-muted-foreground">
             <p>
-              Hello! I'm Akhilesh, a software engineer based in Pune, India. I enjoy building 
-              robust backend systems and exploring the intersection of cloud computing and 
-              artificial intelligence.
+              Hello! I'm Akhilesh, a software engineer based in Pune, India. I thrive on 
+              building systems that are both elegant and scalable — whether that's a robust 
+              REST API, an AI-powered chatbot, or a full-stack e-commerce platform.
             </p>
             
             <p>
-              With experience in developing GenAI chatbots, cloud insight platforms, and 
-              GPU marketplace solutions, I've had the opportunity to work on diverse projects 
-              that scale from concept to production.
+              My work spans backend development, GenAI applications, and cloud infrastructure. 
+              From architecting high-performance APIs with FastAPI to shipping production-ready 
+              platforms, I enjoy the full spectrum of software engineering.
             </p>
             
             <p>
-              I'm an{' '}
+              I'm{' '}
               <span className="text-primary">AWS Certified Developer – Associate</span>, 
-              which has strengthened my ability to architect and deploy cloud-native applications 
-              using AWS services like Bedrock, Lambda, EC2, and S3.
+              but equally comfortable diving deep into Python, designing database schemas, 
+              or shipping React frontends.
             </p>
 
             <p className="pt-2">

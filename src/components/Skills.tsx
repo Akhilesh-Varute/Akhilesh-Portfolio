@@ -2,19 +2,23 @@ const Skills = () => {
   const skillCategories = [
     {
       title: 'Languages',
-      skills: ['Python', 'JavaScript', 'TypeScript', 'Java', 'C++'],
+      skills: ['Python', 'TypeScript', 'JavaScript', 'SQL', 'Java'],
     },
     {
-      title: 'Frameworks & Libraries',
-      skills: ['React.js', 'FastAPI', 'Node.js', 'Express.js'],
+      title: 'Backend',
+      skills: ['FastAPI', 'REST APIs', 'PostgreSQL', 'Node.js', 'Microservices'],
     },
     {
-      title: 'Cloud & DevOps',
-      skills: ['AWS Bedrock', 'EC2', 'S3', 'Lambda', 'Docker', 'Kubernetes', 'GitHub Actions'],
+      title: 'Frontend',
+      skills: ['React.js', 'Tailwind CSS', 'HTML/CSS', 'Responsive Design'],
     },
     {
-      title: 'Databases & Tools',
-      skills: ['PostgreSQL', 'Crossplane IaC', 'REST APIs', 'Microservices'],
+      title: 'DevOps & Cloud',
+      skills: ['Docker', 'Kubernetes', 'AWS', 'CI/CD', 'GitHub Actions'],
+    },
+    {
+      title: 'AI & GenAI',
+      skills: ['LLMs', 'RAG Pipelines', 'AWS Bedrock', 'Prompt Engineering'],
     },
   ];
 

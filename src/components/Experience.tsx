@@ -6,11 +6,11 @@ const Experience = () => {
       location: 'Pune',
       period: 'April 2024 — Present',
       points: [
-        'Developed GenAI chatbots using AWS Bedrock for querying AWS infrastructure details and specific use cases.',
-        'Engineered core backend services using Python and FastAPI for AICloudInsights platform with authentication and data ingestion APIs.',
-        'Integrated AWS services (Security Hub, CloudTrail, CloudWatch, S3) for security monitoring and compliance analytics.',
-        'Built GPUonCLOUD GPU Marketplace — an e-commerce platform for GPU rental with payment integration.',
-        'Created GenAI resource orchestrator using AWS Bedrock + Crossplane for Kubernetes-managed AWS resources.',
+        'Built production-grade GenAI chatbots that query infrastructure data in natural language, powered by LLMs and RAG pipelines.',
+        'Architected RESTful APIs using Python/FastAPI with JWT authentication and data ingestion, handling thousands of daily requests.',
+        'Designed and implemented security monitoring system integrating multiple data sources for compliance analytics.',
+        'Shipped a full-stack e-commerce platform (React + FastAPI + PostgreSQL) with Stripe payment integration for GPU rentals.',
+        'Developed infrastructure-as-code orchestrator combining GenAI with Kubernetes for automated resource provisioning.',
       ],
     },
   ];
