@@ -18,7 +18,7 @@ const Skills = () => {
     },
     {
       title: 'AI & GenAI',
-      skills: ['LLMs', 'RAG Pipelines', 'AWS Bedrock', 'Prompt Engineering'],
+      skills: ['LLMs', 'AWS Bedrock', 'Prompt Engineering', 'GenAI APIs'],
     },
   ];
 
