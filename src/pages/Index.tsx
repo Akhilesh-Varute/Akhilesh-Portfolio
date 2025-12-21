@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
 import About from '@/components/About';
@@ -8,6 +9,13 @@ import Footer from '@/components/Footer';
 import SocialSidebar from '@/components/SocialSidebar';
 
 const Index = () => {
+  useEffect(() => {
+    // Clear hash and scroll to top on initial load
+    if (window.location.hash) {
+      window.history.replaceState(null, '', window.location.pathname);
+      window.scrollTo(0, 0);
+    }
+  }, []);
   return (
     <div className="relative">
       <Navigation />
