@@ -46,7 +46,7 @@ const Navigation = () => {
           ))}
           <li>
             <a
-              href="/Akhilesh_Varute_Resume.pdf"
+              href="https://emphasized-opera-f57.notion.site/Akhilesh-Varute-2d0c76b3595d80b59417c5bcf34458eb"
               target="_blank"
               rel="noopener noreferrer"
               className="px-4 py-2 border border-primary text-primary text-sm font-mono rounded hover:bg-primary/10 transition-colors"
