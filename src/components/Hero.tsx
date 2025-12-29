@@ -6,30 +6,29 @@ const Hero = () => {
           <p className="font-mono text-primary text-sm opacity-0 animate-fade-up stagger-1">
             Hi, my name is
           </p>
-          
+
           <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-foreground opacity-0 animate-fade-up stagger-2">
             Akhilesh Varute.
           </h1>
-          
+
           <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold text-muted-foreground opacity-0 animate-fade-up stagger-3">
-            I build software that scales.
+            Full-Stack Software Engineer specializing in modern web platforms.
           </h2>
-          
+
           <p className="max-w-xl text-muted-foreground text-lg leading-relaxed opacity-0 animate-fade-up stagger-4">
-            I'm a software engineer who loves solving complex problems — from building 
-            high-performance backend APIs with Python and FastAPI, to crafting GenAI-powered 
-            applications and scalable infrastructure. Currently building intelligent platforms at{' '}
-            <a 
-              href="https://gpuoncloud.com" 
-              target="_blank" 
+            I'm a software engineer specializing in Node.js backend systems, React frontends,
+            and AWS cloud architecture. Currently building intelligent cloud platforms at{' '}
+            <a
+              href="https://gpuoncloud.com"
+              target="_blank"
               rel="noopener noreferrer"
               className="text-primary link-hover"
             >
               GPUonCLOUD
             </a>
-            .
+            , serving 500+ daily users with 99.5% uptime.
           </p>
-          
+
           <div className="pt-6 opacity-0 animate-fade-up stagger-5">
             <a
               href="#contact"

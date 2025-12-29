@@ -6,11 +6,12 @@ const Experience = () => {
       location: 'Pune',
       period: 'April 2024 — Present',
       points: [
-        'Built production-grade GenAI chatbots that query infrastructure data in natural language, powered by LLMs and RAG pipelines.',
-        'Architected RESTful APIs using Python/FastAPI with JWT authentication and data ingestion, handling thousands of daily requests.',
-        'Integrated AWS APIs (Security Hub, CloudTrail, CloudWatch, S3) into AICloudInsights platform for real-time security monitoring and compliance analytics.',
-        'Shipped a full-stack e-commerce platform (React + FastAPI + PostgreSQL) with Stripe payment integration for GPU rentals.',
-        'Developed infrastructure-as-code orchestrator combining GenAI with Kubernetes for automated resource provisioning.',
+        'Engineered production GenAI cloud platform (AWS Bedrock) processing 500+ daily user interactions with <100ms latency; built Node.js/Express APIs for authentication and data ingestion.',
+        'Built high-throughput Node.js/Express microservices achieving 99.5% uptime and processing 10K+ daily API requests with <100ms response time.',
+        'Integrated 5 AWS services (Security Hub, CloudTrail, CloudWatch, S3, Lambda) for real-time compliance analytics; reduced manual audit work by ~40 hours/month.',
+        'Architected full-stack AI Cloud Insights platform (Node.js backend + React frontend + MongoDB) serving 500+ daily users with live AWS monitoring.',
+        'Designed Infrastructure-as-Code orchestrator reducing deployment time from 30 minutes to 2 minutes; enabled 10+ weekly deployments.',
+        'Developed AI-Powered Dockerfile Optimizer achieving 60% image size reduction and 40% faster build times; deployed via AWS EC2.',
       ],
     },
   ];
@@ -43,7 +44,7 @@ const Experience = () => {
           {experiences.map((exp, index) => (
             <div key={index} className="relative pl-8 border-l-2 border-border hover:border-primary transition-colors">
               <div className="absolute left-0 top-0 w-3 h-3 bg-primary rounded-full -translate-x-[7px]" />
-              
+
               <div className="space-y-4">
                 <div>
                   <h3 className="text-xl font-semibold text-foreground">

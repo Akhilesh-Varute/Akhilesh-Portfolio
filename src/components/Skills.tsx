@@ -2,23 +2,27 @@ const Skills = () => {
   const skillCategories = [
     {
       title: 'Languages',
-      skills: ['Python', 'TypeScript', 'JavaScript', 'SQL', 'Java'],
+      skills: ['JavaScript', 'TypeScript', 'Python', 'Java', 'SQL'],
     },
     {
-      title: 'Backend',
-      skills: ['FastAPI', 'REST APIs', 'PostgreSQL', 'MongoDB', 'Node.js', 'Microservices'],
+      title: 'Backend & APIs',
+      skills: ['Node.js', 'Express.js', 'NestJS', 'FastAPI', 'RESTful APIs', 'Microservices'],
     },
     {
       title: 'Frontend',
-      skills: ['React.js', 'Tailwind CSS', 'HTML/CSS', 'Responsive Design'],
+      skills: ['React.js', 'Material-UI', 'Tailwind CSS', 'Responsive Design'],
+    },
+    {
+      title: 'Databases',
+      skills: ['MongoDB', 'PostgreSQL', 'Redis', 'Database Design'],
     },
     {
       title: 'DevOps & Cloud',
-      skills: ['Docker', 'Kubernetes', 'AWS', 'CI/CD', 'GitHub Actions'],
+      skills: ['AWS (Bedrock, Lambda, EC2, S3, Security Hub)', 'Docker', 'Kubernetes', 'GitHub Actions', 'CI/CD', 'Crossplane IaC'],
     },
     {
-      title: 'AI & GenAI',
-      skills: ['LLMs', 'AWS Bedrock', 'Prompt Engineering', 'GenAI APIs'],
+      title: 'GenAI & AI',
+      skills: ['AWS Bedrock', 'LLMs', 'Prompt Engineering', 'GenAI Integration'],
     },
   ];
 
@@ -27,7 +31,7 @@ const Skills = () => {
       name: 'AWS Certified Developer – Associate',
       issuer: 'Amazon Web Services',
       code: 'DVA-C02',
-      date: 'August 2025',
+      date: 'August 2028',
       badge: '☁️',
     },
   ];
@@ -36,7 +40,7 @@ const Skills = () => {
     <section id="skills" className="py-24 px-6 bg-secondary/30">
       <div className="container max-w-5xl mx-auto">
         <h2 className="flex items-center gap-4 text-2xl font-bold text-foreground mb-12">
-          <span className="font-mono text-primary text-xl">03.</span>
+          <span className="font-mono text-primary text-xl">04.</span>
           Skills & Certifications
           <span className="h-px bg-border flex-1 max-w-xs" />
         </h2>

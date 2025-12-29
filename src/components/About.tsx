@@ -2,14 +2,16 @@ import profilePhoto from '@/assets/profile-photo.png';
 
 const About = () => {
   const technologies = [
-    'Python',
-    'FastAPI',
-    'TypeScript',
+    'Node.js',
     'React.js',
-    'PostgreSQL',
+    'Express.js',
+    'TypeScript',
+    'AWS Bedrock',
     'Docker',
-    'AWS',
+    'MongoDB',
     'Kubernetes',
+    'PostgreSQL',
+    'GitHub Actions',
   ];
 
   return (
@@ -24,22 +26,22 @@ const About = () => {
         <div className="grid md:grid-cols-3 gap-12">
           <div className="md:col-span-2 space-y-4 text-muted-foreground">
             <p>
-              Hello! I'm Akhilesh, a software engineer based in Pune, India. I thrive on 
-              building systems that are both elegant and scalable — whether that's a robust 
-              REST API, an AI-powered chatbot, or a full-stack e-commerce platform.
+              Hello! I'm Akhilesh, a Full-Stack Software Engineer based in Pune, India.
+              I build production-grade cloud platforms that combine scalability,
+              performance, and modern architecture.
             </p>
-            
+
             <p>
-              My work spans backend development, GenAI applications, and cloud infrastructure. 
-              From architecting high-performance APIs with FastAPI to shipping production-ready 
-              platforms, I enjoy the full spectrum of software engineering.
+              My work spans backend microservices (Node.js/Express), frontend development
+              (React), and cloud infrastructure (AWS, Docker, Kubernetes). I've engineered
+              systems serving 500+ daily users with 99.5% uptime, integrated GenAI applications
+              using AWS Bedrock, and automated deployment pipelines reducing release cycles
+              from 2 hours to 15 minutes.
             </p>
-            
+
             <p>
-              I'm{' '}
-              <span className="text-primary">AWS Certified Developer – Associate</span>, 
-              but equally comfortable diving deep into Python, designing database schemas, 
-              or shipping React frontends.
+              I'm AWS Certified Developer – Associate and hold a PG-DAC in Advanced Computing
+              from Sunbeam Infotech.
             </p>
 
             <p className="pt-2">
@@ -58,9 +60,9 @@ const About = () => {
 
           <div className="relative group">
             <div className="relative z-10 rounded-lg overflow-hidden">
-              <img 
-                src={profilePhoto} 
-                alt="Akhilesh Verma" 
+              <img
+                src={profilePhoto}
+                alt="Akhilesh Varute"
                 className="w-full aspect-[3/4] object-cover object-center rounded-lg"
               />
             </div>
