@@ -6,8 +6,8 @@ const Projects = () => {
             tech: 'Node.js · Express.js · React · MongoDB · AWS Bedrock · Docker · Kubernetes',
             points: [
                 'Built production platform serving 500+ daily users with 99.5% uptime',
-                'Integrated AWS Bedrock for intelligent GenAI analysis',
-                'Processed 10K+ API requests daily with <100ms latency',
+                'Integrated AWS Bedrock for GenAI-powered insights',
+                'Processed 10K+ API requests daily at 100ms latency',
                 'Reduced manual audit work by 40 hours/month per client',
             ],
             links: {
@@ -19,18 +19,13 @@ const Projects = () => {
             title: 'AI-Powered Dockerfile Optimizer',
             description: 'GenAI tool using GPT-4 to analyze and optimize Dockerfiles',
             tech: 'Python · FastAPI · GPT-4 · Docker · AWS EC2',
-            points: [
-                'Achieved 60% image size reduction across test cases',
-                'Improved build times by 40%',
-                'Delivered CLI and REST API interfaces',
-                'Deployed on AWS EC2 with security scanning',
-            ],
+            points: [],
             links: {
                 github: 'https://github.com/Akhilesh-Varute/dockerfile-optimizer',
             },
         },
         {
-            title: 'Infrastructure Orchestrator (Crossplane)',
+            title: 'Infrastructure Orchestrator',
             description: 'Automation tool converting natural language to AWS resources',
             tech: 'AWS · Crossplane · Kubernetes · Node.js',
             points: [
@@ -40,7 +35,7 @@ const Projects = () => {
                 '99%+ deployment success rate',
             ],
             links: {
-                note: '',
+                github: '#',
             },
         },
     ];
@@ -92,9 +87,6 @@ const Projects = () => {
                                     >
                                         GitHub
                                     </a>
-                                )}
-                                {project.links.note && (
-                                    <span className="text-muted-foreground font-mono text-sm">{project.links.note}</span>
                                 )}
                             </div>
 

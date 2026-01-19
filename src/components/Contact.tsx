@@ -36,13 +36,24 @@ const Contact = () => {
           question or just want to say hi, I'll do my best to get back to you!
         </p>
 
-        <a
-          href="mailto:akhileshvarute23@gmail.com"
-          className="inline-flex items-center gap-2 px-8 py-4 border border-primary text-primary font-mono text-sm rounded hover:bg-primary/10 transition-all duration-300 glow"
-        >
-          <Mail className="w-4 h-4" />
-          Say Hello
-        </a>
+        <div className="flex gap-4 justify-center">
+          <a
+            href="https://cal.com/akhilesh-varute/15min"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-8 py-4 border border-primary text-primary font-mono text-sm rounded hover:bg-primary/10 transition-all duration-300 glow"
+          >
+            <Mail className="w-4 h-4" />
+            Book 15-min Call
+          </a>
+          <a
+            href="mailto:akhileshvarute23@gmail.com"
+            className="inline-flex items-center gap-2 px-8 py-4 border border-primary text-primary font-mono text-sm rounded hover:bg-primary/10 transition-all duration-300"
+          >
+            <Mail className="w-4 h-4" />
+            Send Email
+          </a>
+        </div>
 
         {/* Social Links */}
         <div className="flex justify-center gap-6 mt-16">

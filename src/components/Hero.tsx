@@ -29,13 +29,24 @@ const Hero = () => {
             , serving 500+ daily users with 99.5% uptime.
           </p>
 
-          <div className="pt-6 opacity-0 animate-fade-up stagger-5">
+          <div className="pt-6 opacity-0 animate-fade-up stagger-5 flex flex-col items-start gap-4">
             <a
               href="#contact"
               className="inline-flex items-center gap-2 px-8 py-4 border border-primary text-primary font-mono text-sm rounded hover:bg-primary/10 transition-all duration-300 glow"
             >
               Get In Touch
             </a>
+            <span style={{ fontSize: '0.9rem', opacity: 0.8 }}>
+              Or{' '}
+              <a
+                href="https://cal.com/akhilesh-varute/15min"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary link-hover"
+              >
+                book 15-min call
+              </a>
+            </span>
           </div>
         </div>
       </div>
