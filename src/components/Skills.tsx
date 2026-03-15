@@ -1,28 +1,32 @@
 const Skills = () => {
   const skillCategories = [
     {
-      title: 'Languages',
-      skills: ['JavaScript', 'TypeScript', 'Python', 'Java', 'SQL'],
+      title: 'Cloud & AWS',
+      skills: ['Lambda', 'API Gateway', 'S3', 'EC2', 'Bedrock', 'Cognito', 'IAM', 'CloudWatch', 'STS', 'SQS', 'CodePipeline', 'CodeBuild'],
     },
     {
-      title: 'Backend & APIs',
-      skills: ['Node.js', 'Express.js', 'NestJS', 'FastAPI', 'RESTful APIs', 'Microservices'],
+      title: 'Backend',
+      skills: ['Node.js', 'TypeScript', 'Express.js', 'Fastify', 'REST APIs', 'Microservices', 'WebSockets'],
     },
     {
-      title: 'Frontend',
-      skills: ['React.js', 'Material-UI', 'Tailwind CSS', 'Responsive Design'],
+      title: 'Auth & Security',
+      skills: ['JWT', 'RBAC', 'OAuth 2.0', 'Multi-tenant architecture', 'IAM least-privilege'],
+    },
+    {
+      title: 'Infrastructure',
+      skills: ['Docker', 'Kubernetes', 'Crossplane IaC', 'CI/CD', 'GitHub Actions'],
+    },
+    {
+      title: 'AI & GenAI',
+      skills: ['AWS Bedrock', 'LLMs', 'Prompt Engineering', 'NLP Workflow Design', 'AI API Integration'],
     },
     {
       title: 'Databases',
-      skills: ['MongoDB', 'PostgreSQL', 'Redis', 'Database Design'],
+      skills: ['MongoDB', 'Redis', 'PostgreSQL'],
     },
     {
-      title: 'DevOps & Cloud',
-      skills: ['AWS (Bedrock, Lambda, EC2, S3, Security Hub)', 'Docker', 'Kubernetes', 'GitHub Actions', 'CI/CD', 'Crossplane IaC'],
-    },
-    {
-      title: 'GenAI & AI',
-      skills: ['AWS Bedrock', 'LLMs', 'Prompt Engineering', 'GenAI Integration'],
+      title: 'Frontend',
+      skills: ['React.js', 'JavaScript (supporting knowledge)'],
     },
   ];
 

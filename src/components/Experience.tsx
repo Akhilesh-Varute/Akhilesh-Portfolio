@@ -1,17 +1,18 @@
 const Experience = () => {
   const experiences = [
     {
-      title: 'Software Developer',
+      title: 'Cloud Backend Engineer',
       company: 'Expert Cloud Consulting (GPUonCLOUD)',
       location: 'Pune',
       period: 'June 2024 — Present',
       points: [
-        'Built GenAI chatbot (AWS Bedrock) processing 500+ daily queries at 100ms latency.',
-        'Built Node.js microservices achieving 99.5% uptime, processing 10K+ daily API requests at 100ms response time.',
-        'Integrated 5 AWS services (Security Hub, CloudTrail, CloudWatch, S3, Lambda) reducing audit work by 40 hours/month.',
-        'Built full-stack AWS monitoring platform (Node.js + React + MongoDB) serving 500+ daily users.',
-        'Built Crossplane IaC tool reducing deployment from 30 minutes to 2 minutes.',
-        'Built GPT-4 Dockerfile optimizer achieving 60% image size reduction, 40% faster builds on AWS EC2.',
+        'Architected Node.js/TypeScript backend on AWS Lambda + API Gateway for an AI-powered cloud management platform serving enterprise clients',
+        'Built conversational AI chatbot using AWS Bedrock — user asks a natural language question, Bedrock calls live AWS APIs (Cost Explorer, Security Hub, GuardDuty, CloudWatch, IAM) and returns a real-time answer',
+        'Designed multi-tenant JWT + RBAC auth system using Cognito and MongoDB, supporting isolated client environments with granular role control',
+        'Built REST APIs serving real-time AWS cost and security data across 8+ AWS services to a React dashboard — processing 10K+ daily requests at 100ms response time',
+        'Built Crossplane IaC tool reducing infrastructure deployment from 30 minutes to 2 minutes, enabling 10+ concurrent weekly deployments',
+        'Set up CodePipeline + CodeBuild CI/CD with CloudWatch monitoring, reducing release cycles from 2 hours to 15 minutes',
+        'Mentored 2 junior developers — code reviews, architecture standards, and backend technical decisions',
       ],
     },
   ];
@@ -21,10 +22,10 @@ const Experience = () => {
       degree: 'PG Diploma in Advanced Computing (PG-DAC)',
       institution: 'Sunbeam Infotech',
       year: '2024',
-      description: 'CDAC-approved full-stack software engineering program',
+      description: 'Sunbeam Infotech, Pune',
     },
     {
-      degree: 'B.Tech in Textile Chemistry',
+      degree: 'B.Tech',
       institution: 'DKTE Institute of Technology',
       year: '2022',
     },

@@ -2,37 +2,29 @@ const Projects = () => {
     const projects = [
         {
             title: 'AI Cloud Insights Platform',
-            description: 'Full-stack cloud observability platform for real-time AWS monitoring',
-            tech: 'Node.js · Express.js · React · MongoDB · AWS Bedrock · Docker · Kubernetes',
+            description: 'Conversational AI platform for real-time AWS account monitoring',
+            tech: 'Node.js · AWS Lambda · Bedrock · API Gateway · Cognito · Cost Explorer · Security Hub · GuardDuty · CloudWatch · IAM · STS · MongoDB · React',
             points: [
-                'Built production platform serving 500+ daily users with 99.5% uptime',
-                'Integrated AWS Bedrock for GenAI-powered insights',
-                'Processed 10K+ API requests daily at 100ms latency',
+                "User asks a natural language question → Bedrock processes intent → dynamically calls AWS APIs → returns live answer from user's account",
+                'Lambda-based cost optimisation engine analysing 8 AWS services in parallel across multiple accounts using IAM role assumption via STS',
+                'Identifies idle resources and calculates real dollar savings, prioritised by impact — critical / high / medium / low',
+                'Multi-tenant RBAC auth with Cognito, serving 500+ daily users with 99.5% uptime',
                 'Reduced manual audit work by 40 hours/month per client',
             ],
             links: {
-                demo: 'https://aicloudinsights.ai',
                 github: '#',
             },
         },
         {
-            title: 'AI-Powered Dockerfile Optimizer',
-            description: 'GenAI tool using GPT-4 to analyze and optimize Dockerfiles',
-            tech: 'Python · FastAPI · GPT-4 · Docker · AWS EC2',
-            points: [],
-            links: {
-                github: 'https://github.com/Akhilesh-Varute/dockerfile-optimizer',
-            },
-        },
-        {
-            title: 'Infrastructure Orchestrator',
-            description: 'Automation tool converting natural language to AWS resources',
-            tech: 'AWS · Crossplane · Kubernetes · Node.js',
+            title: 'Cloud Infrastructure Automation Platform',
+            description: 'NLP-driven infrastructure provisioning engine — chat to deploy real AWS resources',
+            tech: 'Node.js · Fastify · AWS Bedrock · Crossplane · Kubernetes · WebSocket · SSM · Redis · MongoDB',
             points: [
-                'Reduced infrastructure setup from 30 minutes to 2 minutes',
-                'Enabled 10+ concurrent weekly deployments',
-                'Built Node.js APIs for Kubernetes resource management',
-                '99%+ deployment success rate',
+                'User types a natural language command → Bedrock parses intent → Crossplane acts as IaC layer to provision EC2, S3, and RDS resources via Kubernetes CRDs — replacing manual Terraform/CloudFormation',
+                'WebSocket-based in-browser SSH terminal using xterm.js and AWS SSM Session Manager for secure remote EC2 access',
+                'Reduced infrastructure deployment from 30 minutes to 2 minutes',
+                '99%+ deployment success rate across 10+ concurrent weekly deployments',
+                'Full audit logging for every provisioning action across accounts',
             ],
             links: {
                 github: '#',
