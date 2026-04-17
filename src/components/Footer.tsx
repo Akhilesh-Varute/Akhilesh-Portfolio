@@ -6,9 +6,7 @@ const Footer = () => {
           Designed & Built by{' '}
           <span className="text-primary">Akhilesh Varute</span>
         </p>
-        <p className="font-mono text-xs text-muted-foreground/60 mt-2">
-          Built with React & Tailwind CSS
-        </p>
+
       </div>
     </footer>
   );

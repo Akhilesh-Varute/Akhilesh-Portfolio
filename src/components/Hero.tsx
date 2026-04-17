@@ -12,11 +12,11 @@ const Hero = () => {
           </h1>
 
           <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold text-muted-foreground opacity-0 animate-fade-up stagger-3">
-            Cloud Backend Engineer specializing in AI-powered AWS systems
+            Software Engineer · AI Infrastructure & Cloud Platforms
           </h2>
 
           <p className="font-mono text-primary text-sm opacity-0 animate-fade-up stagger-3">
-            AWS Certified · Node.js · TypeScript · AWS Serverless · AI Integrations
+            AWS Certified · Node.js · TypeScript · AWS Bedrock · Kubernetes · AI Infrastructure
           </p>
 
           <p className="font-mono text-primary/90 text-xs opacity-0 animate-fade-up stagger-3">
@@ -24,7 +24,7 @@ const Hero = () => {
           </p>
 
           <p className="max-w-xl text-muted-foreground text-lg leading-relaxed opacity-0 animate-fade-up stagger-4">
-            I build production-grade cloud backend systems on AWS — from AI-powered chatbots that query live AWS account data, to NLP-driven infrastructure automation engines. Currently building intelligent cloud platforms at{' '}
+            I build AI-powered cloud infrastructure platforms on AWS. Currently the primary engineer on aicloudinsights.ai — a live multi-tenant SaaS platform — coordinating a 3-person team and owning all architectural decisions at{' '}
             <a
               href="https://gpuoncloud.com"
               target="_blank"

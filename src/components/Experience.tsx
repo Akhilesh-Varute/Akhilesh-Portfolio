@@ -1,18 +1,19 @@
 const Experience = () => {
   const experiences = [
     {
-      title: 'Cloud Backend Engineer',
-      company: 'Expert Cloud Consulting (GPUonCLOUD)',
+      title: 'Software Engineer',
+      company: 'GPUonCLOUD',
       location: 'Pune',
       period: 'June 2024 — Present',
       points: [
-        'Architected Node.js/TypeScript backend on AWS Lambda + API Gateway for an AI-powered cloud management platform serving enterprise clients',
-        'Built conversational AI chatbot using AWS Bedrock — user asks a natural language question, Bedrock calls live AWS APIs (Cost Explorer, Security Hub, GuardDuty, CloudWatch, IAM) and returns a real-time answer',
-        'Designed multi-tenant JWT + RBAC auth system using Cognito and MongoDB, supporting isolated client environments with granular role control',
-        'Built REST APIs serving real-time AWS cost and security data across 8+ AWS services to a React dashboard — processing 10K+ daily requests at 100ms response time',
-        'Built Crossplane IaC tool reducing infrastructure deployment from 30 minutes to 2 minutes, enabling 10+ concurrent weekly deployments',
-        'Set up CodePipeline + CodeBuild CI/CD with CloudWatch monitoring, reducing release cycles from 2 hours to 15 minutes',
-        'Mentored 2 junior developers — code reviews, architecture standards, and backend technical decisions',
+        'Primary engineer on aicloudinsights.ai — a live, multi-tenant SaaS platform for natural-language AWS infrastructure monitoring. Planned, designed, and shipped every feature from scratch. Coordinates a 3-person engineering team through GitHub Projects, PR reviews, and all architectural decision-making.',
+        'Built a Bedrock-powered (Claude) conversational interface — users ask natural-language questions about their AWS costs, resource usage, and security posture across multiple connected accounts. Bedrock calls live AWS APIs (Cost Explorer, Security Hub, GuardDuty, CloudWatch, IAM) and returns real-time answers.',
+        'Designed a secure multi-tenant architecture using cross-account IAM role assumption via STS, enforcing strict per-tenant data isolation across 8+ AWS services per account.',
+        'Developed a parallel cost optimisation engine analysing 8 AWS services simultaneously using CloudWatch metrics and the Pricing API; findings ranked by dollar impact and surfaced through the conversational interface.',
+        'Implemented JWT + RBAC authentication using MongoDB and AWS Cognito, with per-user, per-account resource visibility across the multi-tenant deployment.',
+        'Established CI/CD pipelines via CodePipeline and CodeBuild; built CloudWatch dashboards for API health, latency, and error monitoring in production.',
+        'Previously designed and built a Kubernetes-native infrastructure automation engine (Crossplane + Upbound + Bedrock) — users described AWS resources in plain English and the system provisioned them automatically via CRDs, GitOps-style, with automatic drift detection. Project sunset due to company funding reallocation.',
+        'Mentored 2 junior developers through code reviews, architecture standards, and technical guidance.',
       ],
     },
   ];

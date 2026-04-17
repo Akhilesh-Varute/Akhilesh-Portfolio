@@ -32,8 +32,8 @@ const Contact = () => {
         </h2>
 
         <p className="text-muted-foreground text-lg mb-12 max-w-lg mx-auto">
-          I'm currently open to new opportunities and collaborations. Whether you have a
-          question or just want to say hi, I'll do my best to get back to you!
+          I'm interested in problems at the intersection of cloud infrastructure and AI.
+          If you're building something in that space — or have a role that fits — feel free to reach out.
         </p>
 
         <div className="flex gap-4 justify-center">

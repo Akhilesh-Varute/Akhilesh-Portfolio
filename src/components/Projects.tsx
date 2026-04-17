@@ -2,29 +2,31 @@ const Projects = () => {
     const projects = [
         {
             title: 'AI Cloud Insights Platform',
-            description: 'Conversational AI platform for real-time AWS account monitoring',
+            description: 'Live multi-tenant SaaS platform — natural language querying of AWS infrastructure',
             tech: 'Node.js · AWS Lambda · Bedrock · API Gateway · Cognito · Cost Explorer · Security Hub · GuardDuty · CloudWatch · IAM · STS · MongoDB · React',
             points: [
-                "User asks a natural language question → Bedrock processes intent → dynamically calls AWS APIs → returns live answer from user's account",
-                'Lambda-based cost optimisation engine analysing 8 AWS services in parallel across multiple accounts using IAM role assumption via STS',
-                'Identifies idle resources and calculates real dollar savings, prioritised by impact — critical / high / medium / low',
-                'Multi-tenant RBAC auth with Cognito, serving 500+ daily users with 99.5% uptime',
-                'Reduced manual audit work by 40 hours/month per client',
+                'Primary engineer and sole builder — planned, designed, and deployed every feature independently. Coordinates a 3-person team via GitHub Projects and PR reviews.',
+                'Bedrock-powered (Claude) conversational interface — users query AWS costs, resource usage, and security posture across multiple connected accounts in plain English. No dashboard navigation required.',
+                'Secure cross-account architecture using IAM role assumption via STS; strict per-tenant data isolation across 8+ AWS services per account.',
+                'Parallel cost optimisation engine analysing 8 AWS services simultaneously using CloudWatch metrics and the Pricing API; findings ranked by dollar impact — critical / high / medium / low.',
+                'JWT + RBAC auth with per-user, per-account visibility; Cognito-backed across the full multi-tenant deployment.',
+                'Live at aicloudinsights.ai',
             ],
             links: {
                 github: '#',
+                demo: 'https://aicloudinsights.ai',
             },
         },
         {
             title: 'Cloud Infrastructure Automation Platform',
-            description: 'NLP-driven infrastructure provisioning engine — chat to deploy real AWS resources',
+            description: 'Kubernetes-native provisioning engine — describe infrastructure in plain English, deploy automatically',
             tech: 'Node.js · Fastify · AWS Bedrock · Crossplane · Kubernetes · WebSocket · SSM · Redis · MongoDB',
             points: [
-                'User types a natural language command → Bedrock parses intent → Crossplane acts as IaC layer to provision EC2, S3, and RDS resources via Kubernetes CRDs — replacing manual Terraform/CloudFormation',
-                'WebSocket-based in-browser SSH terminal using xterm.js and AWS SSM Session Manager for secure remote EC2 access',
-                'Reduced infrastructure deployment from 30 minutes to 2 minutes',
-                '99%+ deployment success rate across 10+ concurrent weekly deployments',
-                'Full audit logging for every provisioning action across accounts',
+                'Full-stack platform where users describe AWS infrastructure in plain English — Bedrock parses intent and provisions resources automatically via Kubernetes Custom Resources (Crossplane + Upbound), GitOps-style with automatic drift detection.',
+                'WebSocket-based in-browser SSH terminal using xterm.js and AWS SSM Session Manager — secure real-time EC2 access without VPN or bastion hosts.',
+                'D3.js dashboards for real-time infrastructure visualisation; resource state reflected live via WebSocket updates.',
+                'Full audit logging for every provisioning action across accounts.',
+                'Project was sunset due to company funding reallocation.',
             ],
             links: {
                 github: '#',
