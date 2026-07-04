@@ -8,6 +8,9 @@ import Skills from '@/components/Skills';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import SocialSidebar from '@/components/SocialSidebar';
+import AuroraBackground from '@/components/AuroraBackground';
+import ScrollProgress from '@/components/ScrollProgress';
+import CursorGlow from '@/components/CursorGlow';
 
 const Index = () => {
   useEffect(() => {
@@ -17,8 +20,12 @@ const Index = () => {
       window.scrollTo(0, 0);
     }
   }, []);
+
   return (
-    <div className="relative">
+    <div className="relative noise">
+      <AuroraBackground />
+      <CursorGlow />
+      <ScrollProgress />
       <Navigation />
       <SocialSidebar />
 

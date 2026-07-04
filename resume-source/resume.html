@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Akhilesh Varute — Resume</title>
+<style>
+  @page { size: A4; margin: 9mm 11mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif; color: #1a2433; font-size: 9.6pt; line-height: 1.38; }
+
+  .name { text-align: center; font-size: 21pt; font-weight: 700; color: #17456b; letter-spacing: 0.3px; }
+  .role { text-align: center; font-size: 12pt; font-style: italic; color: #17456b; margin-top: 1px; font-weight: 400; }
+  .contact { text-align: center; font-size: 8.8pt; color: #333; margin-top: 5px; }
+  .contact a { color: #17456b; text-decoration: none; }
+  .contact span.sep { color: #999; margin: 0 4px; }
+
+  h2 { font-size: 10.2pt; font-weight: 700; letter-spacing: 1.2px; color: #1a2433; text-transform: uppercase; border-bottom: 1.4px solid #1a2433; padding-bottom: 2px; margin: 10px 0 5px; }
+
+  p.summary { text-align: justify; }
+
+  .job-head { display: flex; justify-content: space-between; align-items: baseline; }
+  .job-head .co { font-weight: 700; }
+  .job-head .co em { font-weight: 400; font-style: italic; }
+  .job-head .when { font-size: 8.8pt; color: #333; white-space: nowrap; }
+
+  ul { margin: 2px 0 0 14px; }
+  li { margin-bottom: 2.5px; text-align: justify; }
+  li b { font-weight: 600; }
+
+  .edu-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 3px; }
+  .edu-row .deg { font-weight: 700; }
+  .edu-row .deg em { font-weight: 400; font-style: italic; }
+
+  .focus-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px 14px; margin-top: 2px; }
+  .focus-grid h3 { font-size: 9.3pt; font-weight: 700; margin-bottom: 1px; }
+  .focus-grid p { font-size: 8.8pt; color: #2c3646; }
+
+  .proj-title { font-weight: 700; }
+  .proj-title em { font-weight: 400; font-style: italic; font-size: 8.9pt; }
+  .proj { margin-bottom: 5px; }
+</style>
+</head>
+<body>
+
+<div class="name">Akhilesh Varute</div>
+<div class="role">Software Engineer | AI Infrastructure &amp; Cloud Platforms</div>
+<div class="contact">
+  <a href="mailto:akhileshvarute23@gmail.com">akhileshvarute23@gmail.com</a><span class="sep">|</span>9511977521<span class="sep">|</span>Pune<span class="sep">|</span><a href="https://akhileshvarute.me">akhileshvarute.me</a><span class="sep">|</span><a href="https://linkedin.com/in/akhileshvarute">linkedin.com/in/akhileshvarute</a><span class="sep">|</span><a href="https://github.com/Akhilesh-Varute">github.com/Akhilesh-Varute</a>
+</div>
+
+<h2>Summary</h2>
+<p class="summary">Software Engineer with 2 years building production AI and cloud infrastructure on AWS. Primary engineer on aicloudinsights.ai at GPUonCLOUD — a live multi-tenant SaaS using Amazon Bedrock for natural-language AWS infrastructure monitoring. Strong in Node.js, TypeScript, AWS (Bedrock, Lambda, STS, CloudWatch), Express.js, REST APIs, and MongoDB. AWS Certified Developer – Associate.</p>
+
+<h2>Professional Experience</h2>
+<div class="job-head">
+  <span class="co">Expert Cloud Consulting aka GPUonCLOUD, <em>Software Developer</em></span>
+  <span class="when">06/2024 – Present&nbsp;&nbsp;|&nbsp;&nbsp;Pune</span>
+</div>
+<ul>
+  <li>Primary engineer on aicloudinsights.ai — built and shipped every feature of the live multi-tenant SaaS end-to-end. Drives architectural decisions and reviews PRs across a 3-person team using GitHub Projects.</li>
+  <li>Built a Bedrock-powered (Claude) conversational interface using function calling / tool use — backend defines AWS tool schemas (Cost Explorer, Security Hub, GuardDuty, CloudWatch, IAM); Claude parses user intent in plain English, selects the right tool, and the system executes the API call and returns real-time answers across multiple connected accounts.</li>
+  <li>Designed cross-account architecture using IAM role assumption via STS — strict per-tenant data isolation across 8+ AWS services per account, no shared credentials.</li>
+  <li>Built a parallel cost optimisation engine analysing 8 AWS services simultaneously using CloudWatch + Pricing API; findings auto-ranked by dollar impact (critical / high / medium / low).</li>
+  <li>JWT-based auth + RBAC stored in MongoDB with per-user, per-account visibility. CI/CD via CodePipeline + CodeBuild; CloudWatch dashboards for production monitoring.</li>
+  <li>Previously: Kubernetes-native infrastructure provisioning engine (Crossplane + Upbound + Bedrock) — plain-English AWS resource description → automatic CRD provisioning, GitOps-style with drift detection. Internal R&amp;D prototype; deprioritised before broader rollout due to funding reallocation.</li>
+  <li>Mentored 2 junior engineers through code reviews, architecture standards, and technical guidance.</li>
+</ul>
+
+<h2>Education</h2>
+<div class="edu-row">
+  <span class="deg">Post Graduate Diploma in Advanced Computing (PG-DAC), <em>Sunbeam Infotech</em></span>
+  <span class="when">2024</span>
+</div>
+<div class="edu-row">
+  <span class="deg">Bachelor of Technology, <em>DKTE Institute of Technology</em></span>
+  <span class="when">2022</span>
+</div>
+
+<h2>Technical Focus Areas</h2>
+<div class="focus-grid">
+  <div>
+    <h3>Cloud &amp; AI</h3>
+    <p>AWS Bedrock, Lambda, API Gateway, STS, CloudWatch, Cost Explorer, Security Hub, S3, EC2</p>
+  </div>
+  <div>
+    <h3>Infrastructure</h3>
+    <p>Docker, Kubernetes, CI/CD, CodePipeline, GitHub Actions</p>
+  </div>
+  <div>
+    <h3>Backend</h3>
+    <p>Node.js, TypeScript, Express.js, Fastify, REST APIs, Microservices</p>
+  </div>
+  <div>
+    <h3>Auth &amp; Data</h3>
+    <p>JWT, RBAC, Multi-tenant architecture, MongoDB, Redis</p>
+  </div>
+  <div>
+    <h3>Frontend</h3>
+    <p>React.js, JavaScript</p>
+  </div>
+  <div>
+    <h3>AI / GenAI</h3>
+    <p>Amazon Bedrock, LLMs, Function calling / Tool use, Prompt Engineering, NLP</p>
+  </div>
+  <div>
+    <h3>AI Dev Tools</h3>
+    <p>Claude Code, GitHub Copilot, Claude (Anthropic)</p>
+  </div>
+</div>
+
+<h2>Certifications</h2>
+<ul>
+  <li>AWS Certified Developer – Associate (DVA-C02)</li>
+</ul>
+
+<h2>Projects</h2>
+<div class="proj">
+  <div class="proj-title">AI Cloud Insights Platform, <em>Node.js, TypeScript, Express.js, Lambda, Bedrock (Claude), STS, CloudWatch, MongoDB, RBAC, Docker</em></div>
+  <ul>
+    <li>Live multi-tenant SaaS — enterprises connect AWS accounts and query costs, security posture, and resource usage in plain English. Cross-account STS; cost engine ranks 8 services by dollar impact.</li>
+    <li>JWT + RBAC stored in MongoDB with per-user, per-account visibility across the multi-tenant deployment.</li>
+  </ul>
+</div>
+<div class="proj">
+  <div class="proj-title">Cloud Infrastructure Automation Platform, <em>Node.js, Fastify, Bedrock, Crossplane, Kubernetes, WebSocket, SSM, Redis, MongoDB</em></div>
+  <ul>
+    <li>Plain-English → Bedrock intent parsing → Crossplane CRD provisioning, GitOps-style with drift detection. WebSocket in-browser SSH (xterm.js + SSM). Internal R&amp;D prototype; deprioritised before broader rollout due to funding reallocation.</li>
+  </ul>
+</div>
+
+</body>
+</html>

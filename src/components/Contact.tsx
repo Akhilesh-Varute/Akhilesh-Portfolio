@@ -1,75 +1,99 @@
-import { Mail, Linkedin, Github, ExternalLink } from 'lucide-react';
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
+import { Mail, Linkedin, Github, CalendarClock, ArrowUpRight } from 'lucide-react';
+import { Reveal } from '@/components/motion/Reveal';
 
 const Contact = () => {
+  const ref = useRef<HTMLElement>(null);
+  const reduceMotion = useReducedMotion();
+
+  // Giant ghost word slides sideways as the section scrolls through
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'end start'],
+  });
+  const ghostX = useTransform(scrollYProgress, [0, 1], ['4%', '-6%']);
+
   const links = [
-    {
-      name: 'Email',
-      href: 'mailto:akhileshvarute23@gmail.com',
-      icon: Mail,
-      label: 'akhileshvarute23@gmail.com',
-    },
-    {
-      name: 'LinkedIn',
-      href: 'https://linkedin.com/in/akhileshvarute',
-      icon: Linkedin,
-      label: 'linkedin.com/in/akhileshvarute',
-    },
-    {
-      name: 'GitHub',
-      href: 'https://github.com/Akhilesh-Varute',
-      icon: Github,
-      label: 'github.com/Akhilesh-Varute',
-    },
+    { name: 'Email', href: 'mailto:akhileshvarute23@gmail.com', icon: Mail },
+    { name: 'LinkedIn', href: 'https://linkedin.com/in/akhileshvarute', icon: Linkedin },
+    { name: 'GitHub', href: 'https://github.com/Akhilesh-Varute', icon: Github },
   ];
 
   return (
-    <section id="contact" className="py-24 px-6">
-      <div className="container max-w-2xl mx-auto text-center">
-        <p className="font-mono text-primary text-sm mb-4">04. What's Next?</p>
+    <section id="contact" ref={ref} className="relative py-36 px-6 overflow-hidden">
+      {/* ghost word */}
+      <motion.span
+        className="absolute top-10 left-0 right-0 text-center font-display font-bold text-[16vw] leading-none text-stroke select-none pointer-events-none whitespace-nowrap"
+        style={reduceMotion ? undefined : { x: ghostX, willChange: 'transform' }}
+        aria-hidden="true"
+      >
+        LET'S TALK
+      </motion.span>
 
-        <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-          Get In Touch
-        </h2>
+      <div className="container max-w-2xl mx-auto text-center relative pt-[10vw]">
+        <Reveal>
+          <p className="font-mono text-primary text-sm tracking-[0.3em] uppercase mb-4">
+            {'//'} 05 · What's next?
+          </p>
+        </Reveal>
 
-        <p className="text-muted-foreground text-lg mb-12 max-w-lg mx-auto">
-          I'm interested in problems at the intersection of cloud infrastructure and AI.
-          If you're building something in that space — or have a role that fits — feel free to reach out.
-        </p>
+        <Reveal delay={0.1}>
+          <h2 className="text-4xl md:text-6xl font-bold font-display text-foreground mb-6">
+            Get In <span className="text-gradient">Touch</span>
+          </h2>
+        </Reveal>
 
-        <div className="flex gap-4 justify-center">
-          <a
-            href="https://cal.com/akhilesh-varute/15min"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-4 border border-primary text-primary font-mono text-sm rounded hover:bg-primary/10 transition-all duration-300 glow"
-          >
-            <Mail className="w-4 h-4" />
-            Book 15-min Call
-          </a>
-          <a
-            href="mailto:akhileshvarute23@gmail.com"
-            className="inline-flex items-center gap-2 px-8 py-4 border border-primary text-primary font-mono text-sm rounded hover:bg-primary/10 transition-all duration-300"
-          >
-            <Mail className="w-4 h-4" />
-            Send Email
-          </a>
-        </div>
+        <Reveal delay={0.2}>
+          <p className="text-muted-foreground text-lg mb-12 max-w-lg mx-auto leading-relaxed">
+            I'm interested in problems at the intersection of cloud infrastructure and AI.
+            If you're building something in that space — or have a role that fits — my inbox
+            is open and my calendar is easier.
+          </p>
+        </Reveal>
 
-        {/* Social Links */}
-        <div className="flex justify-center gap-6 mt-16">
-          {links.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
+        <Reveal delay={0.3}>
+          <div className="flex flex-wrap gap-4 justify-center">
+            <motion.a
+              href="https://cal.com/akhilesh-varute/15min"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 text-muted-foreground hover:text-primary hover:-translate-y-1 transition-all duration-300"
-              aria-label={link.name}
+              className="btn-primary"
+              whileHover={reduceMotion ? undefined : { scale: 1.03 }}
+              whileTap={reduceMotion ? undefined : { scale: 0.98 }}
             >
-              <link.icon className="w-6 h-6" />
-            </a>
-          ))}
-        </div>
+              <CalendarClock className="w-4 h-4" />
+              Book a 15-min Call
+            </motion.a>
+            <motion.a
+              href="mailto:akhileshvarute23@gmail.com"
+              className="btn-outline"
+              whileHover={reduceMotion ? undefined : { scale: 1.03 }}
+              whileTap={reduceMotion ? undefined : { scale: 0.98 }}
+            >
+              <Mail className="w-4 h-4" />
+              akhileshvarute23@gmail.com
+            </motion.a>
+          </div>
+        </Reveal>
+
+        <Reveal delay={0.4}>
+          <div className="flex justify-center gap-6 mt-16">
+            {links.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-1.5 p-3 text-muted-foreground hover:text-primary hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+                aria-label={link.name}
+              >
+                <link.icon className="w-6 h-6" />
+                <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+              </a>
+            ))}
+          </div>
+        </Reveal>
       </div>
     </section>
   );
