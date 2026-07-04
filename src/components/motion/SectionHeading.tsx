@@ -11,15 +11,25 @@ interface SectionHeadingProps {
 /**
  * Editorial section heading: huge outlined ghost number behind,
  * mono kicker line, display-type title, self-drawing divider.
+ * The ghost fades toward its bottom so it never muddies the kicker/title text.
  */
 const SectionHeading = ({ number, title, kicker }: SectionHeadingProps) => (
   <div className="relative mb-16">
     <motion.span
-      className="absolute -top-14 -left-2 font-display font-bold text-[7rem] md:text-[9rem] leading-none text-stroke select-none pointer-events-none"
-      initial={{ opacity: 0, x: -24 }}
-      whileInView={{ opacity: 1, x: 0 }}
+      className="absolute font-display font-bold text-[7rem] md:text-[9rem] leading-none select-none pointer-events-none"
+      // offsets via top/left, not translate — framer's transform would clobber Tailwind translate utilities
+      style={{
+        top: '-4.5rem',
+        left: '-0.4rem',
+        color: 'transparent',
+        WebkitTextStroke: '1.5px hsl(172 66% 50% / 0.3)',
+        maskImage: 'linear-gradient(to bottom, black 30%, transparent 88%)',
+        WebkitMaskImage: 'linear-gradient(to bottom, black 30%, transparent 88%)',
+      }}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
       viewport={{ once: true, margin: '-80px' }}
-      transition={{ duration: 0.9, ease: EASE }}
+      transition={{ duration: 1, ease: EASE }}
       aria-hidden="true"
     >
       {number}
