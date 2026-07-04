@@ -130,7 +130,7 @@ const ProjectCard = ({ project }: { project: Project }) => (
             rel="noopener noreferrer"
             className="ml-auto inline-flex items-center gap-1.5 font-mono text-xs text-primary-foreground bg-primary rounded-full px-4 py-2 hover:brightness-110 transition-all duration-200 cursor-pointer"
           >
-            Visit Live Site
+            See It Running
             <ArrowUpRight className="w-3.5 h-3.5" />
           </a>
         )}

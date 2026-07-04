@@ -161,7 +161,7 @@ const Hero = () => {
             />
             <HeroTerminal />
             <p className="mt-4 text-center font-mono text-[11px] text-muted-foreground/70">
-              ↳ the product I build, in one loop
+              ↳ I built this end-to-end — Bedrock function calling in production
             </p>
           </motion.div>
         </div>
