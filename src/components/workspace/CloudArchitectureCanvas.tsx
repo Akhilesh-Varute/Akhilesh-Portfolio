@@ -2,8 +2,6 @@ import {
   ReactFlow,
   Background,
   BackgroundVariant,
-  Handle,
-  Position,
   useNodesState,
   useEdgesState,
   type Node,
@@ -12,15 +10,14 @@ import {
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 
-const DiamondNode = ({ data }: NodeProps) => (
-  <div className="relative w-[100px] h-[100px] flex items-center justify-center">
-    <div className="absolute inset-0 rotate-45 border-2 border-foreground bg-background" />
-    <Handle type="target" position={Position.Left} className="!bg-foreground !border-none" />
-    <span className="relative font-mono text-[10px] font-semibold text-center leading-tight px-3">
+const ContainerNode = ({ data }: NodeProps) => (
+  <div
+    className="w-full h-full relative"
+    style={{ border: `1px dashed hsl(var(--foreground) / ${(data.strong as boolean) ? 0.55 : 0.3})` }}
+  >
+    <span className="absolute -top-[7px] left-2 bg-background px-1.5 font-mono text-[9px] tracking-wide text-muted-foreground whitespace-nowrap">
       {data.label as string}
     </span>
-    <Handle type="source" position={Position.Top} id="a" className="!bg-foreground !border-none" />
-    <Handle type="source" position={Position.Bottom} id="b" className="!bg-foreground !border-none" />
   </div>
 );
 
@@ -29,49 +26,102 @@ const boxStyle = {
   border: '2px solid hsl(var(--foreground))',
   borderRadius: 0,
   fontFamily: 'var(--font-mono)',
-  fontSize: 12,
+  fontSize: 11,
   fontWeight: 600,
-  padding: '10px 16px',
+  padding: '8px 12px',
   cursor: 'grab',
+  textAlign: 'center' as const,
+  whiteSpace: 'pre-line' as const,
+  lineHeight: 1.4,
 };
 
-// A branching system diagram: a request fans out through EventBridge to
-// two parallel consumers and merges back into Bedrock.
+const highlightStyle = { ...boxStyle, background: 'hsl(var(--primary))' };
+
+const container = (
+  id: string,
+  x: number,
+  y: number,
+  w: number,
+  h: number,
+  label: string,
+  strong = false,
+) => ({
+  id,
+  type: 'container',
+  position: { x, y },
+  data: { label, strong },
+  style: { width: w, height: h },
+  draggable: false,
+  selectable: false,
+  zIndex: strong ? -1 : 0,
+});
+
+// The real AI Cloud Insights infra: two-AZ VPC, ALB + NAT Gateway in each
+// public subnet, an nginx/app Auto Scaling Group per AZ, and a MongoDB
+// primary/secondary replica set split across the private DB subnets.
 const cloudNodes: Node[] = [
-  { id: 'req', position: { x: 0, y: 130 }, data: { label: 'REQUEST' }, style: boxStyle },
-  { id: 'gw', position: { x: 150, y: 130 }, data: { label: 'API GATEWAY' }, style: boxStyle },
-  { id: 'lambda', position: { x: 330, y: 130 }, data: { label: 'LAMBDA' }, style: boxStyle },
-  { id: 'bridge', type: 'diamond', position: { x: 490, y: 85 }, data: { label: 'EVENTBRIDGE' } },
-  { id: 'security', position: { x: 660, y: 20 }, data: { label: 'AUDIT LOG' }, style: boxStyle },
-  { id: 'cost', position: { x: 660, y: 220 }, data: { label: 'METRICS' }, style: boxStyle },
-  {
-    id: 'bedrock',
-    position: { x: 860, y: 130 },
-    data: { label: 'BEDROCK' },
-    style: { ...boxStyle, background: 'hsl(var(--primary))' },
-  },
+  container('vpc', 0, 110, 1000, 560, 'VPC 10.0.0.0/16', true),
+  container('azA', 20, 150, 460, 500, 'AZ · us-east-1a'),
+  container('azB', 520, 150, 460, 500, 'AZ · us-east-1b'),
+  container('pubA', 40, 190, 420, 120, 'PUBLIC SUBNET A · 10.0.1.0/24'),
+  container('appA', 40, 330, 420, 120, 'PRIVATE APP SUBNET A · 10.0.11.0/24'),
+  container('dbA', 40, 470, 420, 150, 'PRIVATE DB SUBNET A · 10.0.21.0/24'),
+  container('pubB', 540, 190, 420, 120, 'PUBLIC SUBNET B · 10.0.2.0/24'),
+  container('appB', 540, 330, 420, 120, 'PRIVATE APP SUBNET B · 10.0.12.0/24'),
+  container('dbB', 540, 470, 420, 150, 'PRIVATE DB SUBNET B · 10.0.22.0/24'),
+
+  { id: 'users', position: { x: 440, y: 0 }, data: { label: 'USERS' }, style: boxStyle },
+  { id: 'igw', position: { x: 405, y: 50 }, data: { label: 'INTERNET GATEWAY' }, style: boxStyle },
+
+  { id: 'natA', position: { x: 70, y: 230 }, data: { label: 'NAT GATEWAY\noutbound only' }, style: boxStyle },
+  { id: 'albA', position: { x: 290, y: 230 }, data: { label: 'ALB\nTCP 443/80' }, style: highlightStyle },
+  { id: 'appNodeA', position: { x: 160, y: 365 }, data: { label: 'nginx + app\nAuto Scaling Group' }, style: boxStyle },
+  { id: 'mongoA', position: { x: 160, y: 510 }, data: { label: 'MongoDB\nPRIMARY' }, style: boxStyle },
+
+  { id: 'natB', position: { x: 570, y: 230 }, data: { label: 'NAT GATEWAY\noutbound only' }, style: boxStyle },
+  { id: 'albB', position: { x: 790, y: 230 }, data: { label: 'ALB\nTCP 443/80' }, style: highlightStyle },
+  { id: 'appNodeB', position: { x: 660, y: 365 }, data: { label: 'nginx + app\nAuto Scaling Group' }, style: boxStyle },
+  { id: 'mongoB', position: { x: 660, y: 510 }, data: { label: 'MongoDB\nSECONDARY' }, style: boxStyle },
 ];
+
+const line = (id: string, source: string, target: string, opts: Partial<Edge> = {}): Edge => ({
+  id,
+  source,
+  target,
+  animated: true,
+  style: { stroke: 'hsl(var(--foreground))' },
+  ...opts,
+});
 
 const cloudEdges: Edge[] = [
-  { id: 'e1', source: 'req', target: 'gw', animated: true, style: { stroke: 'hsl(var(--foreground))' } },
-  { id: 'e2', source: 'gw', target: 'lambda', animated: true, style: { stroke: 'hsl(var(--foreground))' } },
-  { id: 'e3', source: 'lambda', target: 'bridge', animated: true, style: { stroke: 'hsl(var(--foreground))' } },
-  { id: 'e4', source: 'bridge', sourceHandle: 'a', target: 'security', animated: true, style: { stroke: 'hsl(var(--foreground))' } },
-  { id: 'e5', source: 'bridge', sourceHandle: 'b', target: 'cost', animated: true, style: { stroke: 'hsl(var(--foreground))' } },
-  { id: 'e6', source: 'security', target: 'bedrock', animated: true, style: { stroke: 'hsl(var(--primary))' } },
-  { id: 'e7', source: 'cost', target: 'bedrock', animated: true, style: { stroke: 'hsl(var(--primary))' } },
+  line('e-users-igw', 'users', 'igw'),
+  line('e-igw-albA', 'igw', 'albA'),
+  line('e-igw-albB', 'igw', 'albB'),
+  line('e-albA-appA', 'albA', 'appNodeA', { label: 'forward' }),
+  line('e-albB-appB', 'albB', 'appNodeB', { label: 'forward' }),
+  line('e-appA-mongoA', 'appNodeA', 'mongoA', { label: '27017' }),
+  line('e-appB-mongoB', 'appNodeB', 'mongoB', { label: '27017' }),
+  line('e-mongo-replication', 'mongoA', 'mongoB', {
+    label: 'replication',
+    style: { stroke: 'hsl(var(--primary))', strokeDasharray: '4 3' },
+  }),
+  line('e-alb-health', 'albA', 'albB', {
+    label: 'cross-AZ health check',
+    style: { stroke: 'hsl(var(--muted-foreground))', strokeDasharray: '2 4' },
+  }),
 ];
 
-const nodeTypes = { diamond: DiamondNode };
+const nodeTypes = { container: ContainerNode };
 
-/** Open, borderless flow canvas — no panel/box chrome, sized to sit as a
- * half-column companion next to text rather than its own full section. */
+/** Open, borderless flow canvas — the real AI Cloud Insights infrastructure
+ * (not an invented serverless flow): two-AZ HA with ALB, NAT Gateway per
+ * public subnet, and a MongoDB replica set. */
 const CloudArchitectureCanvas = () => {
   const [nodes, , onNodesChange] = useNodesState(cloudNodes);
   const [edges, , onEdgesChange] = useEdgesState(cloudEdges);
 
   return (
-    <div className="relative h-[320px] dot-grid">
+    <div className="relative h-[560px] dot-grid">
       <ReactFlow
         nodes={nodes}
         edges={edges}
@@ -79,7 +129,7 @@ const CloudArchitectureCanvas = () => {
         onEdgesChange={onEdgesChange}
         nodeTypes={nodeTypes}
         fitView
-        fitViewOptions={{ padding: 0.2 }}
+        fitViewOptions={{ padding: 0.08 }}
         proOptions={{ hideAttribution: true }}
         nodesDraggable
         nodesConnectable={false}
@@ -88,8 +138,8 @@ const CloudArchitectureCanvas = () => {
         zoomOnScroll={false}
         zoomOnPinch={false}
         zoomOnDoubleClick={false}
-        translateExtent={[[-60, -60], [1080, 340]]}
-        nodeExtent={[[-60, -60], [1080, 340]]}
+        translateExtent={[[-40, -40], [1040, 700]]}
+        nodeExtent={[[-40, -40], [1040, 700]]}
       >
         <Background variant={BackgroundVariant.Dots} gap={16} size={0} color="transparent" />
       </ReactFlow>
