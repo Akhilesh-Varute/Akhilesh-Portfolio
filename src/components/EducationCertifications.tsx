@@ -10,7 +10,7 @@ const education = [
   {
     degree: 'B.Tech in Textile Engineering',
     institution: "DKTE's Textile and Engineering Institute",
-    year: '2018 – 2022',
+    year: '2022',
   },
 ];
 
@@ -18,7 +18,7 @@ const certifications = [
   {
     title: 'AWS Certified Developer – Associate',
     issuer: 'Amazon Web Services',
-    year: '2024',
+    year: '2025',
   },
 ];
 
