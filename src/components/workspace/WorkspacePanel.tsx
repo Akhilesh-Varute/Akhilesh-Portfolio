@@ -40,14 +40,14 @@ const boxStyle = {
 
 // The Cloud Architecture track — a branching system diagram (not just a
 // straight row of boxes): a request fans out through EventBridge to two
-// bots and merges back into Bedrock.
+// parallel consumers and merges back into Bedrock.
 const cloudNodes: Node[] = [
   { id: 'req', position: { x: 0, y: 130 }, data: { label: 'REQUEST' }, style: boxStyle },
   { id: 'gw', position: { x: 150, y: 130 }, data: { label: 'API GATEWAY' }, style: boxStyle },
   { id: 'lambda', position: { x: 330, y: 130 }, data: { label: 'LAMBDA' }, style: boxStyle },
   { id: 'bridge', type: 'diamond', position: { x: 490, y: 85 }, data: { label: 'EVENTBRIDGE' } },
-  { id: 'security', position: { x: 660, y: 20 }, data: { label: 'SECURITYBOT' }, style: boxStyle },
-  { id: 'cost', position: { x: 660, y: 220 }, data: { label: 'COSTBOT' }, style: boxStyle },
+  { id: 'security', position: { x: 660, y: 20 }, data: { label: 'AUDIT LOG' }, style: boxStyle },
+  { id: 'cost', position: { x: 660, y: 220 }, data: { label: 'METRICS' }, style: boxStyle },
   {
     id: 'bedrock',
     position: { x: 860, y: 130 },
@@ -69,7 +69,7 @@ const cloudEdges: Edge[] = [
 const nodeTypes = { diamond: DiamondNode };
 
 const chatMessages = [
-  { text: 'Validate the CostBot tool-call payload before it hits Bedrock.' },
+  { text: 'Validate the tool-call payload before it hits Bedrock.' },
   { text: 'On it — schema check against ToolDefinition, then execute.' },
   { text: 'Schema passed — shipping.' },
 ];

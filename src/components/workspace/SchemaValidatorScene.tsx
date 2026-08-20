@@ -3,7 +3,7 @@ import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { Check } from 'lucide-react';
 
 const payload = [
-  { key: 'toolName', value: '"CostBot.query"', rule: 'z.string()' },
+  { key: 'toolName', value: '"cloud.query"', rule: 'z.string()' },
   { key: 'tenantId', value: '"4471"', rule: 'z.string().uuid()' },
   { key: 'range', value: '"30d"', rule: 'z.enum([...])' },
 ];
@@ -36,7 +36,7 @@ const SchemaValidatorScene = () => {
       <div className="w-full max-w-lg">
         <div className="border border-border bg-background">
           <div className="px-4 py-2 border-b border-border font-mono text-[10px] uppercase tracking-wide text-muted-foreground flex justify-between">
-            <span>CostBot.query — rawArguments</span>
+            <span>cloud.query — rawArguments</span>
             <span className="text-primary">gate.ts</span>
           </div>
           <div className="p-4 font-mono text-[13px] space-y-1">

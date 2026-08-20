@@ -7,7 +7,7 @@ const script: Line[] = [
   { icon: '·', text: 'the portfolio — type `help`, or press a key below', tone: 'dim' },
   { icon: '❯', text: 'open workspace' },
   { icon: '·', text: 'opening the workspace', tone: 'dim' },
-  { icon: '❯', text: 'gate validate --tool CostBot.query' },
+  { icon: '❯', text: 'gate validate --tool cloud.query' },
   { icon: '·', text: 'checking rawArguments against ToolDefinition schema', tone: 'dim' },
   { icon: '✓', text: 'validation passed — 0 issues', tone: 'ok' },
   { icon: '!', text: 'circuit breaker: 0/3 consecutive failures', tone: 'warn' },
@@ -42,7 +42,7 @@ const TerminalPanel = () => {
   return (
     <div className="border border-border">
       <div className="bg-[#161311] px-4 py-2.5 border-b border-white/10 font-mono text-[11px] text-[#8a8378] flex items-center justify-between">
-        <span>FIGMA · CURSOR · CLAUDE</span>
+        <span>CLAUDE CODE · COPILOT · CURSOR</span>
         <span>LIVE · NEVER FINISHED</span>
       </div>
 
