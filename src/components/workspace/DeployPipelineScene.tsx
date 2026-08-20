@@ -2,22 +2,22 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 
 const stages = [
-  { label: 'PLAN', detail: 'diffing against current stack state' },
-  { label: 'DIFF', detail: '+3 resources · ~0 to destroy' },
-  { label: 'APPLY', detail: 'ECS service updating, 3/3 tasks' },
-  { label: 'VERIFY', detail: 'health checks passing' },
+  { label: 'PLAN', detail: 'scoping the ticket, mapping edge cases' },
+  { label: 'BUILD', detail: 'implementing against the service contract' },
+  { label: 'REVIEW', detail: 'PR open, CI running, review requested' },
+  { label: 'SHIP', detail: 'merged, deployed, dashboards green' },
 ];
 
-const diffLines = [
-  { sign: '+', text: 'aws_ecs_service.api', tone: 'text-[#3f8a5c]' },
-  { sign: '+', text: 'aws_cloudwatch_alarm.cpu_high', tone: 'text-[#3f8a5c]' },
-  { sign: '~', text: 'aws_iam_role_policy.exec', tone: 'text-primary' },
+const checklist = [
+  { sign: '✓', text: 'Unit tests added', tone: 'text-[#3f8a5c]' },
+  { sign: '✓', text: 'CI passing', tone: 'text-[#3f8a5c]' },
+  { sign: '~', text: '1 review comment addressed', tone: 'text-primary' },
 ];
 
 /**
- * A CI-style deploy pipeline for the Automation track — a stage tracker
- * that advances on its own, with a small diff panel that fills in as the
- * PLAN/DIFF stages run.
+ * A lightweight delivery-loop scene for the Experience section — how a
+ * ticket actually moves from plan to shipped, not a CloudFormation-specific
+ * deploy (that's a real part of the job, but not the whole of it).
  */
 const DeployPipelineScene = () => {
   const [stage, setStage] = useState(0);
@@ -81,15 +81,15 @@ const DeployPipelineScene = () => {
 
       <div className="w-full border border-border bg-background">
         <div className="px-4 py-2 border-b border-border font-mono text-[10px] uppercase tracking-wide text-muted-foreground">
-          template.yaml — plan
+          PR #482 — checklist
         </div>
         <div className="p-4 font-mono text-[12px] space-y-1.5">
-          {diffLines.map((line, i) => (
+          {checklist.map((line, i) => (
             <motion.p
               key={line.text}
               className={line.tone}
               initial={reduceMotion ? undefined : { opacity: 0, x: -6 }}
-              animate={{ opacity: stage >= 1 ? 1 : 0.15, x: 0 }}
+              animate={{ opacity: stage >= 2 ? 1 : 0.15, x: 0 }}
               transition={{ delay: i * 0.15, duration: 0.4 }}
             >
               {line.sign} {line.text}

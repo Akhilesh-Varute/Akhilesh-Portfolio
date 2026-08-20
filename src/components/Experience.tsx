@@ -50,7 +50,7 @@ const Experience = () => (
 
           <div className="hidden lg:block">
             <p className="font-mono text-[10px] tracking-[0.16em] uppercase text-muted-foreground mb-3">
-              CloudFormation, live
+              How a feature ships, live
             </p>
             <DeployPipelineScene />
           </div>
