@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react';
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import {
   ReactFlow,
   Background,
@@ -66,25 +64,11 @@ const cloudEdges: Edge[] = [
 
 const nodeTypes = { diamond: DiamondNode };
 
-const chatMessages = [
-  { text: 'Validate the tool-call payload before it hits Bedrock.' },
-  { text: 'On it — schema check against ToolDefinition, then execute.' },
-  { text: 'Schema passed — shipping.' },
-];
-
 /** Open, borderless flow canvas — no panel/box chrome, sized to sit as a
  * half-column companion next to text rather than its own full section. */
 const CloudArchitectureCanvas = () => {
-  const [msgIndex, setMsgIndex] = useState(0);
-  const reduceMotion = useReducedMotion();
   const [nodes, , onNodesChange] = useNodesState(cloudNodes);
   const [edges, , onEdgesChange] = useEdgesState(cloudEdges);
-
-  useEffect(() => {
-    if (reduceMotion) return;
-    const id = setInterval(() => setMsgIndex((i) => (i + 1) % chatMessages.length), 2600);
-    return () => clearInterval(id);
-  }, [reduceMotion]);
 
   return (
     <div className="relative h-[320px] dot-grid">
@@ -104,29 +88,11 @@ const CloudArchitectureCanvas = () => {
         zoomOnScroll={false}
         zoomOnPinch={false}
         zoomOnDoubleClick={false}
+        translateExtent={[[-60, -60], [1080, 340]]}
+        nodeExtent={[[-60, -60], [1080, 340]]}
       >
         <Background variant={BackgroundVariant.Dots} gap={16} size={0} color="transparent" />
       </ReactFlow>
-
-      <div className="absolute bottom-3 right-3 w-56 border border-border bg-background shadow-sm">
-        <div className="px-3 py-1.5 border-b border-border font-mono text-[10px] uppercase tracking-wide text-muted-foreground">
-          Chat
-        </div>
-        <div className="p-3 min-h-[56px] flex items-center">
-          <AnimatePresence mode="wait">
-            <motion.p
-              key={msgIndex}
-              initial={reduceMotion ? false : { opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={reduceMotion ? undefined : { opacity: 0, y: -6 }}
-              transition={{ duration: 0.4 }}
-              className="font-mono text-[11px] leading-relaxed"
-            >
-              {chatMessages[msgIndex].text}
-            </motion.p>
-          </AnimatePresence>
-        </div>
-      </div>
     </div>
   );
 };
