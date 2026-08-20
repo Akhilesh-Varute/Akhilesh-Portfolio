@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
+import { AnimatePresence, motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { ArrowDown, Check, Copy } from 'lucide-react';
 
 const EMAIL = 'akhileshvarute231@gmail.com';
@@ -26,7 +26,12 @@ const Hero = () => {
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end start'] });
   const contentY = useTransform(scrollYProgress, [0, 1], ['0%', '-14%']);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
-  const hintOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
+
+  // Binary show/hide (not just a fade) so the cue actually leaves the DOM
+  // once you've moved away from Hero, instead of lingering as an invisible
+  // fixed-position element that could still catch clicks.
+  const [showScrollCue, setShowScrollCue] = useState(true);
+  useMotionValueEvent(scrollYProgress, 'change', (v) => setShowScrollCue(v < 0.1));
 
   const copyEmail = async () => {
     try {
@@ -98,20 +103,27 @@ const Hero = () => {
         </motion.div>
       </motion.div>
 
-      <motion.a
-        href="#about"
-        className="fixed bottom-8 left-1/2 -translate-x-1/2 z-40 hidden md:flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors cursor-pointer"
-        style={reduceMotion ? undefined : { opacity: hintOpacity }}
-        aria-label="Scroll down"
-      >
-        <span className="font-mono text-[10px] tracking-[0.3em] uppercase">Scroll</span>
-        <motion.span
-          animate={reduceMotion ? undefined : { y: [0, 6, 0] }}
-          transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-        >
-          <ArrowDown className="w-4 h-4" />
-        </motion.span>
-      </motion.a>
+      <AnimatePresence>
+        {showScrollCue && (
+          <motion.a
+            href="#about"
+            className="fixed bottom-8 left-1/2 -translate-x-1/2 z-40 hidden md:flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors cursor-pointer"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            aria-label="Scroll down"
+          >
+            <span className="font-mono text-[10px] tracking-[0.3em] uppercase">Scroll</span>
+            <motion.span
+              animate={reduceMotion ? undefined : { y: [0, 6, 0] }}
+              transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+            >
+              <ArrowDown className="w-4 h-4" />
+            </motion.span>
+          </motion.a>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
