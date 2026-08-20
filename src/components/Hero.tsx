@@ -51,8 +51,8 @@ const Hero = () => {
           animate="show"
         >
           <motion.h1 variants={item} className="font-display font-bold text-4xl md:text-6xl leading-[1.08]">
-            I build cloud systems{' '}
-            <span className="text-muted-foreground">that run themselves.</span>
+            I build cloud systems that run themselves,{' '}
+            <span className="text-muted-foreground">and AI that only does what it's validated to do.</span>
           </motion.h1>
 
           <motion.div variants={item}>
