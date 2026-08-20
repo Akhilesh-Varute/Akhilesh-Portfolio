@@ -1,16 +1,17 @@
 import { useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
-import Highlights from '@/components/Highlights';
-import About from '@/components/About';
+import WorkspacePanel from '@/components/workspace/WorkspacePanel';
+import TerminalPanel from '@/components/workspace/TerminalPanel';
+import AiWorkflow from '@/components/workspace/AiWorkflow';
+import StatBars from '@/components/workspace/StatBars';
 import Projects from '@/components/Projects';
+import About from '@/components/About';
 import Experience from '@/components/Experience';
 import Skills from '@/components/Skills';
 import EducationCertifications from '@/components/EducationCertifications';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
-import SocialSidebar from '@/components/SocialSidebar';
-import ScrollProgress from '@/components/ScrollProgress';
 
 const Index = () => {
   useEffect(() => {
@@ -22,15 +23,22 @@ const Index = () => {
 
   return (
     <div className="relative">
-      <ScrollProgress />
       <Navigation />
-      <SocialSidebar />
 
       <main>
         <Hero />
-        <Highlights />
-        <About />
+
+        <section className="py-16 rule">
+          <div className="wrap space-y-8">
+            <WorkspacePanel />
+            <TerminalPanel />
+          </div>
+        </section>
+
+        <AiWorkflow />
+        <StatBars />
         <Projects />
+        <About />
         <Experience />
         <Skills />
         <EducationCertifications />

@@ -1,7 +1,4 @@
-import { motion, useReducedMotion, useScroll, useSpring } from 'framer-motion';
-import { useRef } from 'react';
 import { Reveal, Stagger, StaggerItem } from '@/components/motion/Reveal';
-import SectionHeading from '@/components/motion/SectionHeading';
 
 const experience = {
   role: 'Software Developer (Cloud Solutions)',
@@ -16,56 +13,41 @@ const experience = {
   ],
 };
 
-const Experience = () => {
-  const timelineRef = useRef<HTMLDivElement>(null);
-  const reduceMotion = useReducedMotion();
+const Experience = () => (
+  <section id="experience" className="py-20 rule">
+    <div className="wrap">
+      <p className="eyebrow mb-4">Profile / Experience</p>
+      <h2 className="font-display font-bold text-4xl md:text-6xl mb-12">Where I've worked</h2>
 
-  const { scrollYProgress } = useScroll({ target: timelineRef, offset: ['start 0.8', 'end 0.5'] });
-  const lineScale = useSpring(scrollYProgress, { stiffness: 90, damping: 25 });
-
-  return (
-    <section id="experience" className="py-28 md:py-36 px-6 bg-secondary/40">
-      <div className="container max-w-6xl mx-auto">
-        <SectionHeading number="03" title="Experience" kicker="Where I've worked" />
-
-        <div ref={timelineRef} className="relative pl-8 md:pl-10">
-          <div className="absolute left-0 top-0 bottom-0 w-px bg-border" />
-          <motion.div
-            className="absolute left-0 top-0 bottom-0 w-px bg-primary origin-top"
-            style={{ scaleY: reduceMotion ? 1 : lineScale }}
-          />
-          <motion.div
-            className="absolute top-0 w-2.5 h-2.5 bg-primary rounded-full"
-            style={{ left: '-4.5px' }}
-            initial={{ scale: 0 }}
-            whileInView={{ scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ type: 'spring', stiffness: 300, damping: 15, delay: 0.2 }}
-          />
-
+      <div className="panel">
+        <div className="panel-topbar justify-between">
+          <span>Role / Company</span>
+          <span className="text-primary">ACTIVE</span>
+        </div>
+        <div className="p-6 md:p-8">
           <Reveal>
-            <h3 className="text-2xl font-display text-foreground">
-              {experience.role} <span className="text-primary italic">@ {experience.company}</span>
+            <h3 className="font-display font-bold text-xl">
+              {experience.role} <span className="text-muted-foreground">@ {experience.company}</span>
             </h3>
-            <p className="font-mono text-sm text-muted-foreground mt-1.5">
+            <p className="font-mono text-xs text-muted-foreground mt-1.5">
               {experience.period} · {experience.location}
             </p>
           </Reveal>
 
-          <Stagger className="space-y-3.5 mt-6">
+          <Stagger className="space-y-3 mt-6">
             {experience.highlights.map((point, i) => (
               <StaggerItem key={i}>
-                <span className="flex gap-3 text-foreground/85 leading-relaxed">
-                  <span className="text-primary mt-1.5">—</span>
-                  <span>{point}</span>
+                <span className="flex gap-3 font-mono text-sm text-foreground/85 leading-relaxed">
+                  <span className="text-primary">→</span>
+                  {point}
                 </span>
               </StaggerItem>
             ))}
           </Stagger>
         </div>
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
 
 export default Experience;
