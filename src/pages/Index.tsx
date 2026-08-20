@@ -28,12 +28,18 @@ const Index = () => {
       <main>
         <Hero />
 
-        <section className="py-16 rule">
+        <section className="py-20 rule">
           <div className="wrap">
+            <p className="eyebrow mb-4">System design</p>
+            <h2 className="font-display font-bold text-4xl md:text-6xl mb-3">
+              A high-availability system, <span className="text-muted-foreground">designed to prove it out.</span>
+            </h2>
+            <p className="font-mono text-sm text-muted-foreground max-w-lg mb-10">
+              Two-AZ VPC, ALB and NAT Gateway per public subnet, an nginx/app Auto Scaling
+              Group, and a MongoDB replica set — designed independently to practice
+              high-availability patterns. Drag the blocks.
+            </p>
             <Reveal>
-              <p className="font-mono text-[10px] tracking-[0.16em] uppercase text-muted-foreground mb-3">
-                AI Cloud Insights, live — how one request actually moves through it
-              </p>
               <CloudArchitectureCanvas />
             </Reveal>
           </div>

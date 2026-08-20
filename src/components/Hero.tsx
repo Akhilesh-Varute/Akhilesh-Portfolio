@@ -1,7 +1,6 @@
 import { useRef, useState } from 'react';
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { Check, Copy } from 'lucide-react';
-import DioramaStrip from '@/components/workspace/DioramaStrip';
 
 const EMAIL = 'akhileshvarute231@gmail.com';
 
@@ -93,8 +92,6 @@ const Hero = () => {
           </button>
         </motion.div>
       </motion.div>
-
-      <DioramaStrip index="04" title="AI Cloud Insights" subtitle="Cloud & AI Architecture" />
     </section>
   );
 };

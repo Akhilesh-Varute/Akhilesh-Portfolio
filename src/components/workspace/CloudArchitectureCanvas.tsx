@@ -56,9 +56,10 @@ const container = (
   zIndex: strong ? -1 : 0,
 });
 
-// The real AI Cloud Insights infra: two-AZ VPC, ALB + NAT Gateway in each
-// public subnet, an nginx/app Auto Scaling Group per AZ, and a MongoDB
-// primary/secondary replica set split across the private DB subnets.
+// A real HA system design (competency exercise, not a production
+// deployment): two-AZ VPC, ALB + NAT Gateway in each public subnet, an
+// nginx/app Auto Scaling Group per AZ, and a MongoDB primary/secondary
+// replica set split across the private DB subnets.
 const cloudNodes: Node[] = [
   container('vpc', 0, 110, 1000, 560, 'VPC 10.0.0.0/16', true),
   container('azA', 20, 150, 460, 500, 'AZ · us-east-1a'),
@@ -113,9 +114,10 @@ const cloudEdges: Edge[] = [
 
 const nodeTypes = { container: ContainerNode };
 
-/** Open, borderless flow canvas — the real AI Cloud Insights infrastructure
- * (not an invented serverless flow): two-AZ HA with ALB, NAT Gateway per
- * public subnet, and a MongoDB replica set. */
+/** Open, borderless flow canvas — a real HA system design (competency
+ * exercise, not the actual AI Cloud Insights deployment, which runs on
+ * simpler EC2 infra): two-AZ VPC with ALB, NAT Gateway per public subnet,
+ * and a MongoDB replica set. */
 const CloudArchitectureCanvas = () => {
   const [nodes, , onNodesChange] = useNodesState(cloudNodes);
   const [edges, , onEdgesChange] = useEdgesState(cloudEdges);
