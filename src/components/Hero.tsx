@@ -1,12 +1,15 @@
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ArrowDown, Check, Copy } from 'lucide-react';
+import { gsap, ScrollTrigger } from '@/lib/gsap';
+import { splitChars } from '@/lib/split-text';
+import { useReducedMotionGsap } from '@/hooks/use-reduced-motion-gsap';
 
 const EASE = [0.25, 0.4, 0.25, 1] as const;
 
 const container = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.09, delayChildren: 0.15 } },
+  show: { transition: { staggerChildren: 0.06, delayChildren: 1.05 } },
 };
 
 const item = {
@@ -15,16 +18,65 @@ const item = {
 };
 
 const EMAIL = 'akhileshvarute231@gmail.com';
+const LINE_ONE = 'Software';
+const LINE_TWO = 'Developer';
 
 const Hero = () => {
   const ref = useRef<HTMLElement>(null);
+  const headlineRef = useRef<HTMLHeadingElement>(null);
   const reduceMotion = useReducedMotion();
+  const reduceMotionGsap = useReducedMotionGsap();
   const [copied, setCopied] = useState(false);
 
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
   const contentY = useTransform(scrollYProgress, [0, 1], ['0%', '18%']);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
   const hintOpacity = useTransform(scrollYProgress, [0, 0.12], [1, 0]);
+
+  // Kinetic split-text: characters assemble on load, then the headline
+  // reacts to scroll velocity with a subtle skew while scrolling.
+  useEffect(() => {
+    const headline = headlineRef.current;
+    if (!headline) return;
+
+    const ctx = gsap.context(() => {
+      const chars = headline.querySelectorAll<HTMLSpanElement>('[data-char]');
+
+      if (reduceMotionGsap) {
+        gsap.set(chars, { yPercent: 0, opacity: 1, rotate: 0 });
+        return;
+      }
+
+      gsap.set(chars, { yPercent: 120, opacity: 0, rotate: 6 });
+      gsap.to(chars, {
+        yPercent: 0,
+        opacity: 1,
+        rotate: 0,
+        duration: 1,
+        ease: 'power4.out',
+        stagger: 0.022,
+        delay: 0.15,
+      });
+
+      // Scroll-velocity skew: the headline leans into the scroll direction
+      // and eases back to neutral when scrolling stops.
+      const skewSetter = gsap.quickTo(headline, 'skewX', { duration: 0.5, ease: 'power3' });
+      const clamp = gsap.utils.clamp(-8, 8);
+
+      ScrollTrigger.create({
+        trigger: ref.current,
+        start: 'top bottom',
+        end: 'bottom top',
+        onUpdate: (self) => {
+          skewSetter(clamp(self.getVelocity() / -260));
+        },
+        onLeave: () => skewSetter(0),
+        onLeaveBack: () => skewSetter(0),
+      });
+    }, headline);
+
+    return () => ctx.revert();
+  }, [reduceMotionGsap]);
 
   const copyEmail = async () => {
     try {
@@ -35,6 +87,21 @@ const Hero = () => {
       window.location.href = `mailto:${EMAIL}`;
     }
   };
+
+  const renderLine = (text: string) => (
+    <span className="block overflow-hidden py-1">
+      {splitChars(text).map((token) => (
+        <span
+          key={token.key}
+          data-char
+          className="inline-block will-change-transform"
+          style={{ whiteSpace: token.char === ' ' ? 'pre' : undefined }}
+        >
+          {token.char}
+        </span>
+      ))}
+    </span>
+  );
 
   return (
     <section
@@ -50,11 +117,8 @@ const Hero = () => {
         <motion.div
           style={reduceMotion ? undefined : { y: contentY, opacity: contentOpacity, willChange: 'transform, opacity' }}
         >
-          <motion.div variants={container} initial="hidden" animate="show">
-            <motion.div
-              variants={item}
-              className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-border mb-8"
-            >
+          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-border mb-8">
               <span className="relative flex h-1.5 w-1.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-60" />
                 <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-primary" />
@@ -62,25 +126,21 @@ const Hero = () => {
               <span className="font-mono text-[11px] text-muted-foreground tracking-wide">
                 Available for Cloud &amp; AI Engineering roles
               </span>
-            </motion.div>
+            </div>
 
-            <motion.p variants={item} className="eyebrow mb-5">
-              Akhilesh Varute · Pune, India
-            </motion.p>
+            <p className="eyebrow mb-5">Akhilesh Varute · Pune, India</p>
+          </motion.div>
 
-            <motion.h1
-              variants={item}
-              className="font-display italic font-medium text-foreground leading-[0.95] text-[16vw] sm:text-[10vw] lg:text-[7.2rem] tracking-tight"
-            >
-              Software
-              <br />
-              Developer
-            </motion.h1>
+          <h1
+            ref={headlineRef}
+            className="font-display italic font-medium text-foreground leading-[0.95] text-[16vw] sm:text-[10vw] lg:text-[7.2rem] tracking-tight"
+          >
+            {renderLine(LINE_ONE)}
+            {renderLine(LINE_TWO)}
+          </h1>
 
-            <motion.p
-              variants={item}
-              className="mt-6 font-display text-2xl md:text-3xl text-muted-foreground max-w-2xl"
-            >
+          <motion.div variants={container} initial="hidden" animate="show">
+            <motion.p variants={item} className="mt-6 font-display text-2xl md:text-3xl text-muted-foreground max-w-2xl">
               Cloud Solutions — AWS Certified.
             </motion.p>
 

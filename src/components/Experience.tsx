@@ -1,7 +1,9 @@
-import { motion, useReducedMotion, useScroll, useSpring } from 'framer-motion';
-import { useRef } from 'react';
+import { motion } from 'framer-motion';
+import { useEffect, useRef } from 'react';
 import { Reveal, Stagger, StaggerItem } from '@/components/motion/Reveal';
 import SectionHeading from '@/components/motion/SectionHeading';
+import { gsap, ScrollTrigger } from '@/lib/gsap';
+import { useReducedMotionGsap } from '@/hooks/use-reduced-motion-gsap';
 
 const experience = {
   role: 'Software Developer (Cloud Solutions)',
@@ -18,10 +20,34 @@ const experience = {
 
 const Experience = () => {
   const timelineRef = useRef<HTMLDivElement>(null);
-  const reduceMotion = useReducedMotion();
+  const lineRef = useRef<HTMLDivElement>(null);
+  const reduceMotion = useReducedMotionGsap();
 
-  const { scrollYProgress } = useScroll({ target: timelineRef, offset: ['start 0.8', 'end 0.5'] });
-  const lineScale = useSpring(scrollYProgress, { stiffness: 90, damping: 25 });
+  useEffect(() => {
+    const timeline = timelineRef.current;
+    const line = lineRef.current;
+    if (!timeline || !line) return;
+
+    const ctx = gsap.context(() => {
+      if (reduceMotion) {
+        gsap.set(line, { scaleY: 1 });
+        return;
+      }
+      gsap.set(line, { scaleY: 0, transformOrigin: 'top center' });
+      gsap.to(line, {
+        scaleY: 1,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: timeline,
+          start: 'top 80%',
+          end: 'bottom 55%',
+          scrub: 0.6,
+        },
+      });
+    }, timeline);
+
+    return () => ctx.revert();
+  }, [reduceMotion]);
 
   return (
     <section id="experience" className="py-28 md:py-36 px-6 bg-secondary/40">
@@ -30,10 +56,7 @@ const Experience = () => {
 
         <div ref={timelineRef} className="relative pl-8 md:pl-10">
           <div className="absolute left-0 top-0 bottom-0 w-px bg-border" />
-          <motion.div
-            className="absolute left-0 top-0 bottom-0 w-px bg-primary origin-top"
-            style={{ scaleY: reduceMotion ? 1 : lineScale }}
-          />
+          <div ref={lineRef} className="absolute left-0 top-0 bottom-0 w-px bg-primary" />
           <motion.div
             className="absolute top-0 w-2.5 h-2.5 bg-primary rounded-full"
             style={{ left: '-4.5px' }}

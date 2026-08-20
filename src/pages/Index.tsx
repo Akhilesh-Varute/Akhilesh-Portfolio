@@ -1,10 +1,12 @@
 import { useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
-import Highlights from '@/components/Highlights';
+import StatCounters from '@/components/creative/StatCounters';
 import About from '@/components/About';
+import ArchitectureDiagram from '@/components/creative/ArchitectureDiagram';
 import Projects from '@/components/Projects';
 import Experience from '@/components/Experience';
+import CodeTypewriter from '@/components/creative/CodeTypewriter';
 import Skills from '@/components/Skills';
 import EducationCertifications from '@/components/EducationCertifications';
 import Contact from '@/components/Contact';
@@ -28,10 +30,12 @@ const Index = () => {
 
       <main>
         <Hero />
-        <Highlights />
+        <StatCounters />
         <About />
+        <ArchitectureDiagram />
         <Projects />
         <Experience />
+        <CodeTypewriter />
         <Skills />
         <EducationCertifications />
       </main>
