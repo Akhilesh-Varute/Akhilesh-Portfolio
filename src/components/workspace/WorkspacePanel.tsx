@@ -6,6 +6,8 @@ import {
   BackgroundVariant,
   Handle,
   Position,
+  useNodesState,
+  useEdgesState,
   type Node,
   type Edge,
   type NodeProps,
@@ -32,17 +34,73 @@ const boxStyle = {
   fontSize: 12,
   fontWeight: 600,
   padding: '10px 16px',
+  cursor: 'grab',
 };
 
-const nodes: Node[] = [
-  { id: 'brief', position: { x: 0, y: 40 }, data: { label: 'PROMPT' }, style: boxStyle, draggable: false },
-  { id: 'design', position: { x: 190, y: 40 }, data: { label: 'DESIGN' }, style: boxStyle, draggable: false },
-  { id: 'validate', type: 'diamond', position: { x: 400, y: -5 }, data: { label: 'GATE PASSES?' }, draggable: false },
-  { id: 'ship', position: { x: 620, y: 40 }, data: { label: 'SHIP' }, style: { ...boxStyle, background: 'hsl(var(--primary))' }, draggable: false },
-  { id: 'rework', position: { x: 400, y: 190 }, data: { label: 'REWORK' }, style: boxStyle, draggable: false },
+interface TrackFlow {
+  title: string;
+  meta: string;
+  labels: { start: string; mid: string; gate: string; ok: string; fail: string };
+  chat: { from: string; text: string }[];
+}
+
+const tracks: TrackFlow[] = [
+  {
+    title: 'Cloud Architecture',
+    meta: 'AWS · LIVE',
+    labels: { start: 'PROMPT', mid: 'DESIGN', gate: 'GATE PASSES?', ok: 'SHIP', fail: 'REWORK' },
+    chat: [
+      { from: 'you', text: 'Validate the CostBot tool-call payload before it hits Bedrock.' },
+      { from: 'gate', text: 'On it — schema check against ToolDefinition, then execute.' },
+      { from: 'gate', text: 'Schema passed — shipping.' },
+    ],
+  },
+  {
+    title: 'AI Guardrails',
+    meta: 'AGENTIC-GATE · DAILY',
+    labels: { start: 'TOOL CALL', mid: 'SCHEMA', gate: 'ARGS VALID?', ok: 'EXECUTE', fail: 'REJECT' },
+    chat: [
+      { from: 'you', text: 'LLM wants to call resetCircuit with a malformed toolName.' },
+      { from: 'gate', text: 'safeParse against the Zod schema first.' },
+      { from: 'gate', text: 'Validation failed — refusing before it touches real systems.' },
+    ],
+  },
+  {
+    title: 'Automation',
+    meta: 'CLOUDFORMATION · LIVE',
+    labels: { start: 'TEMPLATE', mid: 'PLAN', gate: 'DRIFT DETECTED?', ok: 'DEPLOY', fail: 'ROLLBACK' },
+    chat: [
+      { from: 'you', text: 'Provision the client environment from the CFN template.' },
+      { from: 'gate', text: 'Diffing against current stack state.' },
+      { from: 'gate', text: 'No drift — deploying to ECS Fargate.' },
+    ],
+  },
+  {
+    title: 'Backend Systems',
+    meta: 'NODE · PYTHON',
+    labels: { start: 'REQUEST', mid: 'SERVICE', gate: 'CACHE HIT?', ok: 'RESPOND', fail: 'QUERY DB' },
+    chat: [
+      { from: 'you', text: 'GET /cost-report for tenant 4471.' },
+      { from: 'gate', text: 'Checking Redis first.' },
+      { from: 'gate', text: 'Hit — responding in 4ms.' },
+    ],
+  },
 ];
 
-const edges: Edge[] = [
+const buildNodes = (t: TrackFlow): Node[] => [
+  { id: 'brief', position: { x: 0, y: 40 }, data: { label: t.labels.start }, style: boxStyle },
+  { id: 'design', position: { x: 190, y: 40 }, data: { label: t.labels.mid }, style: boxStyle },
+  { id: 'validate', type: 'diamond', position: { x: 400, y: -5 }, data: { label: t.labels.gate } },
+  {
+    id: 'ship',
+    position: { x: 620, y: 40 },
+    data: { label: t.labels.ok },
+    style: { ...boxStyle, background: 'hsl(var(--primary))' },
+  },
+  { id: 'rework', position: { x: 400, y: 190 }, data: { label: t.labels.fail }, style: boxStyle },
+];
+
+const buildEdges = (): Edge[] => [
   { id: 'e1', source: 'brief', target: 'design', animated: true, style: { stroke: 'hsl(var(--foreground))' } },
   { id: 'e2', source: 'design', target: 'validate', animated: true, style: { stroke: 'hsl(var(--foreground))' } },
   { id: 'e3', source: 'validate', sourceHandle: 'ok', target: 'ship', animated: true, label: 'OK', style: { stroke: 'hsl(var(--primary))' } },
@@ -50,34 +108,36 @@ const edges: Edge[] = [
   { id: 'e5', source: 'rework', target: 'design', animated: true, style: { stroke: 'hsl(var(--foreground))' } },
 ];
 
-const tracks = [
-  { title: 'Cloud Architecture', meta: 'AWS · LIVE' },
-  { title: 'AI Guardrails', meta: 'AGENTIC-GATE · DAILY' },
-  { title: 'Automation', meta: 'CLOUDFORMATION · LIVE' },
-  { title: 'Backend Systems', meta: 'NODE · PYTHON' },
-];
-
-const chatMessages = [
-  { from: 'you', text: 'Validate the CostBot tool-call payload before it hits Bedrock.' },
-  { from: 'gate', text: 'On it — schema check against ToolDefinition, then execute.' },
-  { from: 'gate', text: 'Schema passed — shipping.' },
-];
+const nodeTypes = { diamond: DiamondNode };
 
 const WorkspacePanel = () => {
   const [active, setActive] = useState(0);
   const [msgIndex, setMsgIndex] = useState(0);
   const reduceMotion = useReducedMotion();
+  const track = tracks[active];
+
+  const [nodes, setNodes, onNodesChange] = useNodesState(buildNodes(tracks[0]));
+  const [edges, setEdges, onEdgesChange] = useEdgesState(buildEdges());
+
+  // Switching tracks rebuilds the diagram (new labels, positions reset —
+  // any dragging you did on the previous track doesn't carry over).
+  useEffect(() => {
+    setNodes(buildNodes(track));
+    setEdges(buildEdges());
+    setMsgIndex(0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [active]);
 
   useEffect(() => {
     if (reduceMotion) return;
-    const id = setInterval(() => setMsgIndex((i) => (i + 1) % chatMessages.length), 2600);
+    const id = setInterval(() => setMsgIndex((i) => (i + 1) % track.chat.length), 2600);
     return () => clearInterval(id);
-  }, [reduceMotion]);
+  }, [reduceMotion, track]);
 
   return (
     <div className="panel">
       <div className="panel-topbar justify-between">
-        <span>Portfolio / Workspace / Workspace</span>
+        <span>Portfolio / Workspace / {track.title}</span>
         <span className="inline-flex items-center gap-1.5 text-primary">
           <span className="w-1.5 h-1.5 bg-primary rounded-full" /> Ready
         </span>
@@ -102,16 +162,22 @@ const WorkspacePanel = () => {
               </li>
             ))}
           </ul>
+          <p className="px-4 mt-4 font-mono text-[10px] text-muted-foreground leading-relaxed">
+            Drag the blocks on the canvas — each track loads its own run.
+          </p>
         </div>
 
         <div className="relative dot-grid h-[420px] overflow-hidden">
           <ReactFlow
             nodes={nodes}
             edges={edges}
-            nodeTypes={{ diamond: DiamondNode }}
+            onNodesChange={onNodesChange}
+            onEdgesChange={onEdgesChange}
+            nodeTypes={nodeTypes}
             fitView
             fitViewOptions={{ padding: 0.25 }}
             proOptions={{ hideAttribution: true }}
+            nodesDraggable
             nodesConnectable={false}
             elementsSelectable={false}
             panOnDrag={false}
@@ -129,14 +195,14 @@ const WorkspacePanel = () => {
             <div className="p-3 min-h-[64px] flex items-center">
               <AnimatePresence mode="wait">
                 <motion.p
-                  key={msgIndex}
+                  key={`${active}-${msgIndex}`}
                   initial={reduceMotion ? false : { opacity: 0, y: 6 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={reduceMotion ? undefined : { opacity: 0, y: -6 }}
                   transition={{ duration: 0.4 }}
                   className="font-mono text-xs leading-relaxed"
                 >
-                  {chatMessages[msgIndex].text}
+                  {track.chat[msgIndex].text}
                 </motion.p>
               </AnimatePresence>
             </div>
