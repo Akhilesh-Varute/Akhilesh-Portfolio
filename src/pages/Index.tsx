@@ -27,6 +27,7 @@ const Index = () => {
 
       <main>
         <Hero />
+        <About />
 
         <section className="py-20 rule">
           <div className="wrap">
@@ -48,7 +49,6 @@ const Index = () => {
         <AiWorkflow />
         <StatBars />
         <Projects />
-        <About />
         <Experience />
         <Skills />
         <EducationCertifications />

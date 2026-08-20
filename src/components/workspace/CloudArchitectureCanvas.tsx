@@ -123,28 +123,35 @@ const CloudArchitectureCanvas = () => {
   const [edges, , onEdgesChange] = useEdgesState(cloudEdges);
 
   return (
-    <div className="relative h-[560px] dot-grid">
-      <ReactFlow
-        nodes={nodes}
-        edges={edges}
-        onNodesChange={onNodesChange}
-        onEdgesChange={onEdgesChange}
-        nodeTypes={nodeTypes}
-        fitView
-        fitViewOptions={{ padding: 0.08 }}
-        proOptions={{ hideAttribution: true }}
-        nodesDraggable
-        nodesConnectable={false}
-        elementsSelectable={false}
-        panOnDrag={false}
-        zoomOnScroll={false}
-        zoomOnPinch={false}
-        zoomOnDoubleClick={false}
-        translateExtent={[[-40, -40], [1040, 700]]}
-        nodeExtent={[[-40, -40], [1040, 700]]}
-      >
-        <Background variant={BackgroundVariant.Dots} gap={16} size={0} color="transparent" />
-      </ReactFlow>
+    <div>
+      <p className="md:hidden font-mono text-[10px] text-muted-foreground mb-2">
+        ← scroll to explore the full diagram →
+      </p>
+      <div className="overflow-x-auto -mx-6 px-6 md:mx-0 md:px-0">
+        <div className="relative h-[560px] dot-grid" style={{ minWidth: 1080 }}>
+          <ReactFlow
+            nodes={nodes}
+            edges={edges}
+            onNodesChange={onNodesChange}
+            onEdgesChange={onEdgesChange}
+            nodeTypes={nodeTypes}
+            fitView
+            fitViewOptions={{ padding: 0.08 }}
+            proOptions={{ hideAttribution: true }}
+            nodesDraggable
+            nodesConnectable={false}
+            elementsSelectable={false}
+            panOnDrag={false}
+            zoomOnScroll={false}
+            zoomOnPinch={false}
+            zoomOnDoubleClick={false}
+            translateExtent={[[-40, -40], [1040, 700]]}
+            nodeExtent={[[-40, -40], [1040, 700]]}
+          >
+            <Background variant={BackgroundVariant.Dots} gap={16} size={0} color="transparent" />
+          </ReactFlow>
+        </div>
+      </div>
     </div>
   );
 };
