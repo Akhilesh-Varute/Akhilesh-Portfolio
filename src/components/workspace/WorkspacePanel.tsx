@@ -6,23 +6,24 @@ import {
   BackgroundVariant,
   Handle,
   Position,
-  useNodesState,
-  useEdgesState,
   type Node,
   type Edge,
   type NodeProps,
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
+import SchemaValidatorScene from './SchemaValidatorScene';
+import DeployPipelineScene from './DeployPipelineScene';
+import SequenceDiagramScene from './SequenceDiagramScene';
 
 const DiamondNode = ({ data }: NodeProps) => (
-  <div className="relative w-[110px] h-[110px] flex items-center justify-center">
+  <div className="relative w-[100px] h-[100px] flex items-center justify-center">
     <div className="absolute inset-0 rotate-45 border-2 border-foreground bg-background" />
     <Handle type="target" position={Position.Left} className="!bg-foreground !border-none" />
-    <span className="relative font-mono text-[11px] font-semibold text-center leading-tight px-3">
+    <span className="relative font-mono text-[10px] font-semibold text-center leading-tight px-3">
       {data.label as string}
     </span>
-    <Handle type="source" position={Position.Right} id="ok" className="!bg-foreground !border-none" />
-    <Handle type="source" position={Position.Bottom} id="no" className="!bg-foreground !border-none" />
+    <Handle type="source" position={Position.Top} id="a" className="!bg-foreground !border-none" />
+    <Handle type="source" position={Position.Bottom} id="b" className="!bg-foreground !border-none" />
   </div>
 );
 
@@ -37,102 +38,106 @@ const boxStyle = {
   cursor: 'grab',
 };
 
-interface TrackFlow {
-  title: string;
-  meta: string;
-  labels: { start: string; mid: string; gate: string; ok: string; fail: string };
-  chat: { from: string; text: string }[];
-}
-
-const tracks: TrackFlow[] = [
+// The Cloud Architecture track — a branching system diagram (not just a
+// straight row of boxes): a request fans out through EventBridge to two
+// bots and merges back into Bedrock.
+const cloudNodes: Node[] = [
+  { id: 'req', position: { x: 0, y: 130 }, data: { label: 'REQUEST' }, style: boxStyle },
+  { id: 'gw', position: { x: 150, y: 130 }, data: { label: 'API GATEWAY' }, style: boxStyle },
+  { id: 'lambda', position: { x: 330, y: 130 }, data: { label: 'LAMBDA' }, style: boxStyle },
+  { id: 'bridge', type: 'diamond', position: { x: 490, y: 85 }, data: { label: 'EVENTBRIDGE' } },
+  { id: 'security', position: { x: 660, y: 20 }, data: { label: 'SECURITYBOT' }, style: boxStyle },
+  { id: 'cost', position: { x: 660, y: 220 }, data: { label: 'COSTBOT' }, style: boxStyle },
   {
-    title: 'Cloud Architecture',
-    meta: 'AWS · LIVE',
-    labels: { start: 'PROMPT', mid: 'DESIGN', gate: 'GATE PASSES?', ok: 'SHIP', fail: 'REWORK' },
-    chat: [
-      { from: 'you', text: 'Validate the CostBot tool-call payload before it hits Bedrock.' },
-      { from: 'gate', text: 'On it — schema check against ToolDefinition, then execute.' },
-      { from: 'gate', text: 'Schema passed — shipping.' },
-    ],
-  },
-  {
-    title: 'AI Guardrails',
-    meta: 'AGENTIC-GATE · DAILY',
-    labels: { start: 'TOOL CALL', mid: 'SCHEMA', gate: 'ARGS VALID?', ok: 'EXECUTE', fail: 'REJECT' },
-    chat: [
-      { from: 'you', text: 'LLM wants to call resetCircuit with a malformed toolName.' },
-      { from: 'gate', text: 'safeParse against the Zod schema first.' },
-      { from: 'gate', text: 'Validation failed — refusing before it touches real systems.' },
-    ],
-  },
-  {
-    title: 'Automation',
-    meta: 'CLOUDFORMATION · LIVE',
-    labels: { start: 'TEMPLATE', mid: 'PLAN', gate: 'DRIFT DETECTED?', ok: 'DEPLOY', fail: 'ROLLBACK' },
-    chat: [
-      { from: 'you', text: 'Provision the client environment from the CFN template.' },
-      { from: 'gate', text: 'Diffing against current stack state.' },
-      { from: 'gate', text: 'No drift — deploying to ECS Fargate.' },
-    ],
-  },
-  {
-    title: 'Backend Systems',
-    meta: 'NODE · PYTHON',
-    labels: { start: 'REQUEST', mid: 'SERVICE', gate: 'CACHE HIT?', ok: 'RESPOND', fail: 'QUERY DB' },
-    chat: [
-      { from: 'you', text: 'GET /cost-report for tenant 4471.' },
-      { from: 'gate', text: 'Checking Redis first.' },
-      { from: 'gate', text: 'Hit — responding in 4ms.' },
-    ],
-  },
-];
-
-const buildNodes = (t: TrackFlow): Node[] => [
-  { id: 'brief', position: { x: 0, y: 40 }, data: { label: t.labels.start }, style: boxStyle },
-  { id: 'design', position: { x: 190, y: 40 }, data: { label: t.labels.mid }, style: boxStyle },
-  { id: 'validate', type: 'diamond', position: { x: 400, y: -5 }, data: { label: t.labels.gate } },
-  {
-    id: 'ship',
-    position: { x: 620, y: 40 },
-    data: { label: t.labels.ok },
+    id: 'bedrock',
+    position: { x: 860, y: 130 },
+    data: { label: 'BEDROCK' },
     style: { ...boxStyle, background: 'hsl(var(--primary))' },
   },
-  { id: 'rework', position: { x: 400, y: 190 }, data: { label: t.labels.fail }, style: boxStyle },
 ];
 
-const buildEdges = (): Edge[] => [
-  { id: 'e1', source: 'brief', target: 'design', animated: true, style: { stroke: 'hsl(var(--foreground))' } },
-  { id: 'e2', source: 'design', target: 'validate', animated: true, style: { stroke: 'hsl(var(--foreground))' } },
-  { id: 'e3', source: 'validate', sourceHandle: 'ok', target: 'ship', animated: true, label: 'OK', style: { stroke: 'hsl(var(--primary))' } },
-  { id: 'e4', source: 'validate', sourceHandle: 'no', target: 'rework', animated: true, label: 'NO', style: { stroke: 'hsl(var(--destructive))' } },
-  { id: 'e5', source: 'rework', target: 'design', animated: true, style: { stroke: 'hsl(var(--foreground))' } },
+const cloudEdges: Edge[] = [
+  { id: 'e1', source: 'req', target: 'gw', animated: true, style: { stroke: 'hsl(var(--foreground))' } },
+  { id: 'e2', source: 'gw', target: 'lambda', animated: true, style: { stroke: 'hsl(var(--foreground))' } },
+  { id: 'e3', source: 'lambda', target: 'bridge', animated: true, style: { stroke: 'hsl(var(--foreground))' } },
+  { id: 'e4', source: 'bridge', sourceHandle: 'a', target: 'security', animated: true, style: { stroke: 'hsl(var(--foreground))' } },
+  { id: 'e5', source: 'bridge', sourceHandle: 'b', target: 'cost', animated: true, style: { stroke: 'hsl(var(--foreground))' } },
+  { id: 'e6', source: 'security', target: 'bedrock', animated: true, style: { stroke: 'hsl(var(--primary))' } },
+  { id: 'e7', source: 'cost', target: 'bedrock', animated: true, style: { stroke: 'hsl(var(--primary))' } },
 ];
 
 const nodeTypes = { diamond: DiamondNode };
 
-const WorkspacePanel = () => {
-  const [active, setActive] = useState(0);
+const chatMessages = [
+  { text: 'Validate the CostBot tool-call payload before it hits Bedrock.' },
+  { text: 'On it — schema check against ToolDefinition, then execute.' },
+  { text: 'Schema passed — shipping.' },
+];
+
+const CloudFlowScene = () => {
   const [msgIndex, setMsgIndex] = useState(0);
   const reduceMotion = useReducedMotion();
-  const track = tracks[active];
-
-  const [nodes, setNodes, onNodesChange] = useNodesState(buildNodes(tracks[0]));
-  const [edges, setEdges, onEdgesChange] = useEdgesState(buildEdges());
-
-  // Switching tracks rebuilds the diagram (new labels, positions reset —
-  // any dragging you did on the previous track doesn't carry over).
-  useEffect(() => {
-    setNodes(buildNodes(track));
-    setEdges(buildEdges());
-    setMsgIndex(0);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [active]);
 
   useEffect(() => {
     if (reduceMotion) return;
-    const id = setInterval(() => setMsgIndex((i) => (i + 1) % track.chat.length), 2600);
+    const id = setInterval(() => setMsgIndex((i) => (i + 1) % chatMessages.length), 2600);
     return () => clearInterval(id);
-  }, [reduceMotion, track]);
+  }, [reduceMotion]);
+
+  return (
+    <div className="relative h-[420px]">
+      <ReactFlow
+        nodes={cloudNodes}
+        edges={cloudEdges}
+        nodeTypes={nodeTypes}
+        fitView
+        fitViewOptions={{ padding: 0.2 }}
+        proOptions={{ hideAttribution: true }}
+        nodesDraggable
+        nodesConnectable={false}
+        elementsSelectable={false}
+        panOnDrag={false}
+        zoomOnScroll={false}
+        zoomOnPinch={false}
+        zoomOnDoubleClick={false}
+      >
+        <Background variant={BackgroundVariant.Dots} gap={16} size={0} color="transparent" />
+      </ReactFlow>
+
+      <div className="absolute bottom-4 right-4 w-64 border border-border bg-background shadow-sm">
+        <div className="px-3 py-1.5 border-b border-border font-mono text-[10px] uppercase tracking-wide text-muted-foreground">
+          Chat
+        </div>
+        <div className="p-3 min-h-[64px] flex items-center">
+          <AnimatePresence mode="wait">
+            <motion.p
+              key={msgIndex}
+              initial={reduceMotion ? false : { opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={reduceMotion ? undefined : { opacity: 0, y: -6 }}
+              transition={{ duration: 0.4 }}
+              className="font-mono text-xs leading-relaxed"
+            >
+              {chatMessages[msgIndex].text}
+            </motion.p>
+          </AnimatePresence>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const tracks = [
+  { title: 'Cloud Architecture', meta: 'AWS · LIVE', hint: 'Drag the blocks on the canvas.', Scene: CloudFlowScene },
+  { title: 'AI Guardrails', meta: 'AGENTIC-GATE · DAILY', hint: 'Watch each field clear the schema gate.', Scene: SchemaValidatorScene },
+  { title: 'Automation', meta: 'CLOUDFORMATION · LIVE', hint: 'A plan → apply run, stage by stage.', Scene: DeployPipelineScene },
+  { title: 'Backend Systems', meta: 'NODE · PYTHON', hint: 'A request tracing through the cache path.', Scene: SequenceDiagramScene },
+];
+
+const WorkspacePanel = () => {
+  const [active, setActive] = useState(0);
+  const track = tracks[active];
+  const Scene = track.Scene;
 
   return (
     <div className="panel">
@@ -162,51 +167,21 @@ const WorkspacePanel = () => {
               </li>
             ))}
           </ul>
-          <p className="px-4 mt-4 font-mono text-[10px] text-muted-foreground leading-relaxed">
-            Drag the blocks on the canvas — each track loads its own run.
-          </p>
+          <p className="px-4 mt-4 font-mono text-[10px] text-muted-foreground leading-relaxed">{track.hint}</p>
         </div>
 
-        <div className="relative dot-grid h-[420px] overflow-hidden">
-          <ReactFlow
-            nodes={nodes}
-            edges={edges}
-            onNodesChange={onNodesChange}
-            onEdgesChange={onEdgesChange}
-            nodeTypes={nodeTypes}
-            fitView
-            fitViewOptions={{ padding: 0.25 }}
-            proOptions={{ hideAttribution: true }}
-            nodesDraggable
-            nodesConnectable={false}
-            elementsSelectable={false}
-            panOnDrag={false}
-            zoomOnScroll={false}
-            zoomOnPinch={false}
-            zoomOnDoubleClick={false}
-          >
-            <Background variant={BackgroundVariant.Dots} gap={16} size={0} color="transparent" />
-          </ReactFlow>
-
-          <div className="absolute bottom-4 right-4 w-64 border border-border bg-background shadow-sm">
-            <div className="px-3 py-1.5 border-b border-border font-mono text-[10px] uppercase tracking-wide text-muted-foreground">
-              Chat
-            </div>
-            <div className="p-3 min-h-[64px] flex items-center">
-              <AnimatePresence mode="wait">
-                <motion.p
-                  key={`${active}-${msgIndex}`}
-                  initial={reduceMotion ? false : { opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={reduceMotion ? undefined : { opacity: 0, y: -6 }}
-                  transition={{ duration: 0.4 }}
-                  className="font-mono text-xs leading-relaxed"
-                >
-                  {track.chat[msgIndex].text}
-                </motion.p>
-              </AnimatePresence>
-            </div>
-          </div>
+        <div className="relative dot-grid overflow-hidden">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={active}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+            >
+              <Scene />
+            </motion.div>
+          </AnimatePresence>
         </div>
       </div>
     </div>
