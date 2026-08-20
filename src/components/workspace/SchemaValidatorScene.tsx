@@ -32,7 +32,7 @@ const SchemaValidatorScene = () => {
   const showValid = step >= payload.length + 1;
 
   return (
-    <div className="h-[420px] flex items-center justify-center px-6">
+    <div className="flex items-center justify-center py-4">
       <div className="w-full max-w-lg">
         <div className="border border-border bg-background">
           <div className="px-4 py-2 border-b border-border font-mono text-[10px] uppercase tracking-wide text-muted-foreground flex justify-between">

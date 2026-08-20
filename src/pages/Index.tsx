@@ -2,8 +2,7 @@ import { useEffect } from 'react';
 import { Reveal } from '@/components/motion/Reveal';
 import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
-import WorkspacePanel from '@/components/workspace/WorkspacePanel';
-import TerminalPanel from '@/components/workspace/TerminalPanel';
+import CloudArchitectureCanvas from '@/components/workspace/CloudArchitectureCanvas';
 import AiWorkflow from '@/components/workspace/AiWorkflow';
 import StatBars from '@/components/workspace/StatBars';
 import Projects from '@/components/Projects';
@@ -30,12 +29,12 @@ const Index = () => {
         <Hero />
 
         <section className="py-16 rule">
-          <div className="wrap space-y-8">
+          <div className="wrap">
             <Reveal>
-              <WorkspacePanel />
-            </Reveal>
-            <Reveal delay={0.1}>
-              <TerminalPanel />
+              <p className="font-mono text-[10px] tracking-[0.16em] uppercase text-muted-foreground mb-3">
+                AWS · LIVE — how a request moves through my systems
+              </p>
+              <CloudArchitectureCanvas />
             </Reveal>
           </div>
         </section>

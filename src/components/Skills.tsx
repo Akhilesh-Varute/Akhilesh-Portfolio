@@ -1,4 +1,5 @@
 import { Reveal } from '@/components/motion/Reveal';
+import SequenceDiagramScene from '@/components/workspace/SequenceDiagramScene';
 
 const categories = [
   {
@@ -45,6 +46,13 @@ const Skills = () => (
           </Reveal>
         ))}
       </div>
+
+      <Reveal delay={0.2} className="mt-10 pt-10 rule">
+        <p className="font-mono text-[10px] tracking-[0.16em] uppercase text-muted-foreground mb-3">
+          Node · Python, live
+        </p>
+        <SequenceDiagramScene />
+      </Reveal>
     </div>
   </section>
 );

@@ -11,9 +11,6 @@ import {
   type NodeProps,
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
-import SchemaValidatorScene from './SchemaValidatorScene';
-import DeployPipelineScene from './DeployPipelineScene';
-import SequenceDiagramScene from './SequenceDiagramScene';
 
 const DiamondNode = ({ data }: NodeProps) => (
   <div className="relative w-[100px] h-[100px] flex items-center justify-center">
@@ -38,9 +35,8 @@ const boxStyle = {
   cursor: 'grab',
 };
 
-// The Cloud Architecture track — a branching system diagram (not just a
-// straight row of boxes): a request fans out through EventBridge to two
-// parallel consumers and merges back into Bedrock.
+// A branching system diagram: a request fans out through EventBridge to
+// two parallel consumers and merges back into Bedrock.
 const cloudNodes: Node[] = [
   { id: 'req', position: { x: 0, y: 130 }, data: { label: 'REQUEST' }, style: boxStyle },
   { id: 'gw', position: { x: 150, y: 130 }, data: { label: 'API GATEWAY' }, style: boxStyle },
@@ -74,7 +70,9 @@ const chatMessages = [
   { text: 'Schema passed — shipping.' },
 ];
 
-const CloudFlowScene = () => {
+/** Open, borderless flow canvas — no panel/box chrome, sized to sit as a
+ * half-column companion next to text rather than its own full section. */
+const CloudArchitectureCanvas = () => {
   const [msgIndex, setMsgIndex] = useState(0);
   const reduceMotion = useReducedMotion();
 
@@ -85,7 +83,7 @@ const CloudFlowScene = () => {
   }, [reduceMotion]);
 
   return (
-    <div className="relative h-[420px]">
+    <div className="relative h-[320px] dot-grid">
       <ReactFlow
         nodes={cloudNodes}
         edges={cloudEdges}
@@ -104,11 +102,11 @@ const CloudFlowScene = () => {
         <Background variant={BackgroundVariant.Dots} gap={16} size={0} color="transparent" />
       </ReactFlow>
 
-      <div className="absolute bottom-4 right-4 w-64 border border-border bg-background shadow-sm">
+      <div className="absolute bottom-3 right-3 w-56 border border-border bg-background shadow-sm">
         <div className="px-3 py-1.5 border-b border-border font-mono text-[10px] uppercase tracking-wide text-muted-foreground">
           Chat
         </div>
-        <div className="p-3 min-h-[64px] flex items-center">
+        <div className="p-3 min-h-[56px] flex items-center">
           <AnimatePresence mode="wait">
             <motion.p
               key={msgIndex}
@@ -116,7 +114,7 @@ const CloudFlowScene = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={reduceMotion ? undefined : { opacity: 0, y: -6 }}
               transition={{ duration: 0.4 }}
-              className="font-mono text-xs leading-relaxed"
+              className="font-mono text-[11px] leading-relaxed"
             >
               {chatMessages[msgIndex].text}
             </motion.p>
@@ -127,65 +125,4 @@ const CloudFlowScene = () => {
   );
 };
 
-const tracks = [
-  { title: 'Cloud Architecture', meta: 'AWS · LIVE', hint: 'Drag the blocks on the canvas.', Scene: CloudFlowScene },
-  { title: 'AI Guardrails', meta: 'AGENTIC-GATE · DAILY', hint: 'Watch each field clear the schema gate.', Scene: SchemaValidatorScene },
-  { title: 'Automation', meta: 'CLOUDFORMATION · LIVE', hint: 'A plan → apply run, stage by stage.', Scene: DeployPipelineScene },
-  { title: 'Backend Systems', meta: 'NODE · PYTHON', hint: 'A request tracing through the cache path.', Scene: SequenceDiagramScene },
-];
-
-const WorkspacePanel = () => {
-  const [active, setActive] = useState(0);
-  const track = tracks[active];
-  const Scene = track.Scene;
-
-  return (
-    <div className="panel">
-      <div className="panel-topbar justify-between">
-        <span>Portfolio / Workspace / {track.title}</span>
-        <span className="inline-flex items-center gap-1.5 text-primary">
-          <span className="w-1.5 h-1.5 bg-primary rounded-full" /> Ready
-        </span>
-      </div>
-
-      <div className="grid md:grid-cols-[220px_1fr]">
-        <div className="border-r border-border py-4">
-          <p className="px-4 font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground mb-2">Expertise</p>
-          <ul>
-            {tracks.map((t, i) => (
-              <li key={t.title}>
-                <button
-                  type="button"
-                  onClick={() => setActive(i)}
-                  className={`w-full text-left px-4 py-2.5 border-l-2 transition-colors ${
-                    active === i ? 'border-primary bg-secondary' : 'border-transparent hover:bg-secondary/60'
-                  }`}
-                >
-                  <span className="block font-mono text-sm">{t.title}</span>
-                  <span className="block font-mono text-[10px] text-muted-foreground mt-0.5">{t.meta}</span>
-                </button>
-              </li>
-            ))}
-          </ul>
-          <p className="px-4 mt-4 font-mono text-[10px] text-muted-foreground leading-relaxed">{track.hint}</p>
-        </div>
-
-        <div className="relative dot-grid overflow-hidden">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={active}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
-            >
-              <Scene />
-            </motion.div>
-          </AnimatePresence>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default WorkspacePanel;
+export default CloudArchitectureCanvas;

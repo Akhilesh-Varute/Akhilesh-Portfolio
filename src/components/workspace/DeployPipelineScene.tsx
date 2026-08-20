@@ -33,8 +33,8 @@ const DeployPipelineScene = () => {
   }, [reduceMotion]);
 
   return (
-    <div className="h-[420px] flex flex-col items-center justify-center px-6 gap-10">
-      <div className="w-full max-w-xl">
+    <div className="flex flex-col items-center py-4 gap-8">
+      <div className="w-full">
         <div className="flex items-center">
           {stages.map((s, i) => (
             <div key={s.label} className="flex items-center flex-1 last:flex-none">
@@ -79,7 +79,7 @@ const DeployPipelineScene = () => {
         </div>
       </div>
 
-      <div className="w-full max-w-xl border border-border bg-background">
+      <div className="w-full border border-border bg-background">
         <div className="px-4 py-2 border-b border-border font-mono text-[10px] uppercase tracking-wide text-muted-foreground">
           template.yaml — plan
         </div>

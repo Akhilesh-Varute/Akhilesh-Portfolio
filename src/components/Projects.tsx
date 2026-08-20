@@ -96,77 +96,79 @@ const ProjectCard = ({ project }: { project: Project }) => (
     </div>
 
     <div className="p-6 md:p-8">
-      <div className="flex items-start justify-between mb-4">
-        <div>
-          <span className="font-mono text-xs text-muted-foreground">{project.number}</span>
-          <h3 className="font-display font-bold text-2xl md:text-3xl mt-1">{project.title}</h3>
+      <div>
+        <div className="flex items-start justify-between mb-4">
+          <div>
+            <span className="font-mono text-xs text-muted-foreground">{project.number}</span>
+            <h3 className="font-display font-bold text-2xl md:text-3xl mt-1">{project.title}</h3>
+          </div>
+          {project.isCompanyProject && (
+            <span className="inline-flex items-center gap-1.5 font-mono text-[10px] uppercase border border-primary px-2.5 py-1.5 shrink-0">
+              <Building2 className="w-3 h-3" />
+              @ {project.company}
+            </span>
+          )}
         </div>
-        {project.isCompanyProject && (
-          <span className="inline-flex items-center gap-1.5 font-mono text-[10px] uppercase border border-primary px-2.5 py-1.5 shrink-0">
-            <Building2 className="w-3 h-3" />
-            @ {project.company}
-          </span>
+
+        <p className="font-mono text-sm text-muted-foreground mb-6 max-w-2xl">{project.tagline}</p>
+
+        {project.providers && (
+          <div className="flex flex-wrap gap-2 mb-5">
+            {project.providers.map((p) => (
+              <span key={p} className="font-mono text-[11px] border border-border px-2.5 py-1">
+                {p}
+              </span>
+            ))}
+          </div>
         )}
-      </div>
 
-      <p className="font-mono text-sm text-muted-foreground mb-6 max-w-2xl">{project.tagline}</p>
+        <div className="grid sm:grid-cols-2 gap-6 mb-6">
+          <div>
+            <p className="font-mono text-[11px] uppercase tracking-wide text-primary mb-1.5">Problem</p>
+            <p className="font-mono text-sm text-foreground/85 leading-relaxed">{project.problem}</p>
+          </div>
+          <div>
+            <p className="font-mono text-[11px] uppercase tracking-wide text-primary mb-1.5">Solution</p>
+            <p className="font-mono text-sm text-foreground/85 leading-relaxed">{project.solution}</p>
+          </div>
+        </div>
 
-      {project.providers && (
-        <div className="flex flex-wrap gap-2 mb-5">
-          {project.providers.map((p) => (
-            <span key={p} className="font-mono text-[11px] border border-border px-2.5 py-1">
-              {p}
+        <ul className="space-y-2 mb-6">
+          {project.impact.map((point, i) => (
+            <li key={i} className="flex gap-3 font-mono text-sm text-muted-foreground leading-relaxed">
+              <span className="text-primary">→</span>
+              {point}
+            </li>
+          ))}
+        </ul>
+
+        <div className="flex flex-wrap gap-2 mb-6">
+          {project.stack.map((tech) => (
+            <span key={tech} className="font-mono text-[11px] text-muted-foreground border border-border px-2 py-1">
+              {tech}
             </span>
           ))}
         </div>
-      )}
 
-      <div className="grid md:grid-cols-2 gap-6 mb-6">
-        <div>
-          <p className="font-mono text-[11px] uppercase tracking-wide text-primary mb-1.5">Problem</p>
-          <p className="font-mono text-sm text-foreground/85 leading-relaxed">{project.problem}</p>
-        </div>
-        <div>
-          <p className="font-mono text-[11px] uppercase tracking-wide text-primary mb-1.5">Solution</p>
-          <p className="font-mono text-sm text-foreground/85 leading-relaxed">{project.solution}</p>
-        </div>
+        {project.links.length > 0 ? (
+          <div className="flex flex-wrap gap-3">
+            {project.links.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 font-mono text-xs border border-border px-3 py-1.5 hover:border-primary hover:text-primary transition-colors"
+              >
+                {link.label}
+                <ArrowUpRight className="w-3 h-3" />
+              </a>
+            ))}
+          </div>
+        ) : project.note ? (
+          <p className="font-mono text-xs text-muted-foreground italic">{project.note}</p>
+        ) : null}
       </div>
-
-      <ul className="space-y-2 mb-6">
-        {project.impact.map((point, i) => (
-          <li key={i} className="flex gap-3 font-mono text-sm text-muted-foreground leading-relaxed">
-            <span className="text-primary">→</span>
-            {point}
-          </li>
-        ))}
-      </ul>
-
-      <div className="flex flex-wrap gap-2 mb-6">
-        {project.stack.map((tech) => (
-          <span key={tech} className="font-mono text-[11px] text-muted-foreground border border-border px-2 py-1">
-            {tech}
-          </span>
-        ))}
-      </div>
-
-      {project.links.length > 0 ? (
-        <div className="flex flex-wrap gap-3">
-          {project.links.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 font-mono text-xs border border-border px-3 py-1.5 hover:border-primary hover:text-primary transition-colors"
-            >
-              {link.label}
-              <ArrowUpRight className="w-3 h-3" />
-            </a>
-          ))}
-        </div>
-      ) : project.note ? (
-        <p className="font-mono text-xs text-muted-foreground italic">{project.note}</p>
-      ) : null}
     </div>
   </Reveal>
 );

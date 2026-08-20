@@ -35,7 +35,7 @@ const SequenceDiagramScene = () => {
   }, [reduceMotion]);
 
   return (
-    <div className="h-[420px] flex items-center justify-center px-6">
+    <div className="flex items-center justify-center py-4">
       <svg viewBox="0 0 760 360" className="w-full max-w-2xl h-auto" aria-hidden="true">
         {lanes.map((lane) => (
           <g key={lane.id}>
@@ -60,16 +60,17 @@ const SequenceDiagramScene = () => {
               <motion.line
                 x1={fromX}
                 y1={y}
-                x2={fromX}
                 y2={y}
                 stroke={drawing ? 'hsl(var(--primary))' : 'hsl(var(--foreground))'}
                 strokeWidth={1.5}
+                initial={{ x2: fromX }}
                 animate={{ x2: drawn || drawing ? toX : fromX }}
                 transition={{ duration: reduceMotion ? 0 : 0.6, ease: 'easeInOut' }}
               />
               <motion.polygon
                 points={`0,-4 8,0 0,4`}
                 fill={drawing ? 'hsl(var(--primary))' : 'hsl(var(--foreground))'}
+                initial={{ x: fromX - (dir > 0 ? 8 : 0), y, rotate: dir > 0 ? 0 : 180, opacity: 0 }}
                 animate={{
                   x: (drawn || drawing ? toX : fromX) - (dir > 0 ? 8 : 0),
                   y,
