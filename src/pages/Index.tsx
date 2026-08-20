@@ -1,20 +1,19 @@
 import { useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
+import Highlights from '@/components/Highlights';
 import About from '@/components/About';
-import Experience from '@/components/Experience';
 import Projects from '@/components/Projects';
+import Experience from '@/components/Experience';
 import Skills from '@/components/Skills';
+import EducationCertifications from '@/components/EducationCertifications';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import SocialSidebar from '@/components/SocialSidebar';
-import AuroraBackground from '@/components/AuroraBackground';
 import ScrollProgress from '@/components/ScrollProgress';
-import CursorGlow from '@/components/CursorGlow';
 
 const Index = () => {
   useEffect(() => {
-    // Clear hash and scroll to top on initial load
     if (window.location.hash) {
       window.history.replaceState(null, '', window.location.pathname);
       window.scrollTo(0, 0);
@@ -22,22 +21,22 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="relative noise">
-      <AuroraBackground />
-      <CursorGlow />
+    <div className="relative">
       <ScrollProgress />
       <Navigation />
       <SocialSidebar />
 
       <main>
         <Hero />
+        <Highlights />
         <About />
-        <Experience />
         <Projects />
+        <Experience />
         <Skills />
-        <Contact />
+        <EducationCertifications />
       </main>
 
+      <Contact />
       <Footer />
     </div>
   );

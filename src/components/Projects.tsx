@@ -1,264 +1,232 @@
-import {
-  motion,
-  useMotionValueEvent,
-  useReducedMotion,
-  useScroll,
-  useTransform,
-} from 'framer-motion';
-import { useEffect, useRef, useState } from 'react';
-import { ArrowUpRight, Github } from 'lucide-react';
+import { ArrowUpRight, Building2 } from 'lucide-react';
+import { Reveal, Stagger, StaggerItem } from '@/components/motion/Reveal';
 import SectionHeading from '@/components/motion/SectionHeading';
+
+interface ProjectLink {
+  label: string;
+  href: string;
+}
 
 interface Project {
   number: string;
-  status: 'LIVE' | 'R&D PROTOTYPE';
   title: string;
-  description: string;
-  tech: string[];
-  points: string[];
-  demo?: string;
+  tagline: string;
+  category: string;
+  isCompanyProject?: boolean;
+  company?: string;
+  providers?: string[];
+  stack: string[];
+  metrics: string;
+  problem: string;
+  solution: string;
+  impact: string[];
+  links: ProjectLink[];
+  note?: string;
 }
 
 const projects: Project[] = [
   {
     number: '01',
-    status: 'LIVE',
-    title: 'AI Cloud Insights Platform',
-    description:
-      'Multi-tenant SaaS — enterprises connect AWS accounts and query costs, security posture, and resource usage in plain English.',
-    tech: [
-      'Node.js',
-      'TypeScript',
-      'Express.js',
-      'Lambda',
-      'Bedrock (Claude)',
-      'STS',
-      'CloudWatch',
-      'MongoDB',
-      'RBAC',
-      'Docker',
+    title: 'AI Cloud Insights',
+    tagline: 'Multi-Cloud GenAI Infrastructure Monitoring & Cost Optimization Platform',
+    category: 'Cloud & AI Architecture',
+    isCompanyProject: true,
+    company: 'ASCP GPUonCLOUD',
+    providers: ['AWS', 'Azure', 'GCP'],
+    stack: ['AWS Bedrock', 'Multi-Cloud APIs (AWS, Azure, GCP)', 'AWS Lambda', 'EventBridge', 'Node.js', 'Python', 'Amazon ECS'],
+    metrics: 'Unified 3 major cloud providers under one roof; cut assessment overhead by 40%',
+    problem:
+      'Managing cost optimization and monitoring across multi-cloud environments required logging into 3 separate provider consoles (AWS, Azure, GCP), creating fragmented data silos and severe operational overhead.',
+    solution:
+      'Architected and deployed a multi-tenant GenAI platform that unifies billing and resource monitoring metrics across AWS, Azure, and GCP into a single dashboard powered by AWS Bedrock for natural language queries.',
+    impact: [
+      'Eliminated 3-console context switching by consolidating AWS, Azure, and GCP infrastructure visibility under one roof.',
+      'Engineered automated GenAI bots (SecurityBot, CostBot) to process natural language queries across multi-cloud billing and health APIs.',
+      'Reduced assessment overhead by 40% and drove 20–30% cloud cost savings across client workloads.',
     ],
-    points: [
-      'Bedrock function calling / tool use — Claude parses intent, selects AWS tool schemas (Cost Explorer, Security Hub, GuardDuty, CloudWatch, IAM), system executes in real time.',
-      'Cross-account STS role assumption with strict per-tenant isolation; cost engine analyses 8 services in parallel, findings ranked by dollar impact.',
-      'JWT + RBAC stored in MongoDB with per-user, per-account visibility across the multi-tenant deployment.',
-    ],
-    demo: 'https://aicloudinsights.ai',
+    links: [],
+    note: 'Proprietary enterprise software built for ASCP GPUonCLOUD',
   },
   {
     number: '02',
-    status: 'R&D PROTOTYPE',
-    title: 'Cloud Infrastructure Automation Platform',
-    description:
-      'Kubernetes-native provisioning engine — describe infrastructure in plain English, deploy automatically.',
-    tech: [
-      'Node.js',
-      'Fastify',
-      'Bedrock',
-      'Crossplane',
-      'Kubernetes',
-      'WebSocket',
-      'SSM',
-      'Redis',
-      'MongoDB',
+    title: 'Agentic-Gate',
+    tagline: 'Deterministic Guardrails & Schema Validation Engine for LLM Agents',
+    category: 'Open Source Package',
+    stack: ['TypeScript', 'Python', 'Zod', 'Pydantic', 'GitHub Actions', 'npm', 'PyPI'],
+    metrics: 'Published to npm & PyPI with 100% test coverage up to v1.4.0',
+    problem:
+      'Non-deterministic tool calling in LLM agents causes execution loops, invalid argument passing, and unnecessary cloud API token expenses.',
+    solution:
+      'Designed and published a lightweight cross-language validation engine in TypeScript and Python that intercepts agent tool calls locally and enforces schema-based guardrails prior to execution.',
+    impact: [
+      'Eliminated agent loops by failing fast on invalid LLM tool arguments.',
+      'Cut cloud API overhead by reducing unnecessary downstream tool invocations.',
+      'Automated dual-registry releases to npm and PyPI via GitHub Actions Trusted Publishers, with 100% test coverage.',
     ],
-    points: [
-      'Plain English → Bedrock intent parsing → Crossplane CRD provisioning, GitOps-style with automatic drift detection.',
-      'WebSocket in-browser SSH terminal (xterm.js + SSM Session Manager); D3.js real-time infrastructure visualisation.',
-      'Internal R&D prototype — deprioritised before broader rollout due to funding reallocation.',
+    links: [
+      { label: 'GitHub', href: 'https://github.com/Akhilesh-Varute/agentic-gate' },
+      { label: 'npm', href: 'https://www.npmjs.com/package/agentic-gate' },
+      { label: 'PyPI', href: 'https://pypi.org/project/agentic-gate/' },
     ],
+  },
+  {
+    number: '03',
+    title: 'Personal Finance & Expense Automation',
+    tagline: 'Event-Driven Natural Language Expense Parsing & Categorization Pipeline',
+    category: 'Automation & Microservices',
+    stack: ['Node.js', 'n8n', 'Telegram Bot API', 'REST APIs', 'Docker'],
+    metrics: 'Automated natural language expense logging and real-time categorization',
+    problem:
+      'Manual expense logging creates friction, leading to incomplete or inconsistent personal financial tracking.',
+    solution:
+      'Built an event-driven automation bot that processes natural language chat messages from Telegram, extracts structured expense data, and categorizes transaction records automatically.',
+    impact: [
+      'Eliminated manual logging friction using natural language processing.',
+      'Engineered reliable webhook pipelines via n8n and Node.js microservices.',
+    ],
+    links: [{ label: 'GitHub', href: 'https://github.com/Akhilesh-Varute' }],
   },
 ];
 
-const ProjectCard = ({ project }: { project: Project }) => (
-  <article className="relative w-[min(85vw,46rem)] flex-shrink-0 glass-card border-glow rounded-2xl overflow-hidden group hover:border-primary/30 transition-colors duration-300">
-    {/* terminal-style chrome */}
-    <div className="flex items-center gap-2 px-5 py-3 border-b border-white/[0.06] bg-white/[0.02]">
-      <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
-      <span className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
-      <span className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
-      <span className="ml-3 font-mono text-xs text-muted-foreground truncate">
-        ~/projects/{project.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}
-      </span>
-      <span
-        className={`ml-auto font-mono text-[10px] tracking-widest px-2.5 py-1 rounded-full border ${
-          project.status === 'LIVE'
-            ? 'text-emerald-400 border-emerald-400/30 bg-emerald-400/10'
-            : 'text-amber-300 border-amber-300/30 bg-amber-300/10'
-        }`}
-      >
-        {project.status === 'LIVE' ? '● LIVE' : '◦ R&D'}
-      </span>
-    </div>
-
-    <div className="relative p-8 md:p-10">
-      <span
-        className="absolute -top-6 right-6 font-display font-bold text-[7rem] leading-none text-transparent select-none pointer-events-none"
-        style={{ WebkitTextStroke: '1px hsl(172 66% 50% / 0.22)' }}
-        aria-hidden="true"
-      >
-        {project.number}
-      </span>
-
-      <h3 className="text-2xl md:text-3xl font-bold font-display text-foreground mb-3 group-hover:text-primary transition-colors duration-300 pr-24">
-        {project.title}
-      </h3>
-      <p className="text-muted-foreground mb-6 max-w-xl">{project.description}</p>
-
-      <ul className="space-y-3 mb-8">
-        {project.points.map((point, i) => (
-          <li key={i} className="flex gap-3 text-muted-foreground text-sm md:text-[0.95rem] leading-relaxed">
-            <span className="text-primary mt-0.5">▹</span>
-            <span>{point}</span>
-          </li>
-        ))}
-      </ul>
-
-      <div className="flex flex-wrap items-center gap-2">
-        {project.tech.map((tech) => (
-          <span
-            key={tech}
-            className="font-mono text-xs text-primary/90 bg-primary/[0.07] border border-primary/15 rounded-full px-3 py-1"
-          >
-            {tech}
-          </span>
-        ))}
-        {project.demo && (
-          <a
-            href={project.demo}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="ml-auto inline-flex items-center gap-1.5 font-mono text-xs text-primary-foreground bg-primary rounded-full px-4 py-2 hover:brightness-110 transition-all duration-200 cursor-pointer"
-          >
-            See It Running
-            <ArrowUpRight className="w-3.5 h-3.5" />
-          </a>
-        )}
-      </div>
-    </div>
-  </article>
-);
-
-const CtaCard = () => (
-  <article className="relative w-[min(85vw,46rem)] flex-shrink-0 glass-card rounded-2xl p-10 flex flex-col items-center justify-center text-center gap-6 min-h-[26rem]">
-    <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center">
-      <Github className="w-8 h-8 text-primary" />
-    </div>
-    <h3 className="text-2xl md:text-3xl font-bold font-display text-foreground">
-      More on <span className="text-gradient">GitHub</span>
-    </h3>
-    <p className="text-muted-foreground max-w-sm">
-      Explore experiments, infrastructure tooling, and works in progress.
-    </p>
-    <a
-      href="https://github.com/Akhilesh-Varute"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="btn-outline glow"
-    >
-      Visit GitHub
-      <ArrowUpRight className="w-4 h-4" />
-    </a>
-  </article>
-);
-
-const SLIDE_COUNT = projects.length + 1;
-
-const Projects = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
-  const reduceMotion = useReducedMotion();
-  const [distance, setDistance] = useState(0);
-  const [activeSlide, setActiveSlide] = useState(0);
-
-  // Measure how far the track must travel so the last card lands fully in view
-  useEffect(() => {
-    const measure = () => {
-      if (trackRef.current) {
-        setDistance(Math.max(0, trackRef.current.scrollWidth - window.innerWidth));
-      }
-    };
-    measure();
-    window.addEventListener('resize', measure);
-    return () => window.removeEventListener('resize', measure);
-  }, []);
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start start', 'end end'],
-  });
-  // Direct 1:1 mapping — a spring here trails the scroll and reads as lag
-  const x = useTransform(scrollYProgress, [0, 1], [0, -distance]);
-
-  useMotionValueEvent(scrollYProgress, 'change', (v) => {
-    setActiveSlide(Math.min(SLIDE_COUNT - 1, Math.floor(v * SLIDE_COUNT)));
-  });
-
-  // Reduced motion: plain vertical stack, no pinning
-  if (reduceMotion) {
-    return (
-      <section id="projects" className="py-32 px-6">
-        <div className="container max-w-6xl mx-auto">
-          <SectionHeading number="03" title="Featured Projects" kicker="what I've built" />
-          <div className="space-y-10 flex flex-col items-center">
-            {projects.map((project) => (
-              <ProjectCard key={project.title} project={project} />
-            ))}
-            <CtaCard />
-          </div>
-        </div>
-      </section>
-    );
-  }
+const ProjectCase = ({ project, index }: { project: Project; index: number }) => {
+  const reversed = index % 2 === 1;
 
   return (
-    // Tall section provides the scroll runway; inner viewport stays pinned
-    <section
-      id="projects"
-      ref={sectionRef}
-      className="relative"
-      style={{ height: `${SLIDE_COUNT * 100 + 60}vh` }}
-    >
-      <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden">
-        <div className="container max-w-6xl mx-auto px-6 w-full">
-          <SectionHeading number="03" title="Featured Projects" kicker="what I've built" />
-        </div>
+    <Reveal className="rule py-14 md:py-20 first:border-t-0">
+      <div className={`grid md:grid-cols-12 gap-x-10 gap-y-6 ${reversed ? '' : ''}`}>
+        <div className={`md:col-span-4 ${reversed ? 'md:order-2 md:text-right' : ''}`}>
+          <span className="font-display italic text-6xl text-primary/70 leading-none">
+            {project.number}
+          </span>
 
-        <motion.div
-          ref={trackRef}
-          className="flex gap-8 items-stretch"
-          style={{
-            x,
-            willChange: 'transform',
-            paddingLeft: 'max(1.5rem, calc(50vw - min(42.5vw, 23rem)))',
-            paddingRight: 'max(1.5rem, calc(50vw - min(42.5vw, 23rem)))',
-          }}
-        >
-          {projects.map((project) => (
-            <ProjectCard key={project.title} project={project} />
-          ))}
-          <CtaCard />
-        </motion.div>
+          {project.isCompanyProject ? (
+            <span
+              className={`inline-flex items-center gap-1.5 font-mono text-[10px] tracking-[0.2em] uppercase text-primary border border-primary/30 bg-primary/[0.06] rounded-full px-3 py-1.5 mt-4 ${
+                reversed ? 'md:ml-auto' : ''
+              }`}
+            >
+              <Building2 className="w-3 h-3" />
+              Professional Work @ {project.company}
+            </span>
+          ) : (
+            <p className="font-mono text-[11px] tracking-[0.28em] uppercase text-muted-foreground mt-4">
+              {project.category}
+            </p>
+          )}
 
-        {/* slide progress */}
-        <div className="flex items-center justify-center gap-4 mt-10">
-          <div className="flex gap-2">
-            {Array.from({ length: SLIDE_COUNT }).map((_, i) => (
+          {project.providers && (
+            <div className={`mt-4 ${reversed ? 'md:text-right' : ''}`}>
+              <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground mb-2">
+                Providers unified
+              </p>
+              <div className={`flex flex-wrap gap-2 ${reversed ? 'md:justify-end' : ''}`}>
+                {project.providers.map((p) => (
+                  <span
+                    key={p}
+                    className="font-mono text-[11px] font-medium text-foreground border border-border rounded-full px-3 py-1"
+                  >
+                    {p}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <div className={`flex flex-wrap gap-2 mt-4 ${reversed ? 'md:justify-end' : ''}`}>
+            {project.stack.map((tech) => (
               <span
-                key={i}
-                className={`h-1 rounded-full transition-all duration-300 ${
-                  i === activeSlide ? 'w-8 bg-primary' : 'w-3 bg-muted'
-                }`}
-              />
+                key={tech}
+                className="font-mono text-[11px] text-muted-foreground border border-border rounded-full px-2.5 py-1"
+              >
+                {tech}
+              </span>
             ))}
           </div>
-          <span className="font-mono text-xs text-muted-foreground">
-            {String(activeSlide + 1).padStart(2, '0')} / {String(SLIDE_COUNT).padStart(2, '0')}
-          </span>
+        </div>
+
+        <div className={`md:col-span-8 ${reversed ? 'md:order-1' : ''}`}>
+          <h3 className="font-display text-3xl md:text-4xl text-foreground mb-2">{project.title}</h3>
+          <p className="text-muted-foreground text-lg mb-6">{project.tagline}</p>
+
+          <div className="space-y-4 text-foreground/85 leading-relaxed">
+            <p>
+              <span className="font-mono text-primary text-xs uppercase tracking-wider mr-2">
+                {project.isCompanyProject ? 'System Problem' : 'Problem'}
+              </span>
+              {project.problem}
+            </p>
+            <p>
+              <span className="font-mono text-primary text-xs uppercase tracking-wider mr-2">
+                {project.isCompanyProject ? 'Architecture' : 'Solution'}
+              </span>
+              {project.solution}
+            </p>
+          </div>
+
+          <p className="font-mono text-primary text-xs uppercase tracking-wider mt-6 mb-2.5">
+            {project.isCompanyProject ? 'Enterprise Impact' : 'Impact'}
+          </p>
+          <ul className="space-y-2.5 mb-7">
+            {project.impact.map((point, i) => (
+              <li key={i} className="flex gap-3 text-muted-foreground text-sm leading-relaxed">
+                <span className="text-primary mt-1">—</span>
+                <span>{point}</span>
+              </li>
+            ))}
+          </ul>
+
+          {project.links.length > 0 ? (
+            <div className="flex flex-wrap items-center gap-3">
+              {project.links.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 font-mono text-xs border border-border rounded-full px-4 py-2 hover:border-primary hover:text-primary transition-colors duration-200 cursor-pointer"
+                >
+                  {link.label}
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </a>
+              ))}
+            </div>
+          ) : project.note ? (
+            <p className="font-mono text-xs text-muted-foreground italic">{project.note}</p>
+          ) : null}
         </div>
       </div>
-    </section>
+    </Reveal>
   );
 };
+
+const Projects = () => (
+  <section id="projects" className="py-28 md:py-36 px-6">
+    <div className="container max-w-6xl mx-auto">
+      <SectionHeading number="02" title="Selected Work" kicker="What I've built" />
+
+      <div>
+        {projects.map((project, i) => (
+          <ProjectCase key={project.title} project={project} index={i} />
+        ))}
+      </div>
+
+      <Stagger className="mt-4">
+        <StaggerItem>
+          <p className="text-center pt-6">
+            <a
+              href="https://github.com/Akhilesh-Varute"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-outline"
+            >
+              More on GitHub
+              <ArrowUpRight className="w-4 h-4" />
+            </a>
+          </p>
+        </StaggerItem>
+      </Stagger>
+    </div>
+  </section>
+);
 
 export default Projects;

@@ -3,19 +3,18 @@ import { Reveal } from '@/components/motion/Reveal';
 
 const Footer = () => {
   return (
-    <footer className="py-10 px-6 border-t border-border/60">
+    <footer className="theme-dark bg-background py-8 px-6 border-t border-border">
       <div className="container max-w-6xl mx-auto">
         <Reveal y={12}>
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <a href="#" className="font-mono text-primary font-medium text-lg">
-              AV<span className="text-muted-foreground">·</span>
+          <div className="flex flex-col md:flex-row items-center justify-between gap-5">
+            <a href="#hero" className="font-display italic text-foreground text-base">
+              Akhilesh<span className="text-primary">.</span>
             </a>
 
             <p className="font-mono text-xs text-muted-foreground text-center">
-              Designed & built by <span className="text-primary">Akhilesh Varute</span> — React ·
-              TypeScript · Tailwind · Framer Motion
+              Akhilesh Varute — Pune, Maharashtra, India
               <span className="mx-2 text-border">|</span>
-              <a href="https://akhileshvarute.me" className="link-hover text-muted-foreground hover:text-primary">
+              <a href="https://akhileshvarute.me" className="link-hover hover:text-primary">
                 akhileshvarute.me
               </a>
             </p>
@@ -40,7 +39,7 @@ const Footer = () => {
                 <Linkedin className="w-4 h-4" />
               </a>
               <a
-                href="mailto:akhileshvarute23@gmail.com"
+                href="mailto:akhileshvarute231@gmail.com"
                 aria-label="Email"
                 className="text-muted-foreground hover:text-primary transition-colors duration-200"
               >
