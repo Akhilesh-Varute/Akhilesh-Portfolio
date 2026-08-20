@@ -38,7 +38,7 @@ const Hero = () => {
   };
 
   return (
-    <section id="hero" ref={sectionRef}>
+    <section id="hero" ref={sectionRef} className="min-h-[100svh] flex items-center">
       <motion.div
         className="wrap py-16 md:py-20"
         style={reduceMotion ? undefined : { y: contentY, opacity: contentOpacity, willChange: 'transform, opacity' }}
