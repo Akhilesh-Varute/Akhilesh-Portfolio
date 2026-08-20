@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { Reveal } from '@/components/motion/Reveal';
 import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
 import WorkspacePanel from '@/components/workspace/WorkspacePanel';
@@ -30,8 +31,12 @@ const Index = () => {
 
         <section className="py-16 rule">
           <div className="wrap space-y-8">
-            <WorkspacePanel />
-            <TerminalPanel />
+            <Reveal>
+              <WorkspacePanel />
+            </Reveal>
+            <Reveal delay={0.1}>
+              <TerminalPanel />
+            </Reveal>
           </div>
         </section>
 

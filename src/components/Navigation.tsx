@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import ThemeToggle from '@/components/workspace/ThemeToggle';
 
@@ -12,6 +12,7 @@ const navItems = [
 
 const Navigation = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : '';
@@ -21,7 +22,12 @@ const Navigation = () => {
   }, [menuOpen]);
 
   return (
-    <header className="sticky top-0 z-50 bg-background border-b border-border">
+    <motion.header
+      className="sticky top-0 z-50 bg-background border-b border-border"
+      initial={reduceMotion ? false : { y: -60, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: [0.25, 0.4, 0.25, 1] }}
+    >
       <nav className="wrap flex items-center justify-between py-4">
         <a href="#hero" className="font-display font-bold text-xl tracking-tight">
           akhilesh
@@ -84,7 +90,7 @@ const Navigation = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+    </motion.header>
   );
 };
 
