@@ -1,7 +1,8 @@
-import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
+import { useState } from 'react';
 import { Check, Copy, Github, Linkedin } from 'lucide-react';
 import { Reveal } from '@/components/motion/Reveal';
+import Marquee from '@/components/build-log/Marquee';
 
 const EMAIL = 'akhileshvarute231@gmail.com';
 
@@ -11,12 +12,8 @@ const links = [
 ];
 
 const Contact = () => {
-  const ref = useRef<HTMLElement>(null);
   const reduceMotion = useReducedMotion();
   const [copied, setCopied] = useState(false);
-
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
-  const ghostX = useTransform(scrollYProgress, [0, 1], ['3%', '-5%']);
 
   const copyEmail = async () => {
     try {
@@ -29,35 +26,27 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" ref={ref} className="theme-dark relative py-32 md:py-44 px-6 overflow-hidden bg-background">
-      <motion.span
-        className="absolute top-8 left-0 right-0 text-center font-display italic font-medium text-[15vw] leading-none text-stroke select-none pointer-events-none whitespace-nowrap"
-        style={reduceMotion ? undefined : { x: ghostX, willChange: 'transform' }}
-        aria-hidden="true"
-      >
-        Let's talk
-      </motion.span>
+    <section id="contact" className="py-20">
+      <Marquee text="Let's talk —" />
 
-      <div className="container max-w-2xl mx-auto text-center relative pt-[9vw]">
+      <div className="offset-col-wide mt-14">
         <Reveal>
-          <p className="eyebrow mb-4">06 · What's next</p>
+          <p className="eyebrow mb-4">About / Contact</p>
         </Reveal>
 
         <Reveal delay={0.1}>
-          <h2 className="text-4xl md:text-6xl font-display font-medium text-foreground mb-6">
-            Get in <span className="italic text-primary">touch</span>
-          </h2>
+          <h2 className="font-display italic text-4xl md:text-6xl mb-6">Get in touch</h2>
         </Reveal>
 
         <Reveal delay={0.2}>
-          <p className="text-muted-foreground text-lg mb-12 max-w-lg mx-auto leading-relaxed">
+          <p className="font-mono text-sm text-muted-foreground max-w-lg leading-relaxed mb-10">
             I'm open to conversations about Cloud &amp; AI Engineering roles — or anything
             at the intersection of cloud infrastructure and GenAI tooling.
           </p>
         </Reveal>
 
         <Reveal delay={0.3}>
-          <div className="flex flex-wrap gap-4 justify-center">
+          <div className="flex flex-wrap gap-4">
             <motion.a
               href={`mailto:${EMAIL}`}
               className="btn-primary"
@@ -84,14 +73,14 @@ const Contact = () => {
         </Reveal>
 
         <Reveal delay={0.45}>
-          <div className="flex justify-center gap-6 mt-12">
+          <div className="flex gap-6 mt-10">
             {links.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-3 text-muted-foreground hover:text-primary hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+                className="text-muted-foreground hover:text-primary transition-colors duration-300 cursor-pointer"
                 aria-label={link.name}
               >
                 <link.icon className="w-5 h-5" />

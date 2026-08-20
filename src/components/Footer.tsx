@@ -3,8 +3,8 @@ import { Reveal } from '@/components/motion/Reveal';
 
 const Footer = () => {
   return (
-    <footer className="theme-dark bg-background py-8 px-6 border-t border-border">
-      <div className="container max-w-6xl mx-auto">
+    <footer className="py-8 rule">
+      <div className="offset-col-wide">
         <Reveal y={12}>
           <div className="flex flex-col md:flex-row items-center justify-between gap-5">
             <a href="#hero" className="font-display italic text-foreground text-base">

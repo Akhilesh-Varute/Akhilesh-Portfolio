@@ -1,5 +1,4 @@
 import { Reveal } from '@/components/motion/Reveal';
-import SectionHeading from '@/components/motion/SectionHeading';
 
 const categories = [
   {
@@ -24,19 +23,20 @@ const categories = [
 ];
 
 const Skills = () => (
-  <section id="skills" className="py-28 md:py-36 px-6">
-    <div className="container max-w-6xl mx-auto">
-      <SectionHeading number="04" title="Skills" kicker="What I work with" />
+  <section id="skills" className="py-20 rule">
+    <div className="offset-col-wide">
+      <p className="eyebrow mb-2">About / Skills</p>
+      <h2 className="font-display italic text-4xl md:text-5xl mb-12">What I work with</h2>
 
-      <div className="grid md:grid-cols-3 gap-x-10 gap-y-12 rule pt-12">
+      <div className="grid md:grid-cols-3 gap-x-10 gap-y-10">
         {categories.map((cat, i) => (
           <Reveal key={cat.title} delay={i * 0.1}>
             <div>
               <span className="font-mono text-xs text-primary">0{i + 1}</span>
-              <h3 className="font-display text-xl text-foreground mt-2 mb-5">{cat.title}</h3>
+              <h3 className="font-mono text-sm text-foreground mt-2 mb-4">{cat.title}</h3>
               <ul className="space-y-2">
                 {cat.items.map((item) => (
-                  <li key={item} className="text-muted-foreground text-sm leading-relaxed border-b border-border/60 py-1.5">
+                  <li key={item} className="font-mono text-sm text-muted-foreground leading-relaxed border-b border-border/60 py-1.5">
                     {item}
                   </li>
                 ))}

@@ -1,6 +1,5 @@
 import { Award } from 'lucide-react';
 import { Reveal, Stagger, StaggerItem } from '@/components/motion/Reveal';
-import SectionHeading from '@/components/motion/SectionHeading';
 
 const education = [
   {
@@ -24,9 +23,10 @@ const certifications = [
 ];
 
 const EducationCertifications = () => (
-  <section id="education" className="py-28 md:py-36 px-6 bg-secondary/40">
-    <div className="container max-w-6xl mx-auto">
-      <SectionHeading number="05" title="Education & Certifications" kicker="Credentials" />
+  <section id="education" className="py-20 rule">
+    <div className="offset-col-wide">
+      <p className="eyebrow mb-2">About / Credentials</p>
+      <h2 className="font-display italic text-4xl md:text-5xl mb-12">Education &amp; certifications</h2>
 
       <div className="grid md:grid-cols-2 gap-14">
         <div>
@@ -35,9 +35,9 @@ const EducationCertifications = () => (
             {education.map((edu) => (
               <StaggerItem key={edu.degree}>
                 <div className="border-b border-border pb-6">
-                  <p className="font-mono text-sm text-muted-foreground mb-1.5">{edu.year}</p>
-                  <h3 className="font-display text-lg text-foreground">{edu.degree}</h3>
-                  <p className="text-muted-foreground text-sm mt-1">{edu.institution}</p>
+                  <p className="font-mono text-xs text-muted-foreground mb-1.5">{edu.year}</p>
+                  <h3 className="font-mono text-sm text-foreground">{edu.degree}</h3>
+                  <p className="font-mono text-xs text-muted-foreground mt-1">{edu.institution}</p>
                 </div>
               </StaggerItem>
             ))}
@@ -48,12 +48,12 @@ const EducationCertifications = () => (
           <p className="font-mono text-xs text-primary mb-5 tracking-[0.2em] uppercase">Certifications</p>
           <Reveal>
             <div className="flex items-start gap-4 border-b border-border pb-6">
-              <div className="w-11 h-11 rounded-full border border-border flex items-center justify-center shrink-0">
-                <Award className="w-5 h-5 text-primary" />
+              <div className="w-10 h-10 border border-border flex items-center justify-center shrink-0">
+                <Award className="w-4 h-4 text-primary" />
               </div>
               <div>
-                <h3 className="font-display text-lg text-foreground">{certifications[0].title}</h3>
-                <p className="text-muted-foreground text-sm mt-1">
+                <h3 className="font-mono text-sm text-foreground">{certifications[0].title}</h3>
+                <p className="font-mono text-xs text-muted-foreground mt-1">
                   {certifications[0].issuer} · {certifications[0].year}
                 </p>
               </div>

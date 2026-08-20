@@ -1,6 +1,5 @@
 import { ArrowUpRight, Building2 } from 'lucide-react';
-import { Reveal, Stagger, StaggerItem } from '@/components/motion/Reveal';
-import SectionHeading from '@/components/motion/SectionHeading';
+import { Reveal } from '@/components/motion/Reveal';
 
 interface ProjectLink {
   label: string;
@@ -16,7 +15,6 @@ interface Project {
   company?: string;
   providers?: string[];
   stack: string[];
-  metrics: string;
   problem: string;
   solution: string;
   impact: string[];
@@ -34,7 +32,6 @@ const projects: Project[] = [
     company: 'ASCP GPUonCLOUD',
     providers: ['AWS', 'Azure', 'GCP'],
     stack: ['AWS Bedrock', 'Multi-Cloud APIs (AWS, Azure, GCP)', 'AWS Lambda', 'EventBridge', 'Node.js', 'Python', 'Amazon ECS'],
-    metrics: 'Unified 3 major cloud providers under one roof; cut assessment overhead by 40%',
     problem:
       'Managing cost optimization and monitoring across multi-cloud environments required logging into 3 separate provider consoles (AWS, Azure, GCP), creating fragmented data silos and severe operational overhead.',
     solution:
@@ -53,7 +50,6 @@ const projects: Project[] = [
     tagline: 'Deterministic Guardrails & Schema Validation Engine for LLM Agents',
     category: 'Open Source Package',
     stack: ['TypeScript', 'Python', 'Zod', 'Pydantic', 'GitHub Actions', 'npm', 'PyPI'],
-    metrics: 'Published to npm & PyPI with 100% test coverage up to v1.4.0',
     problem:
       'Non-deterministic tool calling in LLM agents causes execution loops, invalid argument passing, and unnecessary cloud API token expenses.',
     solution:
@@ -75,7 +71,6 @@ const projects: Project[] = [
     tagline: 'Event-Driven Natural Language Expense Parsing & Categorization Pipeline',
     category: 'Automation & Microservices',
     stack: ['Node.js', 'n8n', 'Telegram Bot API', 'REST APIs', 'Docker'],
-    metrics: 'Automated natural language expense logging and real-time categorization',
     problem:
       'Manual expense logging creates friction, leading to incomplete or inconsistent personal financial tracking.',
     solution:
@@ -88,143 +83,111 @@ const projects: Project[] = [
   },
 ];
 
-const ProjectCase = ({ project, index }: { project: Project; index: number }) => {
-  const reversed = index % 2 === 1;
+const ProjectEntry = ({ project }: { project: Project }) => (
+  <Reveal className="rule py-14 first:border-t-0">
+    <div className="flex items-baseline gap-4 mb-3">
+      <span className="font-mono text-xs text-muted-foreground">{project.number}</span>
+      {project.isCompanyProject ? (
+        <span className="inline-flex items-center gap-1.5 font-mono text-[10px] tracking-[0.18em] uppercase text-primary border border-primary/30 px-2.5 py-1">
+          <Building2 className="w-3 h-3" />
+          Professional work @ {project.company}
+        </span>
+      ) : (
+        <span className="font-mono text-[11px] tracking-[0.18em] uppercase text-muted-foreground">
+          {project.category}
+        </span>
+      )}
+    </div>
 
-  return (
-    <Reveal className="rule py-14 md:py-20 first:border-t-0">
-      <div className={`grid md:grid-cols-12 gap-x-10 gap-y-6 ${reversed ? '' : ''}`}>
-        <div className={`md:col-span-4 ${reversed ? 'md:order-2 md:text-right' : ''}`}>
-          <span className="font-display italic text-6xl text-primary/70 leading-none">
-            {project.number}
+    <h3 className="font-display text-3xl md:text-5xl italic mb-2">{project.title}</h3>
+    <p className="text-muted-foreground text-base md:text-lg max-w-2xl mb-6">{project.tagline}</p>
+
+    {project.providers && (
+      <div className="flex flex-wrap gap-2 mb-4">
+        {project.providers.map((p) => (
+          <span key={p} className="font-mono text-[11px] border border-border px-2.5 py-1">
+            {p}
           </span>
-
-          {project.isCompanyProject ? (
-            <span
-              className={`inline-flex items-center gap-1.5 font-mono text-[10px] tracking-[0.2em] uppercase text-primary border border-primary/30 bg-primary/[0.06] rounded-full px-3 py-1.5 mt-4 ${
-                reversed ? 'md:ml-auto' : ''
-              }`}
-            >
-              <Building2 className="w-3 h-3" />
-              Professional Work @ {project.company}
-            </span>
-          ) : (
-            <p className="font-mono text-[11px] tracking-[0.28em] uppercase text-muted-foreground mt-4">
-              {project.category}
-            </p>
-          )}
-
-          {project.providers && (
-            <div className={`mt-4 ${reversed ? 'md:text-right' : ''}`}>
-              <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground mb-2">
-                Providers unified
-              </p>
-              <div className={`flex flex-wrap gap-2 ${reversed ? 'md:justify-end' : ''}`}>
-                {project.providers.map((p) => (
-                  <span
-                    key={p}
-                    className="font-mono text-[11px] font-medium text-foreground border border-border rounded-full px-3 py-1"
-                  >
-                    {p}
-                  </span>
-                ))}
-              </div>
-            </div>
-          )}
-
-          <div className={`flex flex-wrap gap-2 mt-4 ${reversed ? 'md:justify-end' : ''}`}>
-            {project.stack.map((tech) => (
-              <span
-                key={tech}
-                className="font-mono text-[11px] text-muted-foreground border border-border rounded-full px-2.5 py-1"
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        <div className={`md:col-span-8 ${reversed ? 'md:order-1' : ''}`}>
-          <h3 className="font-display text-3xl md:text-4xl text-foreground mb-2">{project.title}</h3>
-          <p className="text-muted-foreground text-lg mb-6">{project.tagline}</p>
-
-          <div className="space-y-4 text-foreground/85 leading-relaxed">
-            <p>
-              <span className="font-mono text-primary text-xs uppercase tracking-wider mr-2">
-                {project.isCompanyProject ? 'System Problem' : 'Problem'}
-              </span>
-              {project.problem}
-            </p>
-            <p>
-              <span className="font-mono text-primary text-xs uppercase tracking-wider mr-2">
-                {project.isCompanyProject ? 'Architecture' : 'Solution'}
-              </span>
-              {project.solution}
-            </p>
-          </div>
-
-          <p className="font-mono text-primary text-xs uppercase tracking-wider mt-6 mb-2.5">
-            {project.isCompanyProject ? 'Enterprise Impact' : 'Impact'}
-          </p>
-          <ul className="space-y-2.5 mb-7">
-            {project.impact.map((point, i) => (
-              <li key={i} className="flex gap-3 text-muted-foreground text-sm leading-relaxed">
-                <span className="text-primary mt-1">—</span>
-                <span>{point}</span>
-              </li>
-            ))}
-          </ul>
-
-          {project.links.length > 0 ? (
-            <div className="flex flex-wrap items-center gap-3">
-              {project.links.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 font-mono text-xs border border-border rounded-full px-4 py-2 hover:border-primary hover:text-primary transition-colors duration-200 cursor-pointer"
-                >
-                  {link.label}
-                  <ArrowUpRight className="w-3.5 h-3.5" />
-                </a>
-              ))}
-            </div>
-          ) : project.note ? (
-            <p className="font-mono text-xs text-muted-foreground italic">{project.note}</p>
-          ) : null}
-        </div>
+        ))}
       </div>
-    </Reveal>
-  );
-};
+    )}
+
+    <div className="grid md:grid-cols-[1fr_1fr] gap-x-10 gap-y-4 max-w-3xl">
+      <p className="font-mono text-sm leading-relaxed text-foreground/85">
+        <span className="text-primary block mb-1 text-xs uppercase tracking-wider">
+          {project.isCompanyProject ? 'System problem' : 'Problem'}
+        </span>
+        {project.problem}
+      </p>
+      <p className="font-mono text-sm leading-relaxed text-foreground/85">
+        <span className="text-primary block mb-1 text-xs uppercase tracking-wider">
+          {project.isCompanyProject ? 'Architecture' : 'Solution'}
+        </span>
+        {project.solution}
+      </p>
+    </div>
+
+    <ul className="space-y-2 mt-6 max-w-2xl">
+      {project.impact.map((point, i) => (
+        <li key={i} className="flex gap-3 font-mono text-sm text-muted-foreground leading-relaxed">
+          <span className="text-primary">→</span>
+          <span>{point}</span>
+        </li>
+      ))}
+    </ul>
+
+    <div className="flex flex-wrap items-center gap-2 mt-6">
+      {project.stack.map((tech) => (
+        <span key={tech} className="font-mono text-[11px] text-muted-foreground border border-border px-2 py-1">
+          {tech}
+        </span>
+      ))}
+    </div>
+
+    {project.links.length > 0 ? (
+      <div className="flex flex-wrap items-center gap-4 mt-6">
+        {project.links.map((link) => (
+          <a
+            key={link.label}
+            href={link.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 font-mono text-sm text-foreground hover:text-primary link-hover"
+          >
+            {link.label}
+            <ArrowUpRight className="w-3.5 h-3.5" />
+          </a>
+        ))}
+      </div>
+    ) : project.note ? (
+      <p className="font-mono text-xs text-muted-foreground italic mt-6">{project.note}</p>
+    ) : null}
+  </Reveal>
+);
 
 const Projects = () => (
-  <section id="projects" className="py-28 md:py-36 px-6">
-    <div className="container max-w-6xl mx-auto">
-      <SectionHeading number="02" title="Selected Work" kicker="What I've built" />
+  <section id="work" className="py-20">
+    <div className="offset-col-wide">
+      <p className="eyebrow mb-2">Build</p>
+      <h2 className="font-display italic text-4xl md:text-6xl mb-2">Selected work</h2>
 
       <div>
-        {projects.map((project, i) => (
-          <ProjectCase key={project.title} project={project} index={i} />
+        {projects.map((project) => (
+          <ProjectEntry key={project.title} project={project} />
         ))}
       </div>
 
-      <Stagger className="mt-4">
-        <StaggerItem>
-          <p className="text-center pt-6">
-            <a
-              href="https://github.com/Akhilesh-Varute"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-outline"
-            >
-              More on GitHub
-              <ArrowUpRight className="w-4 h-4" />
-            </a>
-          </p>
-        </StaggerItem>
-      </Stagger>
+      <p className="pt-6">
+        <a
+          href="https://github.com/Akhilesh-Varute"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-outline"
+        >
+          More on GitHub
+          <ArrowUpRight className="w-4 h-4" />
+        </a>
+      </p>
     </div>
   </section>
 );
