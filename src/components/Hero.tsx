@@ -51,14 +51,14 @@ const Hero = () => {
           animate="show"
         >
           <motion.h1 variants={item} className="font-display font-bold text-4xl md:text-6xl leading-[1.08]">
-            I build cloud backends, event-driven systems,{' '}
-            <span className="text-muted-foreground">and AI-powered guardrails</span>
+            I build cloud systems{' '}
+            <span className="text-muted-foreground">that run themselves.</span>
           </motion.h1>
 
           <motion.div variants={item}>
             <p className="font-mono text-sm text-muted-foreground leading-relaxed">
-              2+ years designing the systems, guardrails, and cloud platforms behind products
-              teams actually run in production. AWS Certified Developer.
+              Event-driven architecture, deterministic AI guardrails, production from day one.
+              2+ years shipping cloud platforms teams actually run on. AWS Certified Developer.
             </p>
 
             <div className="flex flex-wrap items-center gap-3 mt-6">
