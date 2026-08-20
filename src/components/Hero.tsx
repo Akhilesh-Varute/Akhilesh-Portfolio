@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
-import { Check, Copy } from 'lucide-react';
+import { ArrowDown, Check, Copy } from 'lucide-react';
 
 const EMAIL = 'akhileshvarute231@gmail.com';
 
@@ -26,6 +26,7 @@ const Hero = () => {
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end start'] });
   const contentY = useTransform(scrollYProgress, [0, 1], ['0%', '-14%']);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const hintOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
 
   const copyEmail = async () => {
     try {
@@ -38,7 +39,11 @@ const Hero = () => {
   };
 
   return (
-    <section id="hero" ref={sectionRef} className="min-h-[100svh] flex items-center">
+    <section
+      id="hero"
+      ref={sectionRef}
+      className="relative min-h-[100svh] flex items-center dot-grid overflow-hidden"
+    >
       <motion.div
         className="wrap py-16 md:py-20"
         style={reduceMotion ? undefined : { y: contentY, opacity: contentOpacity, willChange: 'transform, opacity' }}
@@ -92,6 +97,21 @@ const Hero = () => {
           </button>
         </motion.div>
       </motion.div>
+
+      <motion.a
+        href="#about"
+        className="fixed bottom-8 left-1/2 -translate-x-1/2 z-40 hidden md:flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors cursor-pointer"
+        style={reduceMotion ? undefined : { opacity: hintOpacity }}
+        aria-label="Scroll down"
+      >
+        <span className="font-mono text-[10px] tracking-[0.3em] uppercase">Scroll</span>
+        <motion.span
+          animate={reduceMotion ? undefined : { y: [0, 6, 0] }}
+          transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+        >
+          <ArrowDown className="w-4 h-4" />
+        </motion.span>
+      </motion.a>
     </section>
   );
 };
