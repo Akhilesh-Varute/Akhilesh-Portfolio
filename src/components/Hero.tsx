@@ -1,5 +1,14 @@
-import { useRef, useState } from 'react';
-import { AnimatePresence, motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from 'framer-motion';
+import { useRef, useState, type MouseEvent, type ReactNode } from 'react';
+import {
+  AnimatePresence,
+  motion,
+  useMotionValue,
+  useMotionValueEvent,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+} from 'framer-motion';
 import { ArrowDown, Check, Copy } from 'lucide-react';
 
 const EMAIL = 'akhileshvarute231@gmail.com';
@@ -14,6 +23,78 @@ const container = {
 const item = {
   hidden: { opacity: 0, y: 22 },
   show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE } },
+};
+
+// Word-by-word reveal: each word clips in from below on its own stagger
+// step, instead of the whole headline fading in as one block.
+const wordContainer = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.045, delayChildren: 0.1 } },
+};
+
+const word = {
+  hidden: { y: '110%' },
+  show: { y: '0%', transition: { duration: 0.55, ease: EASE } },
+};
+
+const Words = ({ text, className }: { text: string; className?: string }) => {
+  const words = text.split(' ');
+  return (
+    <span className={className}>
+      {words.map((w, i) => (
+        <span key={i} className="inline-block overflow-hidden align-top pb-[0.1em]">
+          <motion.span variants={word} className="inline-block">
+            {w}
+            {i < words.length - 1 ? ' ' : ''}
+          </motion.span>
+        </span>
+      ))}
+    </span>
+  );
+};
+
+// Cursor-following "magnetic" pull on the CTA buttons — a small, cheap
+// motion touch that reads as intentional rather than a generic hover scale.
+const MagneticLink = ({
+  href,
+  className,
+  children,
+}: {
+  href: string;
+  className?: string;
+  children: ReactNode;
+}) => {
+  const reduceMotion = useReducedMotion();
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const springX = useSpring(x, { stiffness: 150, damping: 15, mass: 0.2 });
+  const springY = useSpring(y, { stiffness: 150, damping: 15, mass: 0.2 });
+
+  const handleMove = (e: MouseEvent<HTMLAnchorElement>) => {
+    if (reduceMotion) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    x.set((e.clientX - rect.left - rect.width / 2) * 0.35);
+    y.set((e.clientY - rect.top - rect.height / 2) * 0.35);
+  };
+
+  const handleLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <motion.a
+      href={href}
+      className={className}
+      style={reduceMotion ? undefined : { x: springX, y: springY }}
+      onMouseMove={handleMove}
+      onMouseLeave={handleLeave}
+      whileHover={reduceMotion ? undefined : { scale: 1.03 }}
+      whileTap={reduceMotion ? undefined : { scale: 0.97 }}
+    >
+      {children}
+    </motion.a>
+  );
 };
 
 const Hero = () => {
@@ -59,9 +140,14 @@ const Hero = () => {
           initial="hidden"
           animate="show"
         >
-          <motion.h1 variants={item} className="font-display font-bold text-4xl md:text-6xl leading-[1.08]">
-            I build cloud systems that run themselves,{' '}
-            <span className="text-muted-foreground">and AI that only does what it's validated to do.</span>
+          <motion.h1
+            variants={wordContainer}
+            initial="hidden"
+            animate="show"
+            className="font-display font-bold text-4xl md:text-6xl leading-[1.08]"
+          >
+            <Words text="I build cloud systems that run themselves," />{' '}
+            <Words text="and AI that only does what it's validated to do." className="text-muted-foreground" />
           </motion.h1>
 
           <motion.div variants={item}>
@@ -71,22 +157,12 @@ const Hero = () => {
             </p>
 
             <div className="flex flex-wrap items-center gap-3 mt-6">
-              <motion.a
-                href="#work"
-                className="btn-primary"
-                whileHover={reduceMotion ? undefined : { scale: 1.03 }}
-                whileTap={reduceMotion ? undefined : { scale: 0.97 }}
-              >
+              <MagneticLink href="#work" className="btn-primary">
                 View selected work ↗
-              </motion.a>
-              <motion.a
-                href="#about"
-                className="btn-outline"
-                whileHover={reduceMotion ? undefined : { scale: 1.03 }}
-                whileTap={reduceMotion ? undefined : { scale: 0.97 }}
-              >
+              </MagneticLink>
+              <MagneticLink href="#about" className="btn-outline">
                 About me ↗
-              </motion.a>
+              </MagneticLink>
             </div>
           </motion.div>
         </motion.div>
