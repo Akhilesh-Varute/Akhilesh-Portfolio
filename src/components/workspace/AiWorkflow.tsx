@@ -1,6 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import { Reveal, Stagger, StaggerItem } from '@/components/motion/Reveal';
-import SchemaValidatorScene from './SchemaValidatorScene';
 
 const pipeline = [
   { label: 'Prompt', meta: 'CLAUDE CODE' },
@@ -109,38 +108,29 @@ const AiWorkflow = () => (
 
       <PipelineStrip />
 
-      <div className="rule pt-10 mt-2 grid md:grid-cols-[1fr_360px] gap-10 items-start">
-        <div>
-          <p className="eyebrow mb-4">The loop</p>
-          <h3 className="font-display font-bold text-3xl md:text-4xl mb-2">AI as part of my</h3>
-          <h3 className="font-display font-bold text-3xl md:text-4xl text-muted-foreground mb-10">
-            everyday workflow.
-          </h3>
+      <div className="rule pt-10 mt-2">
+        <p className="eyebrow mb-4">The loop</p>
+        <h3 className="font-display font-bold text-3xl md:text-4xl mb-2">AI as part of my</h3>
+        <h3 className="font-display font-bold text-3xl md:text-4xl text-muted-foreground mb-10">
+          everyday workflow.
+        </h3>
 
-          <Stagger>
-            {items.map((item) => (
-              <StaggerItem key={item.n}>
-                <div className="grid md:grid-cols-[3rem_10rem_1fr] gap-x-6 gap-y-1 border-t border-border py-5">
-                  <span className="font-mono text-sm text-primary">{item.n}</span>
-                  <span className="font-mono text-[11px] tracking-[0.14em] uppercase text-muted-foreground">
-                    {item.tag}
-                  </span>
-                  <div>
-                    <p className="font-display font-semibold text-lg mb-1">{item.title}</p>
-                    <p className="font-mono text-sm text-muted-foreground leading-relaxed max-w-xl">{item.body}</p>
-                  </div>
+        <Stagger>
+          {items.map((item) => (
+            <StaggerItem key={item.n}>
+              <div className="grid md:grid-cols-[3rem_10rem_1fr] gap-x-6 gap-y-1 border-t border-border py-5">
+                <span className="font-mono text-sm text-primary">{item.n}</span>
+                <span className="font-mono text-[11px] tracking-[0.14em] uppercase text-muted-foreground">
+                  {item.tag}
+                </span>
+                <div>
+                  <p className="font-display font-semibold text-lg mb-1">{item.title}</p>
+                  <p className="font-mono text-sm text-muted-foreground leading-relaxed max-w-xl">{item.body}</p>
                 </div>
-              </StaggerItem>
-            ))}
-          </Stagger>
-        </div>
-
-        <Reveal delay={0.15} className="hidden md:block md:sticky md:top-24">
-          <p className="font-mono text-[10px] tracking-[0.16em] uppercase text-muted-foreground mb-3">
-            05 · Guardrails, live
-          </p>
-          <SchemaValidatorScene />
-        </Reveal>
+              </div>
+            </StaggerItem>
+          ))}
+        </Stagger>
       </div>
     </div>
   </section>

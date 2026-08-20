@@ -83,11 +83,6 @@ const projects: Project[] = [
   },
 ];
 
-const stack = [
-  'AWS Bedrock', 'Claude Code', 'GitHub Copilot', 'LangChain', 'Docker',
-  'Kubernetes', 'GitHub Actions', 'MongoDB', 'Redis', 'PostgreSQL',
-];
-
 const ProjectCard = ({ project }: { project: Project }) => (
   <Reveal className="panel">
     <div className="panel-topbar justify-between">
@@ -189,23 +184,6 @@ const Projects = () => (
         {projects.map((project) => (
           <ProjectCard key={project.title} project={project} />
         ))}
-      </div>
-
-      <div className="mt-16 pt-10 rule">
-        <p className="eyebrow mb-4">The stack</p>
-        <h3 className="font-display font-bold text-2xl md:text-3xl mb-2">
-          The stack, <span className="text-muted-foreground">and what each is for.</span>
-        </h3>
-        <p className="font-mono text-sm text-muted-foreground max-w-lg mt-3 mb-8">
-          Reached for daily. Short on purpose — a tool used once a quarter is a tool you're bad at.
-        </p>
-        <div className="flex flex-wrap gap-3">
-          {stack.map((tool) => (
-            <span key={tool} className="font-mono text-sm border border-border px-4 py-2">
-              {tool}
-            </span>
-          ))}
-        </div>
       </div>
     </div>
   </section>

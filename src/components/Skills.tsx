@@ -27,7 +27,14 @@ const Skills = () => (
   <section id="skills" className="py-20 rule">
     <div className="wrap">
       <p className="eyebrow mb-4">Profile / Skills</p>
-      <h2 className="font-display font-bold text-4xl md:text-6xl mb-12">What I work with</h2>
+      <h2 className="font-display font-bold text-4xl md:text-6xl mb-10">What I work with</h2>
+
+      <Reveal className="mb-14">
+        <p className="font-mono text-[10px] tracking-[0.16em] uppercase text-muted-foreground mb-3">
+          Node · Python, live
+        </p>
+        <SequenceDiagramScene />
+      </Reveal>
 
       <div className="grid md:grid-cols-3">
         {categories.map((cat, i) => (
@@ -46,13 +53,6 @@ const Skills = () => (
           </Reveal>
         ))}
       </div>
-
-      <Reveal delay={0.2} className="mt-10 pt-10 rule">
-        <p className="font-mono text-[10px] tracking-[0.16em] uppercase text-muted-foreground mb-3">
-          Node · Python, live
-        </p>
-        <SequenceDiagramScene />
-      </Reveal>
     </div>
   </section>
 );
