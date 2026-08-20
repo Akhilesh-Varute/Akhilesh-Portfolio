@@ -32,7 +32,7 @@ const Index = () => {
           <div className="wrap">
             <Reveal>
               <p className="font-mono text-[10px] tracking-[0.16em] uppercase text-muted-foreground mb-3">
-                AWS · LIVE — how a request moves through my systems
+                AI Cloud Insights, live — how one request actually moves through it
               </p>
               <CloudArchitectureCanvas />
             </Reveal>

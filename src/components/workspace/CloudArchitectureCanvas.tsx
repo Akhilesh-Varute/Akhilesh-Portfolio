@@ -6,6 +6,8 @@ import {
   BackgroundVariant,
   Handle,
   Position,
+  useNodesState,
+  useEdgesState,
   type Node,
   type Edge,
   type NodeProps,
@@ -75,6 +77,8 @@ const chatMessages = [
 const CloudArchitectureCanvas = () => {
   const [msgIndex, setMsgIndex] = useState(0);
   const reduceMotion = useReducedMotion();
+  const [nodes, , onNodesChange] = useNodesState(cloudNodes);
+  const [edges, , onEdgesChange] = useEdgesState(cloudEdges);
 
   useEffect(() => {
     if (reduceMotion) return;
@@ -85,8 +89,10 @@ const CloudArchitectureCanvas = () => {
   return (
     <div className="relative h-[320px] dot-grid">
       <ReactFlow
-        nodes={cloudNodes}
-        edges={cloudEdges}
+        nodes={nodes}
+        edges={edges}
+        onNodesChange={onNodesChange}
+        onEdgesChange={onEdgesChange}
         nodeTypes={nodeTypes}
         fitView
         fitViewOptions={{ padding: 0.2 }}
