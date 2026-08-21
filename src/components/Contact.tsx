@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Check, Copy, Github, Linkedin } from 'lucide-react';
 import { Reveal } from '@/components/motion/Reveal';
 
-const EMAIL = 'akhileshvarute231@gmail.com';
+const EMAIL = 'akhileshvarute23@gmail.com';
 
 const links = [
   { name: 'LinkedIn', href: 'https://linkedin.com/in/akhileshvarute', icon: Linkedin },

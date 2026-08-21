@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type MouseEvent } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { animate, scrambleText } from 'animejs';
 import { Menu, X } from 'lucide-react';
 import ThemeToggle from '@/components/workspace/ThemeToggle';
 
@@ -9,6 +10,13 @@ const navItems = [
   { label: 'AI', href: '#ai' },
   { label: 'Profile', href: '#about' },
 ];
+
+const scrambleOnHover = (e: MouseEvent<HTMLAnchorElement>) => {
+  animate(e.currentTarget, {
+    text: scrambleText({ chars: 'lowercase', from: 'left' }),
+    duration: 500,
+  });
+};
 
 const Navigation = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -36,7 +44,11 @@ const Navigation = () => {
         <ul className="hidden md:flex items-center gap-8">
           {navItems.map((item) => (
             <li key={item.label}>
-              <a href={item.href} className="font-mono text-sm hover:text-primary transition-colors">
+              <a
+                href={item.href}
+                onMouseEnter={reduceMotion ? undefined : scrambleOnHover}
+                className="font-mono text-sm hover:text-primary transition-colors"
+              >
                 {item.label}
               </a>
             </li>

@@ -12,7 +12,7 @@ import {
 import { ArrowDown, Check, Copy } from 'lucide-react';
 import HeroGridBackground from '@/components/workspace/HeroGridBackground';
 
-const EMAIL = 'akhileshvarute231@gmail.com';
+const EMAIL = 'akhileshvarute23@gmail.com';
 
 const EASE = [0.25, 0.4, 0.25, 1] as const;
 

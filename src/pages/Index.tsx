@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Reveal } from '@/components/motion/Reveal';
+import CustomCursor from '@/components/workspace/CustomCursor';
 import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
 import CloudArchitectureCanvas from '@/components/workspace/CloudArchitectureCanvas';
@@ -23,6 +24,7 @@ const Index = () => {
 
   return (
     <div className="relative">
+      <CustomCursor />
       <Navigation />
 
       <main>

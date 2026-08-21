@@ -158,6 +158,27 @@
     background-size: 16px 16px;
   }
 
+  /* Custom interactive cursor (fine-pointer devices only) — hidden by
+     default, revealed once CustomCursor confirms hover+pointer support. */
+  .cursor-dot,
+  .cursor-ring {
+    display: none;
+    opacity: 0;
+  }
+  html.custom-cursor-active {
+    cursor: none;
+  }
+  html.custom-cursor-active a,
+  html.custom-cursor-active button {
+    cursor: none;
+  }
+  html.custom-cursor-active .cursor-dot,
+  html.custom-cursor-active .cursor-ring {
+    display: block;
+    opacity: 1;
+    transition: opacity 0.2s ease;
+  }
+
   /* Diagonal-hatch fill used by the stat bars */
   .hatch-fill {
     background-image: repeating-linear-gradient(
