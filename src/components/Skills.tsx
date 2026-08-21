@@ -31,7 +31,7 @@ const Skills = () => (
 
       <Reveal className="mb-14">
         <p className="font-mono text-[10px] tracking-[0.16em] uppercase text-muted-foreground mb-3">
-          Node · Python, live
+          Request flow · cache hit &amp; miss
         </p>
         <SequenceDiagramScene />
       </Reveal>
