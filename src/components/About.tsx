@@ -2,7 +2,7 @@ import { Reveal, Stagger, StaggerItem } from '@/components/motion/Reveal';
 
 const meta = [
   { label: 'Based in', value: 'Pune, Maharashtra, India' },
-  { label: 'Currently at', value: 'ASCP GPUonCLOUD' },
+  { label: 'Currently', value: 'Software Developer (Cloud Solutions), ASCP GPUonCLOUD' },
   { label: 'Certified', value: 'AWS Certified Developer – Associate' },
 ];
 
@@ -17,11 +17,12 @@ const About = () => (
       <div className="grid md:grid-cols-[1.4fr_1fr] gap-10">
         <Reveal>
           <p className="font-mono text-base md:text-lg leading-relaxed text-foreground/90">
-            I am a Software Developer specializing in Cloud Solutions with expertise in
-            building scalable, production-grade cloud backends and GenAI platform
-            automation — architecting event-driven microservices on AWS, enforcing
-            deterministic guardrails for LLM agent workflows, and automating
-            infrastructure provisioning with Infrastructure as Code.
+            Most people learning cloud and AI right now optimize for speed — ship the demo,
+            ship the prompt, move on. I optimize for what happens after: who's on call when
+            it breaks, what happens when a model hallucinates a tool call, whether the
+            infrastructure still holds up once someone other than me is touching it.
+            That's the lens everything here gets built through — not a stack of buzzwords,
+            a way of deciding what actually counts as production-ready.
           </p>
         </Reveal>
 

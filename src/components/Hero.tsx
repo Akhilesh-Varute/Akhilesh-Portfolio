@@ -10,7 +10,7 @@ import {
   useTransform,
 } from 'framer-motion';
 import { ArrowDown, Check, Copy } from 'lucide-react';
-import HeroGridBackground from '@/components/workspace/HeroGridBackground';
+import HeroBuildScene from '@/components/workspace/HeroBuildScene';
 
 const EMAIL = 'akhileshvarute23@gmail.com';
 
@@ -60,10 +60,12 @@ const MagneticLink = ({
   href,
   className,
   children,
+  download,
 }: {
   href: string;
   className?: string;
   children: ReactNode;
+  download?: boolean;
 }) => {
   const reduceMotion = useReducedMotion();
   const x = useMotionValue(0);
@@ -86,6 +88,7 @@ const MagneticLink = ({
   return (
     <motion.a
       href={href}
+      download={download}
       className={className}
       style={reduceMotion ? undefined : { x: springX, y: springY }}
       onMouseMove={handleMove}
@@ -129,14 +132,35 @@ const Hero = () => {
     <section
       id="hero"
       ref={sectionRef}
-      className="relative min-h-[100svh] flex items-center dot-grid overflow-hidden"
+      className="relative min-h-[100svh] md:min-h-[calc(100svh-80px)] flex items-center dot-grid overflow-hidden"
     >
-      <HeroGridBackground />
+      <HeroBuildScene />
 
       <motion.div
         className="wrap py-16 md:py-20 relative z-10"
         style={reduceMotion ? undefined : { y: contentY, opacity: contentOpacity, willChange: 'transform, opacity' }}
       >
+        <div className="flex flex-col items-start">
+          <motion.div
+            variants={item}
+            initial="hidden"
+            animate="show"
+            className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-border mb-6"
+          >
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-60" />
+              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-primary" />
+            </span>
+            <span className="font-mono text-[11px] text-muted-foreground tracking-wide">
+              Available for Cloud &amp; AI Engineering roles
+            </span>
+          </motion.div>
+
+          <motion.p variants={item} initial="hidden" animate="show" className="eyebrow mb-5">
+            Akhilesh Varute · Pune, India
+          </motion.p>
+        </div>
+
         <motion.div
           className="grid md:grid-cols-[1.4fr_1fr] gap-10 items-start"
           variants={container}
@@ -165,6 +189,9 @@ const Hero = () => {
               </MagneticLink>
               <MagneticLink href="#about" className="btn-outline">
                 About me ↗
+              </MagneticLink>
+              <MagneticLink href="/Akhilesh_Varute_Resume.pdf" download className="btn-ghost">
+                Download Resume
               </MagneticLink>
             </div>
           </motion.div>

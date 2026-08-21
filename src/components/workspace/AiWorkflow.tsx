@@ -63,15 +63,15 @@ const items = [
 const PipelineStrip = () => {
   const reduceMotion = useReducedMotion();
   return (
-    <div className="flex items-center overflow-x-auto py-8" aria-hidden="true">
+    <div className="flex items-center w-full py-8" aria-hidden="true">
       {pipeline.map((step, i) => (
-        <div key={step.label} className="flex items-center shrink-0">
-          <div className="border border-border bg-card px-4 py-3 w-[168px]">
-            <p className="font-mono text-sm font-semibold">{step.label}</p>
-            <p className="font-mono text-[10px] text-muted-foreground mt-1">{step.meta}</p>
+        <div key={step.label} className="flex items-center flex-1 min-w-0">
+          <div className="border border-border bg-card px-2 sm:px-4 py-3 w-full min-w-0">
+            <p className="font-mono text-xs sm:text-sm font-semibold truncate">{step.label}</p>
+            <p className="font-mono text-[9px] sm:text-[10px] text-muted-foreground mt-1 truncate">{step.meta}</p>
           </div>
           {i < pipeline.length - 1 && (
-            <div className="relative w-10 h-px bg-transparent border-t border-dashed border-border mx-1">
+            <div className="relative w-3 sm:w-10 h-px bg-transparent border-t border-dashed border-border mx-1 shrink-0">
               {!reduceMotion && (
                 <motion.span
                   className="absolute -top-[3px] w-1.5 h-1.5 rounded-full bg-primary"
@@ -92,6 +92,7 @@ const AiWorkflow = () => (
     <div className="wrap">
       <div className="grid md:grid-cols-[1.4fr_1fr] gap-10 items-start">
         <Reveal>
+          <p className="eyebrow mb-4">AI workflow</p>
           <h2 className="font-display font-bold text-4xl md:text-6xl leading-[1.05]">
             AI doesn&apos;t ship the system.
             <br />

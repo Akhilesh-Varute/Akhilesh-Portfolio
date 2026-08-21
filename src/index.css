@@ -123,6 +123,18 @@
 }
 
 @layer utilities {
+  /* Keeps horizontally-scrollable strips (e.g. the AI pipeline steps)
+     swipeable without showing a scrollbar across the row. */
+  .scrollbar-hide {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@layer utilities {
   .font-mono {
     font-family: var(--font-mono);
   }
