@@ -1,53 +1,46 @@
 import { Reveal, Stagger, StaggerItem } from '@/components/motion/Reveal';
-import SectionHeading from '@/components/motion/SectionHeading';
 
 const meta = [
   { label: 'Based in', value: 'Pune, Maharashtra, India' },
-  { label: 'Focus', value: 'Cloud backends & GenAI tooling' },
-  { label: 'Currently at', value: 'ASCP GPUonCLOUD' },
-  { label: 'Site', value: 'akhileshvarute.me', href: 'https://akhileshvarute.me' },
+  { label: 'Currently', value: 'Software Developer (Cloud Solutions), ASCP GPUonCLOUD' },
+  { label: 'Certified', value: 'AWS Certified Developer – Associate' },
 ];
 
-const About = () => {
-  return (
-    <section id="about" className="py-28 md:py-36 px-6">
-      <div className="container max-w-6xl mx-auto">
-        <SectionHeading number="01" title="About" kicker="Who I am" />
+const About = () => (
+  <section id="about" className="py-20 rule">
+    <div className="wrap">
+      <p className="eyebrow mb-4">Profile</p>
+      <h2 className="font-display font-bold text-4xl md:text-6xl mb-10">
+        Not just prompting. <span className="text-muted-foreground">Systems thinking.</span>
+      </h2>
 
-        <div className="grid md:grid-cols-[1fr_0.7fr] gap-16 items-start">
-          <Reveal>
-            <p className="font-display text-2xl md:text-[2.05rem] leading-[1.4] text-foreground">
-              <span className="float-left font-display italic text-[4.2rem] leading-[0.8] pr-3 pt-1 text-primary">
-                I
-              </span>
-              am a Software Developer specializing in Cloud Solutions with expertise in
-              building scalable, production-grade cloud backends and GenAI platform
-              automation. My focus is on architecting event-driven microservices on AWS,
-              enforcing deterministic guardrails for LLM agent workflows, and automating
-              infrastructure provisioning using Infrastructure as Code.
-            </p>
-          </Reveal>
+      <div className="grid md:grid-cols-[1.4fr_1fr] gap-10">
+        <Reveal>
+          <p className="font-mono text-base md:text-lg leading-relaxed text-foreground/90">
+            Most people learning cloud and AI right now optimize for speed — ship the demo,
+            ship the prompt, move on. I optimize for what happens after: who's on call when
+            it breaks, what happens when a model hallucinates a tool call, whether the
+            infrastructure still holds up once someone other than me is touching it.
+            That's the lens everything here gets built through — not a stack of buzzwords,
+            a way of deciding what actually counts as production-ready.
+          </p>
+        </Reveal>
 
-          <Stagger className="md:mt-2 md:pl-12 md:border-l border-border space-y-6">
-            {meta.map((row) => (
-              <StaggerItem key={row.label}>
-                <p className="font-mono text-[11px] tracking-[0.28em] uppercase text-muted-foreground mb-1.5">
+        <Stagger className="space-y-5">
+          {meta.map((row) => (
+            <StaggerItem key={row.label}>
+              <div className="border border-border p-4">
+                <p className="font-mono text-[10px] tracking-[0.16em] uppercase text-muted-foreground mb-1">
                   {row.label}
                 </p>
-                {row.href ? (
-                  <a href={row.href} className="font-display text-lg text-primary link-hover">
-                    {row.value}
-                  </a>
-                ) : (
-                  <p className="font-display text-lg text-foreground">{row.value}</p>
-                )}
-              </StaggerItem>
-            ))}
-          </Stagger>
-        </div>
+                <p className="font-mono text-sm">{row.value}</p>
+              </div>
+            </StaggerItem>
+          ))}
+        </Stagger>
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
 
 export default About;

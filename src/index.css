@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -6,77 +6,77 @@
 
 @layer base {
   :root {
-    /* Paper — the default body theme: warm cream + ink */
-    --background: 42 35% 95%;
-    --foreground: 30 12% 10%;
+    /* Cream/parchment + ink + one flat vivid orange — a "product UI" palette */
+    --background: 45 55% 95%;
+    --foreground: 0 0% 8%;
 
-    --card: 40 28% 91%;
-    --card-foreground: 30 12% 10%;
+    --card: 42 40% 92%;
+    --card-foreground: 0 0% 8%;
 
-    --popover: 42 35% 95%;
-    --popover-foreground: 30 12% 10%;
+    --popover: 45 55% 95%;
+    --popover-foreground: 0 0% 8%;
 
-    --primary: 18 88% 54%;
-    --primary-foreground: 42 35% 97%;
+    --primary: 32 95% 55%;
+    --primary-foreground: 0 0% 8%;
 
-    --secondary: 40 22% 88%;
-    --secondary-foreground: 30 12% 10%;
+    --secondary: 42 30% 90%;
+    --secondary-foreground: 0 0% 8%;
 
-    --muted: 40 20% 88%;
-    --muted-foreground: 30 8% 38%;
+    --muted: 42 30% 90%;
+    --muted-foreground: 0 0% 42%;
 
-    --accent: 18 88% 54%;
-    --accent-foreground: 42 35% 97%;
+    --accent: 32 95% 55%;
+    --accent-foreground: 0 0% 8%;
 
-    --destructive: 6 74% 48%;
-    --destructive-foreground: 42 35% 97%;
+    --destructive: 4 78% 46%;
+    --destructive-foreground: 45 55% 96%;
 
-    --border: 35 16% 80%;
-    --input: 35 16% 80%;
-    --ring: 18 88% 54%;
+    --border: 38 20% 80%;
+    --input: 38 20% 80%;
+    --ring: 32 95% 55%;
 
-    --radius: 0.5rem;
+    --radius: 0px;
 
-    --font-sans: "Inter", system-ui, sans-serif;
-    --font-display: "Fraunces", "Inter", system-ui, serif;
+    --font-sans: "Space Grotesk", system-ui, sans-serif;
+    --font-display: "Space Grotesk", system-ui, sans-serif;
     --font-mono: "JetBrains Mono", monospace;
 
-    --sidebar-background: 42 35% 95%;
-    --sidebar-foreground: 30 12% 10%;
-    --sidebar-primary: 18 88% 54%;
-    --sidebar-primary-foreground: 42 35% 97%;
-    --sidebar-accent: 40 22% 88%;
-    --sidebar-accent-foreground: 30 12% 10%;
-    --sidebar-border: 35 16% 80%;
-    --sidebar-ring: 18 88% 54%;
+    --sidebar-background: 45 55% 95%;
+    --sidebar-foreground: 0 0% 8%;
+    --sidebar-primary: 32 95% 55%;
+    --sidebar-primary-foreground: 0 0% 8%;
+    --sidebar-accent: 42 30% 90%;
+    --sidebar-accent-foreground: 0 0% 8%;
+    --sidebar-border: 38 20% 80%;
+    --sidebar-ring: 32 95% 55%;
   }
 
-  /* Ink — scoped dark theme for the hero and contact bookends */
-  .theme-dark {
-    --background: 30 11% 6%;
-    --foreground: 42 28% 93%;
+  /* Dark-mode toggle — a real light/dark switch, unlike the other branches */
+  .dark {
+    --background: 0 0% 7%;
+    --foreground: 45 20% 94%;
 
-    --card: 30 10% 9%;
-    --card-foreground: 42 28% 93%;
+    --card: 0 0% 11%;
+    --card-foreground: 45 20% 94%;
 
-    --popover: 30 11% 6%;
-    --popover-foreground: 42 28% 93%;
+    --popover: 0 0% 7%;
+    --popover-foreground: 45 20% 94%;
 
-    --primary: 18 92% 58%;
-    --primary-foreground: 30 10% 8%;
+    --primary: 32 95% 58%;
+    --primary-foreground: 0 0% 8%;
 
-    --secondary: 30 9% 13%;
-    --secondary-foreground: 42 28% 93%;
+    --secondary: 0 0% 14%;
+    --secondary-foreground: 45 20% 94%;
 
-    --muted: 30 8% 14%;
-    --muted-foreground: 40 14% 62%;
+    --muted: 0 0% 14%;
+    --muted-foreground: 0 0% 62%;
 
-    --accent: 18 92% 58%;
-    --accent-foreground: 30 10% 8%;
+    --accent: 32 95% 58%;
+    --accent-foreground: 0 0% 8%;
 
-    --border: 30 10% 18%;
-    --input: 30 10% 18%;
-    --ring: 18 92% 58%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 32 95% 58%;
   }
 }
 
@@ -90,13 +90,20 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased;
+    @apply bg-background text-foreground antialiased;
     font-family: var(--font-sans);
     overflow-x: hidden;
+    background-image: repeating-linear-gradient(
+      to bottom,
+      hsl(var(--foreground) / 0.035) 0px,
+      hsl(var(--foreground) / 0.035) 1px,
+      transparent 1px,
+      transparent 28px
+    );
   }
 
   ::selection {
-    background: hsl(var(--primary) / 0.25);
+    background: hsl(var(--primary) / 0.35);
     color: hsl(var(--foreground));
   }
 
@@ -116,6 +123,18 @@
 }
 
 @layer utilities {
+  /* Keeps horizontally-scrollable strips (e.g. the AI pipeline steps)
+     swipeable without showing a scrollbar across the row. */
+  .scrollbar-hide {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@layer utilities {
   .font-mono {
     font-family: var(--font-mono);
   }
@@ -124,46 +143,102 @@
     font-family: var(--font-display);
   }
 
-  /* Huge outlined editorial ghost type — recolors with the section's theme.
-     Fill (not fully transparent) is the fallback for browsers without
-     -webkit-text-stroke support, so the word never disappears entirely. */
-  .text-stroke {
-    color: hsl(var(--foreground) / 0.1);
-    -webkit-text-stroke: 1.5px hsl(var(--foreground) / 0.45);
-  }
-
   .eyebrow {
-    @apply font-mono text-[11px] tracking-[0.28em] uppercase text-primary;
+    @apply inline-flex items-center font-mono text-[11px] tracking-[0.16em] uppercase bg-primary text-primary-foreground px-2.5 py-1;
   }
 
   .rule {
     @apply border-t border-border;
   }
 
-  /* animated underline on hover, used for inline text links */
+  /* Centered container with generous side margins — matches Pleurat's
+     symmetric layout (deliberately not the asymmetric offset column used
+     on design/build-log). */
+  .wrap {
+    @apply w-full max-w-6xl mx-auto px-6 md:px-10;
+  }
+
   .link-hover {
     @apply relative inline-block after:content-[''] after:absolute after:w-full after:scale-x-0
            after:h-px after:bottom-0 after:left-0 after:bg-primary after:origin-bottom-right
            after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left;
   }
+
+  /* Dotted panel backdrop used inside the workspace/terminal panels */
+  .dot-grid {
+    background-image: radial-gradient(hsl(var(--foreground) / 0.18) 1px, transparent 1px);
+    background-size: 16px 16px;
+  }
+
+  /* Custom interactive cursor (fine-pointer devices only) — hidden by
+     default, revealed once CustomCursor confirms hover+pointer support. */
+  .cursor-dot,
+  .cursor-ring {
+    display: none;
+    opacity: 0;
+  }
+  html.custom-cursor-active {
+    cursor: none;
+  }
+  html.custom-cursor-active a,
+  html.custom-cursor-active button {
+    cursor: none;
+  }
+  html.custom-cursor-active .cursor-dot,
+  html.custom-cursor-active .cursor-ring {
+    display: block;
+    opacity: 1;
+    transition: opacity 0.2s ease;
+  }
+
+  /* Diagonal-hatch fill used by the stat bars */
+  .hatch-fill {
+    background-image: repeating-linear-gradient(
+      45deg,
+      hsl(var(--foreground) / 0.55) 0,
+      hsl(var(--foreground) / 0.55) 1px,
+      transparent 1px,
+      transparent 7px
+    );
+  }
 }
 
 @layer components {
   .btn-primary {
-    @apply inline-flex items-center gap-2 px-7 py-3.5 font-mono text-sm rounded-full cursor-pointer
+    @apply inline-flex items-center gap-2 px-6 py-3 font-mono text-sm cursor-pointer border border-foreground
            bg-primary text-primary-foreground font-medium
-           hover:brightness-105 transition-all duration-300;
+           hover:bg-foreground hover:text-background transition-colors duration-200;
   }
 
   .btn-outline {
-    @apply inline-flex items-center gap-2 px-7 py-3.5 border border-foreground/25 text-foreground font-mono
-           text-sm rounded-full hover:border-primary hover:text-primary transition-colors duration-300 cursor-pointer;
+    @apply inline-flex items-center gap-2 px-6 py-3 border border-foreground text-foreground font-mono
+           text-sm hover:bg-foreground hover:text-background transition-colors duration-200 cursor-pointer;
   }
 
   .btn-ghost {
-    @apply inline-flex items-center gap-2 px-1 py-2 font-mono text-sm text-muted-foreground
-           hover:text-primary transition-colors duration-300 cursor-pointer;
+    @apply inline-flex items-center gap-2 px-3 py-2 border border-transparent font-mono text-sm text-muted-foreground
+           hover:border-foreground hover:bg-foreground hover:text-background transition-colors duration-200 cursor-pointer;
   }
+
+  .panel {
+    @apply border border-border bg-card;
+  }
+
+  .panel-topbar {
+    @apply flex items-center gap-2 px-4 py-2.5 border-b border-border font-mono text-[11px] tracking-wide uppercase text-muted-foreground;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.animate-marquee {
+  animation: marquee 30s linear infinite;
 }
 
 /* Respect reduced motion */
