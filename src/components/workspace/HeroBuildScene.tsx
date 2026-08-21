@@ -233,8 +233,14 @@ const HeroBuildScene = () => {
     let raf = 0;
     const handlePointerMove = (e: PointerEvent) => {
       const rect = svg.getBoundingClientRect();
-      const px = (e.clientX - rect.left) / rect.width - 0.5;
-      const py = (e.clientY - rect.top) / rect.height - 0.5;
+      // The listener is on the whole section, but rect belongs to the much
+      // smaller SVG anchored at its corner — moving the cursor toward the
+      // far side of the section produces a raw ratio well outside
+      // [-0.5, 0.5], so it must be clamped or the scene drags itself
+      // off-screen and gets clipped by the section's overflow-hidden.
+      const clamp = (v: number) => Math.min(0.5, Math.max(-0.5, v));
+      const px = clamp((e.clientX - rect.left) / rect.width - 0.5);
+      const py = clamp((e.clientY - rect.top) / rect.height - 0.5);
       cancelAnimationFrame(raf);
       raf = requestAnimationFrame(() => {
         animate(group, {
