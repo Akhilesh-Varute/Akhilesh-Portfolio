@@ -10,6 +10,7 @@ import {
   useTransform,
 } from 'framer-motion';
 import { ArrowDown, Check, Copy } from 'lucide-react';
+import HeroSystemPulse from '@/components/workspace/HeroSystemPulse';
 
 const EMAIL = 'akhileshvarute231@gmail.com';
 
@@ -130,8 +131,15 @@ const Hero = () => {
       ref={sectionRef}
       className="relative min-h-[100svh] flex items-center dot-grid overflow-hidden"
     >
+      <div
+        className="hidden lg:block absolute right-[4%] bottom-[8%] w-[380px] h-[260px] opacity-70 pointer-events-none select-none z-0"
+        aria-hidden="true"
+      >
+        <HeroSystemPulse />
+      </div>
+
       <motion.div
-        className="wrap py-16 md:py-20"
+        className="wrap py-16 md:py-20 relative z-10"
         style={reduceMotion ? undefined : { y: contentY, opacity: contentOpacity, willChange: 'transform, opacity' }}
       >
         <motion.div
