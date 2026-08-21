@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Moon, Sun } from 'lucide-react';
+import { MagneticButton } from '@/components/motion/Magnetic';
 
 const STORAGE_KEY = 'workspace-theme';
 
@@ -17,14 +18,13 @@ const ThemeToggle = () => {
   }, [dark]);
 
   return (
-    <button
-      type="button"
+    <MagneticButton
       onClick={() => setDark((d) => !d)}
       aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}
-      className="p-2 border border-border hover:border-primary transition-colors cursor-pointer"
+      className="p-2 border border-border hover:border-foreground hover:bg-foreground hover:text-background transition-colors duration-200 cursor-pointer"
     >
       {dark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-    </button>
+    </MagneticButton>
   );
 };
 

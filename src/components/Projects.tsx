@@ -153,7 +153,7 @@ const ProjectCard = ({ project }: { project: Project }) => (
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 font-mono text-xs border border-border px-3 py-1.5 hover:border-primary hover:text-primary transition-colors"
+                className="inline-flex items-center gap-1 font-mono text-xs border border-border px-3 py-1.5 hover:border-foreground hover:bg-foreground hover:text-background transition-colors duration-200"
               >
                 {link.label}
                 <ArrowUpRight className="w-3 h-3" />

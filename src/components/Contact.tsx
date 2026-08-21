@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Check, Copy, Github, Linkedin } from 'lucide-react';
 import { Reveal } from '@/components/motion/Reveal';
+import { MagneticLink, MagneticButton } from '@/components/motion/Magnetic';
 
 const EMAIL = 'akhileshvarute23@gmail.com';
 
@@ -45,13 +46,13 @@ const Contact = () => {
 
             <Reveal delay={0.2}>
               <div className="flex flex-wrap gap-4">
-                <a href={`mailto:${EMAIL}`} className="btn-primary">
+                <MagneticLink href={`mailto:${EMAIL}`} className="btn-primary">
                   {EMAIL}
-                </a>
-                <button type="button" onClick={copyEmail} className="btn-outline">
+                </MagneticLink>
+                <MagneticButton onClick={copyEmail} className="btn-outline">
                   {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                   {copied ? 'Copied' : 'Copy'}
-                </button>
+                </MagneticButton>
               </div>
             </Reveal>
 

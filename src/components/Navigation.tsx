@@ -3,6 +3,7 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { animate, scrambleText } from 'animejs';
 import { Menu, X } from 'lucide-react';
 import ThemeToggle from '@/components/workspace/ThemeToggle';
+import { MagneticLink } from '@/components/motion/Magnetic';
 
 const navItems = [
   { label: 'Welcome', href: '#hero' },
@@ -57,9 +58,9 @@ const Navigation = () => {
 
         <div className="hidden md:flex items-center gap-3">
           <ThemeToggle />
-          <a href="#contact" className="btn-primary">
+          <MagneticLink href="#contact" className="btn-primary">
             Contact
-          </a>
+          </MagneticLink>
         </div>
 
         <button
