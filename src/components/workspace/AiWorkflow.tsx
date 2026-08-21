@@ -5,7 +5,7 @@ const pipeline = [
   { label: 'Prompt', meta: 'CLAUDE CODE' },
   { label: 'Route', meta: 'MCP · TOOL SELECT' },
   { label: 'Gate', meta: 'AGENTIC-GATE · SCHEMA' },
-  { label: 'Deploy', meta: 'CLOUDFORMATION · GH ACTIONS' },
+  { label: 'Deploy', meta: 'CFN · GH ACTIONS' },
   { label: 'Monitor', meta: 'CLOUDWATCH · COST' },
 ];
 
@@ -19,41 +19,29 @@ const items = [
   {
     n: '02',
     tag: 'RESEARCH',
-    title: 'Research & Triage',
-    body: 'Comparing AWS, Azure, and GCP service tradeoffs and parsing provider docs in a fraction of the usual time.',
+    title: 'Research & Architecture',
+    body: 'Comparing AWS, Azure, and GCP tradeoffs, mapping event-driven flows, and surfacing edge cases — before a line of infra code gets written.',
   },
   {
     n: '03',
-    tag: 'ANALYSIS',
-    title: 'Architecture & Decision Making',
-    body: 'Breaking down requirements, mapping event-driven flows, surfacing edge cases before a line of infra code is written.',
-  },
-  {
-    n: '04',
     tag: 'DEVELOPMENT',
     title: 'Code & Development',
     body: 'Claude Code and GitHub Copilot pairing on Node.js and Python backend services — production-bound, not disposable demos.',
   },
   {
-    n: '05',
+    n: '04',
     tag: 'GUARDRAILS',
-    title: 'Guardrails & Validation',
-    body: 'Built Agentic-Gate because LLM tool calls need schema validation before they touch real systems — deterministic, not prompt-and-hope.',
+    title: 'Guardrails & Testing',
+    body: 'Built Agentic-Gate because LLM tool calls need schema validation before they touch real systems — deterministic, not prompt-and-hope. 100% test coverage through v1.4.0 is a fact, not a target.',
   },
   {
-    n: '06',
-    tag: 'TESTING',
-    title: 'Testing & Validation',
-    body: 'Automated coverage and CI checks before a release ships — 100% test coverage on Agentic-Gate through v1.4.0 is a fact, not a target.',
-  },
-  {
-    n: '07',
+    n: '05',
     tag: 'AGENTS',
     title: 'LLM Agents & Tool Orchestration',
     body: 'AWS Bedrock function calling, the SecurityBot / CostBot pair in AI Cloud Insights, structured tool schemas instead of freeform prompting.',
   },
   {
-    n: '08',
+    n: '06',
     tag: 'SYSTEMS',
     title: 'Building Real Systems',
     body: "Not just prompting an API. It's event-driven architecture, multi-tenant isolation, and things staying up.",
@@ -116,18 +104,18 @@ const AiWorkflow = () => (
           everyday workflow.
         </h3>
 
-        <Stagger>
+        <Stagger className="grid sm:grid-cols-2 gap-4">
           {items.map((item) => (
             <StaggerItem key={item.n}>
-              <div className="grid md:grid-cols-[3rem_10rem_1fr] gap-x-6 gap-y-1 border-t border-border py-5">
-                <span className="font-mono text-sm text-primary">{item.n}</span>
-                <span className="font-mono text-[11px] tracking-[0.14em] uppercase text-muted-foreground">
-                  {item.tag}
-                </span>
-                <div>
-                  <p className="font-display font-semibold text-lg mb-1">{item.title}</p>
-                  <p className="font-mono text-sm text-muted-foreground leading-relaxed max-w-xl">{item.body}</p>
+              <div className="border border-border p-5 h-full hover:border-primary transition-colors duration-200">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="font-mono text-sm text-primary">{item.n}</span>
+                  <span className="font-mono text-[11px] tracking-[0.14em] uppercase text-muted-foreground">
+                    {item.tag}
+                  </span>
                 </div>
+                <p className="font-display font-semibold text-lg mb-1.5">{item.title}</p>
+                <p className="font-mono text-sm text-muted-foreground leading-relaxed">{item.body}</p>
               </div>
             </StaggerItem>
           ))}
