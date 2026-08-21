@@ -145,6 +145,7 @@ const CloudArchitectureCanvas = () => {
             zoomOnScroll={false}
             zoomOnPinch={false}
             zoomOnDoubleClick={false}
+            preventScrolling={false}
             translateExtent={[[-40, -40], [1040, 700]]}
             nodeExtent={[[-40, -40], [1040, 700]]}
           >
