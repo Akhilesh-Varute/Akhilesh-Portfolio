@@ -67,19 +67,31 @@ const projects: Project[] = [
   },
   {
     number: '03',
-    title: 'Personal Finance & Expense Automation',
-    tagline: 'Event-Driven Natural Language Expense Parsing & Categorization Pipeline',
+    title: 'EcoScheduler',
+    tagline: 'Multi-Tenant AWS EC2 Cost Optimization SaaS',
     status: 'ACTIVE · 2025',
-    stack: ['Node.js', 'n8n', 'Telegram Bot API', 'Docker'],
-    problem:
-      'Manual expense logging creates friction, leading to incomplete or inconsistent personal financial tracking.',
-    solution:
-      'Built an event-driven automation bot that processes natural language chat messages from Telegram, extracts structured expense data, and categorizes transaction records automatically.',
-    impact: [
-      'Eliminated manual logging friction using natural language processing.',
-      'Engineered reliable webhook pipelines via n8n and Node.js microservices.',
+    stack: [
+      'Python',
+      'TypeScript',
+      'Next.js',
+      'AWS Lambda',
+      'API Gateway',
+      'DynamoDB',
+      'EventBridge',
+      'IAM AssumeRole',
+      'Serverless Framework',
     ],
-    links: [{ label: 'GitHub', href: 'https://github.com/Akhilesh-Varute' }],
+    problem:
+      'Unmanaged non-production EC2 instances running 24/7 across multiple AWS accounts create avoidable cloud spend, while native AWS tooling lacks multi-tenant RBAC, self-service account onboarding, or savings visibility for non-technical stakeholders.',
+    solution:
+      'Built a multi-tenant serverless FinOps SaaS that lets customers self-connect their own AWS accounts, schedule EC2 start/stop via a friendly recurring/one-time UI, and track real cost savings — without a platform operator manually onboarding every customer.',
+    impact: [
+      'Engineered secure multi-account EC2 access using STS AssumeRole cross-account IAM roles, with self-service account connection and live verification instead of long-lived per-account credentials.',
+      'Built a 3-tier RBAC system (Admin, Developer, Finance) with JWT-based auth, where developers manage schedules/instances scoped strictly to their own connected AWS accounts.',
+      'Shipped a dry-run mode and full audit trail (who/what/when/result) for every EC2 start/stop action, scheduled or manual.',
+      'Found and fixed real correctness bugs during end-to-end AWS testing: an EventBridge day-of-week numbering mismatch that silently misfired recurring schedules by a day, a missing EventBridge-to-Lambda invoke permission that caused scheduled triggers to fail silently, and DynamoDB Decimal/reserved-keyword serialization issues.',
+    ],
+    links: [{ label: 'GitHub', href: 'https://github.com/Akhilesh-Varute/EcoScheduler' }],
   },
 ];
 
