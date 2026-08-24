@@ -68,30 +68,19 @@ const projects: Project[] = [
   {
     number: '03',
     title: 'EcoScheduler',
-    tagline: 'Multi-Tenant AWS EC2 Cost Optimization SaaS',
+    tagline: 'Multi-Tenant AWS FinOps SaaS Platform',
     status: 'ACTIVE · 2025',
-    stack: [
-      'Python',
-      'TypeScript',
-      'Next.js',
-      'AWS Lambda',
-      'API Gateway',
-      'DynamoDB',
-      'EventBridge',
-      'IAM AssumeRole',
-      'Serverless Framework',
-    ],
+    stack: ['AWS Lambda', 'API Gateway', 'DynamoDB', 'AWS SDK', 'STS AssumeRole', 'Node.js', 'TypeScript'],
     problem:
-      'Unmanaged non-production EC2 instances running 24/7 across multiple AWS accounts create avoidable cloud spend, while native AWS tooling lacks multi-tenant RBAC, self-service account onboarding, or savings visibility for non-technical stakeholders.',
+      'Unmanaged non-production EC2 instances running 24/7 across multiple client AWS accounts waste compute budgets, while existing tools lack secure cross-account RBAC and dry-run safety modes.',
     solution:
-      'Built a multi-tenant serverless FinOps SaaS that lets customers self-connect their own AWS accounts, schedule EC2 start/stop via a friendly recurring/one-time UI, and track real cost savings — without a platform operator manually onboarding every customer.',
+      'Built a multi-tenant serverless FinOps SaaS on AWS Lambda, API Gateway, and DynamoDB that automates cross-account EC2 lifecycle schedules while maintaining strict security audit trails.',
     impact: [
-      'Engineered secure multi-account EC2 access using STS AssumeRole cross-account IAM roles, with self-service account connection and live verification instead of long-lived per-account credentials.',
-      'Built a 3-tier RBAC system (Admin, Developer, Finance) with JWT-based auth, where developers manage schedules/instances scoped strictly to their own connected AWS accounts.',
-      'Shipped a dry-run mode and full audit trail (who/what/when/result) for every EC2 start/stop action, scheduled or manual.',
-      'Found and fixed real correctness bugs during end-to-end AWS testing: an EventBridge day-of-week numbering mismatch that silently misfired recurring schedules by a day, a missing EventBridge-to-Lambda invoke permission that caused scheduled triggers to fail silently, and DynamoDB Decimal/reserved-keyword serialization issues.',
+      'Engineered secure cross-account EC2 access using AWS STS AssumeRole policies and dynamic account onboarding.',
+      'Architected a 3-tier RBAC system (Admin, Developer, Finance) with JWT authorization, dry-run evaluation, and audit logging.',
+      'Remediated critical edge cases during cloud integration testing, including EventBridge UTC schedule sync, Lambda resource policies, and DynamoDB attribute serialization.',
     ],
-    links: [{ label: 'GitHub', href: 'https://github.com/Akhilesh-Varute/EcoScheduler' }],
+    links: [{ label: 'GitHub', href: 'https://github.com/Akhilesh-Varute/ecoscheduler' }],
   },
 ];
 
