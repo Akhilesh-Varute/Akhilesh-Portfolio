@@ -3,23 +3,25 @@ import SequenceDiagramScene from '@/components/workspace/SequenceDiagramScene';
 
 const categories = [
   {
-    title: 'Cloud & Infrastructure',
+    title: 'AI & LLM',
     items: [
-      'AWS Bedrock', 'AWS Lambda', 'Amazon ECS Fargate', 'AWS S3', 'CloudFront',
-      'Amazon EC2', 'AWS IAM', 'Security Hub', 'CloudFormation', 'Docker',
-      'CI/CD (GitHub Actions)', 'Infrastructure as Code (IaC)',
+      'AWS Bedrock', 'LLM function calling', 'Tool-call validation', 'Zod', 'Pydantic',
+      'LangChain', 'Claude Code', 'GitHub Copilot',
     ],
   },
   {
-    title: 'Backend & AI/LLM',
+    title: 'Backend',
     items: [
-      'Python', 'TypeScript', 'Node.js', 'Fastify', 'LangChain', 'Pydantic', 'Zod',
-      'REST APIs', 'Microservices Architecture', 'Event-Driven Systems',
+      'Python', 'TypeScript', 'Node.js', 'FastAPI', 'REST APIs', 'Microservices',
+      'Event-driven systems', 'DynamoDB', 'MongoDB', 'Next.js',
     ],
   },
   {
-    title: 'Databases & Tooling',
-    items: ['PostgreSQL', 'MongoDB', 'Redis', 'Linux', 'Git', 'n8n', 'Postman', 'Automated Workflows'],
+    title: 'Cloud & delivery',
+    items: [
+      'AWS Lambda', 'EventBridge', 'API Gateway', 'ECS Fargate', 'IAM and STS',
+      'CloudFormation', 'Docker', 'GitHub Actions CI/CD', 'Linux', 'Git',
+    ],
   },
 ];
 
@@ -31,7 +33,7 @@ const Skills = () => (
 
       <Reveal className="mb-14">
         <p className="font-mono text-[10px] tracking-[0.16em] uppercase text-muted-foreground mb-3">
-          Request flow · cache hit &amp; miss
+          How agentic-gate handles a tool call · illustrative
         </p>
         <SequenceDiagramScene />
       </Reveal>

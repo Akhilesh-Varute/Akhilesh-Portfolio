@@ -2,35 +2,38 @@ import { useEffect, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 
 const lanes = [
-  { id: 'client', label: 'Client', x: 90 },
-  { id: 'service', label: 'Service', x: 380 },
-  { id: 'cache', label: 'Redis', x: 670 },
-  { id: 'db', label: 'DB', x: 940 },
+  { id: 'user', label: 'User', x: 90 },
+  { id: 'llm', label: 'LLM', x: 380 },
+  { id: 'gate', label: 'Gate', x: 670 },
+  { id: 'tool', label: 'Tool', x: 940 },
 ];
 
-// Two request paths through the same request flow, alternating on each
-// replay: a cache hit alone only shows the read path; the miss path is
-// where cache invalidation/write-back actually shows up.
+// Two paths through the same tool-call flow, alternating on each replay.
+// The valid call is the easy case; the interesting one is a bad call that
+// gets rejected, fed back to the model and retried before it ever reaches
+// a real system.
 const scenarios = [
   {
-    label: 'CACHE HIT',
+    label: 'VALID CALL',
     steps: [
-      { from: 0, to: 1, label: 'GET /cost-report?tenant=4471' },
-      { from: 1, to: 2, label: 'GET cache:4471' },
-      { from: 2, to: 1, label: 'HIT · 4ms' },
-      { from: 1, to: 0, label: '200 OK' },
+      { from: 0, to: 1, label: 'Stop the idle dev instances' },
+      { from: 1, to: 2, label: 'stop_instance(id: "i-0a1b")' },
+      { from: 2, to: 3, label: 'schema OK, execute' },
+      { from: 3, to: 2, label: 'stopped' },
+      { from: 2, to: 1, label: 'result' },
+      { from: 1, to: 0, label: 'Done, 1 instance stopped' },
     ],
   },
   {
-    label: 'CACHE MISS',
+    label: 'REJECTED, THEN RETRIED',
     steps: [
-      { from: 0, to: 1, label: 'GET /cost-report?tenant=4471' },
-      { from: 1, to: 2, label: 'GET cache:4471' },
-      { from: 2, to: 1, label: 'MISS' },
-      { from: 1, to: 3, label: 'SELECT … WHERE tenant=4471' },
-      { from: 3, to: 1, label: '42 rows · 180ms' },
-      { from: 1, to: 2, label: 'SET cache:4471 ttl=60s' },
-      { from: 1, to: 0, label: '200 OK' },
+      { from: 0, to: 1, label: 'Stop the idle dev instances' },
+      { from: 1, to: 2, label: 'stop_instance(id: 42)' },
+      { from: 2, to: 1, label: 'REJECTED: id must be a string' },
+      { from: 1, to: 2, label: 'stop_instance(id: "i-0a1b")' },
+      { from: 2, to: 3, label: 'schema OK, execute' },
+      { from: 3, to: 2, label: 'stopped' },
+      { from: 1, to: 0, label: 'Done, 1 instance stopped' },
     ],
   },
 ];
@@ -39,11 +42,10 @@ const ROW_START = 90;
 const ROW_END = 330;
 
 /**
- * A vertical sequence-diagram scene for the Backend Systems track: request
- * arrows travel between Client / Service / Redis / DB lanes in order, one
- * step lighting up at a time. Alternates between the cache-hit and
- * cache-miss paths on each replay instead of only ever showing the happy
- * path.
+ * A vertical sequence diagram of how a tool call moves from the user to the
+ * LLM, through the validation gate, to the tool. One step lights up at a
+ * time, and it alternates between a valid call and a rejected-then-retried
+ * one so it doesn't only show the happy path.
  */
 const SequenceDiagramScene = () => {
   const [scenarioIndex, setScenarioIndex] = useState(0);
@@ -75,7 +77,7 @@ const SequenceDiagramScene = () => {
   return (
     <div className="flex items-center justify-center py-4">
       <svg viewBox="0 0 1030 360" className="w-full max-w-3xl h-auto" aria-hidden="true">
-        <text x={1030} y={22} textAnchor="end" className="font-mono" fontSize={10} letterSpacing="0.08em" fill="hsl(var(--primary))">
+        <text x={1030} y={62} textAnchor="end" className="font-mono" fontSize={10} letterSpacing="0.08em" fill="hsl(var(--primary))">
           {scenario.label}
         </text>
 
