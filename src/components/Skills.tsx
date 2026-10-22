@@ -13,7 +13,7 @@ const categories = [
     title: 'Backend',
     items: [
       'Python', 'TypeScript', 'Node.js', 'FastAPI', 'REST APIs', 'Microservices',
-      'Event-driven systems', 'DynamoDB', 'MongoDB', 'Next.js',
+      'Event-driven systems', 'DynamoDB', 'MongoDB', 'Redis', 'Next.js',
     ],
   },
   {
