@@ -114,7 +114,7 @@ const cloudEdges: Edge[] = [
 
 const nodeTypes = { container: ContainerNode };
 
-/** Open, borderless flow canvas — a real HA system design (competency
+/** Open, borderless flow canvas: a real HA system design (competency
  * exercise, not the actual AI Cloud Insights deployment, which runs on
  * simpler EC2 infra): two-AZ VPC with ALB, NAT Gateway per public subnet,
  * and a MongoDB replica set. */

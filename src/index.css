@@ -6,7 +6,7 @@
 
 @layer base {
   :root {
-    /* Cream/parchment + ink + one flat vivid orange — a "product UI" palette */
+    /* Cream/parchment + ink + one flat vivid orange: a "product UI" palette */
     --background: 45 55% 95%;
     --foreground: 0 0% 8%;
 
@@ -51,7 +51,7 @@
     --sidebar-ring: 32 95% 55%;
   }
 
-  /* Dark-mode toggle — a real light/dark switch, unlike the other branches */
+  /* Dark-mode toggle: a real light/dark switch, unlike the other branches */
   .dark {
     --background: 0 0% 7%;
     --foreground: 45 20% 94%;
@@ -147,7 +147,7 @@
     @apply border-t border-border;
   }
 
-  /* Centered container with generous side margins — matches Pleurat's
+  /* Centered container with generous side margins: matches Pleurat's
      symmetric layout (deliberately not the asymmetric offset column used
      on design/build-log). */
   .wrap {
@@ -166,7 +166,7 @@
     background-size: 16px 16px;
   }
 
-  /* Custom interactive cursor (fine-pointer devices only) — hidden by
+  /* Custom interactive cursor (fine-pointer devices only): hidden by
      default, revealed once CustomCursor confirms hover+pointer support. */
   .cursor-dot,
   .cursor-ring {

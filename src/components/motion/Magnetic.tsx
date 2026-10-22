@@ -2,7 +2,7 @@ import { type MouseEvent, type ReactNode } from 'react';
 import { motion, useMotionValue, useReducedMotion, useSpring } from 'framer-motion';
 
 // Cursor-following "magnetic" pull, shared by every clickable button/link
-// site-wide — a small, cheap motion touch that reads as intentional rather
+// site-wide: a small, cheap motion touch that reads as intentional rather
 // than a generic hover scale. Originally lived only on Hero's CTAs; pulled
 // out here so Contact's buttons, the nav's Contact link, and the theme
 // toggle can all share the exact same hover feel instead of drifting apart.

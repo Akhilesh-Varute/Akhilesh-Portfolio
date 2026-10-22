@@ -40,8 +40,7 @@ const Contact = () => {
             <Reveal delay={0.1}>
               <p className="font-mono text-sm text-muted-foreground max-w-lg mb-8 leading-relaxed">
                 Looking for AI/LLM and backend engineering roles at product companies in Pune or
-                remote across India. Open to a conversation, or anything at the intersection of
-                cloud infrastructure and GenAI tooling.
+                remote across India. Happy to talk, even if you just want to compare notes on LLM tool calling.
               </p>
             </Reveal>
 

@@ -22,8 +22,7 @@ const StatBars = () => {
         </Reveal>
         <Reveal delay={0.1}>
           <p className="font-mono text-sm text-muted-foreground max-w-lg mt-4 mb-16">
-            Shipping cadence and published packages — the practice counted rather than
-            described.
+            Deploy cadence and published packages, counted instead of described.
           </p>
         </Reveal>
 

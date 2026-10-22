@@ -3,7 +3,7 @@ import { animate } from 'animejs';
 
 // Site-wide interactive cursor: a small dot that tracks the pointer 1:1
 // and a trailing ring that eases toward it (the classic anime.js
-// mouse-follow idiom — re-calling animate() on every pointermove lets
+// mouse-follow idiom: re-calling animate() on every pointermove lets
 // each new tween smoothly retarget from wherever the ring currently is).
 // The ring grows and inverts over anything interactive.
 const HOVER_SELECTOR = 'a, button, [role="button"], input, textarea, select, [data-cursor-hover]';

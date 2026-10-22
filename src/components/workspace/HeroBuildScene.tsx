@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { animate, stagger, utils } from 'animejs';
 
-// Isometric "product being built" background for the Hero — a base plate
+// Isometric "product being built" background for the Hero: a base plate
 // with a few blocks that slide/drop in from different sides and settle,
 // like components landing on a board. Pure SVG (crisp at any size) using
 // the standard iso projection: screenX = (x - y) * cos30, screenY = (x +
@@ -65,12 +65,12 @@ const gridLines = () => {
 };
 
 // Five blocks, each standing in for a real part of the stack the headline
-// talks about — not just AI+guardrail+queue in isolation, but the shape of
+// talks about: not just AI+guardrail+queue in isolation, but the shape of
 // an actual event-driven service: an entry point, the model with its
 // guardrail cap, the store it reads/writes, and the queue connecting them.
 const blocks = [
   {
-    // Entry point — where a request first lands. Slides in from the left,
+    // Entry point: where a request first lands. Slides in from the left,
     // opposite QUEUE, so the two "ends" of the request flow read as a pair.
     id: 'api',
     name: 'PROMPT',
@@ -84,7 +84,7 @@ const blocks = [
     delay: 300,
   },
   {
-    // The base block: does the actual work. Labeled from its west corner —
+    // The base block: does the actual work. Labeled from its west corner -
     // its north corner is where GUARDRAIL sits (it caps this block from
     // above).
     id: 'ai',
@@ -114,7 +114,7 @@ const blocks = [
     delay: 650,
   },
   {
-    // Persistence layer, opposite corner from API — the state AI/guardrail
+    // Persistence layer, opposite corner from API: the state AI/guardrail
     // read and write, not just a request/response pair with nothing behind it.
     id: 'store',
     name: 'TOOLS',
@@ -145,14 +145,14 @@ const blocks = [
 
 const labels = [{ text: 'AGENT', p: project(PLATE.x1, PLATE.y1, 0), dx: 8, dy: 4, anchor: 'start' as const }];
 
-// A small pulse orbiting a fixed point between API and QUEUE — the "event
+// A small pulse orbiting a fixed point between API and QUEUE: the "event
 // loop" isn't a static label, it's this: something actually moving,
 // continuously, independent of the assembly sequence above.
 const LOOP_PIVOT = project(2.3, 5.1, 0.05);
 const LOOP_RADIUS = 16;
 
 // The headline column runs nearly the full section height, so there's no
-// safe horizontal band to bleed under — only the right column's empty
+// safe horizontal band to bleed under: only the right column's empty
 // space below its CTA row. The scene's own sizing/position (below) keeps
 // it inside that zone; this mask just softens its top edge into the
 // section rather than a hard box line.
@@ -175,7 +175,7 @@ const HeroBuildScene = () => {
     const gridEls = group.querySelectorAll<SVGLineElement>('.build-grid-line');
     if (reduceMotion || isMobile) return;
 
-    // The event-loop pulse spins independently of the assembly sequence —
+    // The event-loop pulse spins independently of the assembly sequence -
     // it's meant to read as an always-on process, not a one-shot entrance.
     animate(loopPivotRef.current, {
       rotate: '360deg',
@@ -234,7 +234,7 @@ const HeroBuildScene = () => {
     const handlePointerMove = (e: PointerEvent) => {
       const rect = svg.getBoundingClientRect();
       // The listener is on the whole section, but rect belongs to the much
-      // smaller SVG anchored at its corner — moving the cursor toward the
+      // smaller SVG anchored at its corner: moving the cursor toward the
       // far side of the section produces a raw ratio well outside
       // [-0.5, 0.5], so it must be clamped or the scene drags itself
       // off-screen and gets clipped by the section's overflow-hidden.

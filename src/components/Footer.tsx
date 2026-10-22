@@ -48,7 +48,7 @@ const Footer = () => (
         </div>
       </Reveal>
       <p className="font-mono text-[11px] text-muted-foreground text-center mt-6">
-        © 2026 Akhilesh Varute — all rights reserved
+        © 2026 Akhilesh Varute. All rights reserved.
       </p>
     </div>
   </footer>

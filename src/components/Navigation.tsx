@@ -24,7 +24,7 @@ const MAGNIFY_RADIUS = 46;
 const MAGNIFY_MAX_SCALE = 1.55;
 
 // macOS-dock-style magnify: letters nearest the cursor scale up, falling
-// off smoothly with distance, instead of a plain uniform hover scale — a
+// off smoothly with distance, instead of a plain uniform hover scale: a
 // distinct effect for the wordmark so it doesn't read the same as the
 // scramble-text nav links next to it.
 const NavLogo = () => {

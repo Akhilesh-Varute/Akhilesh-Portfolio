@@ -11,18 +11,18 @@ const About = () => (
     <div className="wrap">
       <p className="eyebrow mb-4">Profile</p>
       <h2 className="font-display font-bold text-4xl md:text-6xl mb-10">
-        Not just prompting. <span className="text-muted-foreground">Systems thinking.</span>
+        What I care about, <span className="text-muted-foreground">in short.</span>
       </h2>
 
       <div className="grid md:grid-cols-[1.4fr_1fr] gap-10">
         <Reveal>
           <p className="font-mono text-base md:text-lg leading-relaxed text-foreground/90">
-            Most people learning cloud and AI right now optimize for speed — ship the demo,
-            ship the prompt, move on. I optimize for what happens after: who's on call when
-            it breaks, what happens when a model hallucinates a tool call, whether the
-            infrastructure still holds up once someone other than me is touching it.
-            That's the lens everything here gets built through — not a stack of buzzwords,
-            a way of deciding what actually counts as production-ready.
+            I build backends around LLMs, and most of my time goes into the parts that have
+            to keep working when nobody is watching. What happens when a model calls a tool
+            with bad arguments? Who finds out when something breaks? Does it still hold up
+            once other people start changing it? I built AI Cloud Insights from scratch and
+            then led a few developers through its launch. I wrote agentic-gate because I
+            kept seeing LLM tool calls reach real systems with no checks in between.
           </p>
         </Reveal>
 

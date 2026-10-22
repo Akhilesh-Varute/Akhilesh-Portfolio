@@ -5,7 +5,7 @@ const experience = {
   role: 'Software Developer',
   company: 'Expert Cloud Consulting (ASCP GPUonCLOUD Pvt Ltd)',
   location: 'Pune, Maharashtra, India',
-  period: 'Jun 2024 — Present',
+  period: 'Jun 2024 to Present',
   highlights: [
     'Built and launched AI Cloud Insights, a GenAI platform on AWS Bedrock that automates AWS infrastructure monitoring and cost management. Sole engineer from day one; onboarded and led 3 developers ahead of public launch.',
     'Ship to production about 13 times a week with a 3.6-minute median deploy time through CI/CD (160+ merged PRs).',

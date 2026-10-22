@@ -9,7 +9,7 @@ const lanes = [
 ];
 
 // Two request paths through the same request flow, alternating on each
-// replay — a cache hit alone only shows the read path; the miss path is
+// replay: a cache hit alone only shows the read path; the miss path is
 // where cache invalidation/write-back actually shows up.
 const scenarios = [
   {
@@ -39,7 +39,7 @@ const ROW_START = 90;
 const ROW_END = 330;
 
 /**
- * A vertical sequence-diagram scene for the Backend Systems track — request
+ * A vertical sequence-diagram scene for the Backend Systems track: request
  * arrows travel between Client / Service / Redis / DB lanes in order, one
  * step lighting up at a time. Alternates between the cache-hit and
  * cache-miss paths on each replay instead of only ever showing the happy

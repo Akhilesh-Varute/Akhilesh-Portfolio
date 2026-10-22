@@ -15,7 +15,7 @@ const checklist = [
 ];
 
 /**
- * A lightweight delivery-loop scene for the Experience section — how a
+ * A lightweight delivery-loop scene for the Experience section: how a
  * ticket actually moves from plan to shipped, not a CloudFormation-specific
  * deploy (that's a real part of the job, but not the whole of it).
  */
@@ -81,7 +81,7 @@ const DeployPipelineScene = () => {
 
       <div className="w-full border border-border bg-background">
         <div className="px-4 py-2 border-b border-border font-mono text-[10px] uppercase tracking-wide text-muted-foreground">
-          PR #482 — checklist
+          PR #482: checklist
         </div>
         <div className="p-4 font-mono text-[12px] space-y-1.5">
           {checklist.map((line, i) => (

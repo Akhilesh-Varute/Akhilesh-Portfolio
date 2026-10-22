@@ -26,13 +26,13 @@ const items = [
     n: '03',
     tag: 'DEVELOPMENT',
     title: 'Code & Development',
-    body: 'Claude Code and GitHub Copilot pairing on Node.js and Python backend services — production-bound, not disposable demos.',
+    body: 'Claude Code and GitHub Copilot alongside me on Node.js and Python backend services. The code is meant for production, not for demos.',
   },
   {
     n: '04',
     tag: 'GUARDRAILS',
     title: 'Guardrails & Testing',
-    body: 'Built Agentic-Gate because LLM tool calls need schema validation before they touch real systems — deterministic, not prompt-and-hope.',
+    body: 'Built Agentic-Gate because LLM tool calls need schema validation before they touch real systems. Deterministic checks, not prompt-and-hope.',
   },
   {
     n: '05',
@@ -89,8 +89,8 @@ const AiWorkflow = () => (
         </Reveal>
         <Reveal delay={0.1}>
           <p className="font-mono text-sm text-muted-foreground leading-relaxed">
-            Using AI daily for faster iteration and safer changes while building LLM products
-            — not for replacing engineering judgment.
+            Using AI daily for faster iteration and safer changes while building LLM products.
+            Not for replacing engineering judgment.
           </p>
         </Reveal>
       </div>

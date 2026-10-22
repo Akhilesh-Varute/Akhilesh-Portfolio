@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import Lenis from 'lenis';
 
 // Inertia-eased scrolling for regular wheel/trackpad input across the whole
-// page — CSS scroll-behavior:smooth only smooths anchor-link jumps, not
+// page: CSS scroll-behavior:smooth only smooths anchor-link jumps, not
 // everyday scrolling, so it can't give the "buttery" feel on its own. Skips
 // entirely under prefers-reduced-motion, falling back to plain native
 // scrolling (including instant anchor jumps) rather than fighting it.

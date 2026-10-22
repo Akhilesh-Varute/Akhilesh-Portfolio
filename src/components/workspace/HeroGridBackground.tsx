@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { animate, stagger, utils } from 'animejs';
 
-// Full-bleed animated dot grid behind the hero content — inspired by
+// Full-bleed animated dot grid behind the hero content: inspired by
 // animejs.com's own homepage background. Anime.js drives a continuous
 // staggered breathing wave from the grid center, and reacts to the
 // pointer with a localized ripple, using stagger's grid/from-index math.
