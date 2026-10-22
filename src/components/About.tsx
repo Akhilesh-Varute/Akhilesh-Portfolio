@@ -2,7 +2,7 @@ import { Reveal, Stagger, StaggerItem } from '@/components/motion/Reveal';
 
 const meta = [
   { label: 'Based in', value: 'Pune, Maharashtra, India' },
-  { label: 'Currently', value: 'Software Developer (Cloud Solutions), ASCP GPUonCLOUD' },
+  { label: 'Currently', value: 'Software Developer, Expert Cloud Consulting (ASCP GPUonCLOUD Pvt Ltd)' },
   { label: 'Certified', value: 'AWS Certified Developer – Associate' },
 ];
 

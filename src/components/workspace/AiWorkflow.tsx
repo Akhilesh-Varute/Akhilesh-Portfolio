@@ -3,24 +3,24 @@ import { Reveal, Stagger, StaggerItem } from '@/components/motion/Reveal';
 
 const pipeline = [
   { label: 'Prompt', meta: 'CLAUDE CODE' },
-  { label: 'Route', meta: 'MCP · TOOL SELECT' },
-  { label: 'Gate', meta: 'AGENTIC-GATE · SCHEMA' },
-  { label: 'Deploy', meta: 'CFN · GH ACTIONS' },
-  { label: 'Monitor', meta: 'CLOUDWATCH · COST' },
+  { label: 'Tool call', meta: 'BEDROCK · FUNCTION CALLING' },
+  { label: 'Validate', meta: 'AGENTIC-GATE · SCHEMA' },
+  { label: 'Ship', meta: 'CI/CD · GH ACTIONS' },
+  { label: 'Observe', meta: 'LOGS · COST' },
 ];
 
 const items = [
   {
     n: '01',
     tag: 'AUTOMATION',
-    title: 'Infra Automation',
-    body: 'CloudFormation templates, CI/CD pipelines, provisioning scaffolding generated and reviewed with AI, off my plate.',
+    title: 'Automation',
+    body: 'CI/CD pipelines, CloudFormation templates and provisioning scaffolding generated and reviewed with AI, off my plate.',
   },
   {
     n: '02',
     tag: 'RESEARCH',
     title: 'Research & Architecture',
-    body: 'Comparing AWS, Azure, and GCP tradeoffs, mapping event-driven flows, and surfacing edge cases — before a line of infra code gets written.',
+    body: 'Comparing approaches, mapping tool-calling flows and surfacing edge cases with AI, before a line of code gets written.',
   },
   {
     n: '03',
@@ -32,7 +32,7 @@ const items = [
     n: '04',
     tag: 'GUARDRAILS',
     title: 'Guardrails & Testing',
-    body: 'Built Agentic-Gate because LLM tool calls need schema validation before they touch real systems — deterministic, not prompt-and-hope. 100% test coverage through v1.4.0 is a fact, not a target.',
+    body: 'Built Agentic-Gate because LLM tool calls need schema validation before they touch real systems — deterministic, not prompt-and-hope.',
   },
   {
     n: '05',
@@ -89,8 +89,8 @@ const AiWorkflow = () => (
         </Reveal>
         <Reveal delay={0.1}>
           <p className="font-mono text-sm text-muted-foreground leading-relaxed">
-            Using AI daily for faster iteration, safer changes, and shipping production cloud
-            systems — not for replacing engineering judgment.
+            Using AI daily for faster iteration and safer changes while building LLM products
+            — not for replacing engineering judgment.
           </p>
         </Reveal>
       </div>

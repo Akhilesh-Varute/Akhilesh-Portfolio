@@ -3,9 +3,9 @@ import { Reveal } from '@/components/motion/Reveal';
 
 const stats = [
   { value: '2+', label: 'Years shipping production cloud systems', heightPct: 35, filled: true },
-  { value: '40%', label: 'Assessment overhead reduced at ASCP GPUonCLOUD', heightPct: 60, filled: true },
-  { value: '3', label: 'Cloud providers unified — AWS, Azure, GCP', heightPct: 28, filled: true },
-  { value: '100%', label: 'Test coverage on Agentic-Gate through v1.4.0', heightPct: 95, filled: false },
+  { value: '~13', label: 'Production deploys per week through CI/CD', heightPct: 60, filled: true },
+  { value: '3.6 min', label: 'Median deploy time (160+ merged PRs)', heightPct: 28, filled: true },
+  { value: '2', label: 'Package registries: Agentic-Gate on npm and PyPI', heightPct: 45, filled: false },
 ];
 
 const StatBars = () => {
@@ -22,7 +22,7 @@ const StatBars = () => {
         </Reveal>
         <Reveal delay={0.1}>
           <p className="font-mono text-sm text-muted-foreground max-w-lg mt-4 mb-16">
-            Systems shipped, providers unified, coverage held — the practice counted rather than
+            Shipping cadence and published packages — the practice counted rather than
             described.
           </p>
         </Reveal>

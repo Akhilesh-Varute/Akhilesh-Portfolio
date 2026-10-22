@@ -39,8 +39,9 @@ const Contact = () => {
             </Reveal>
             <Reveal delay={0.1}>
               <p className="font-mono text-sm text-muted-foreground max-w-lg mb-8 leading-relaxed">
-                Open to conversations about Cloud &amp; AI Engineering roles — or anything at the
-                intersection of cloud infrastructure and GenAI tooling.
+                Looking for AI/LLM and backend engineering roles at product companies in Pune or
+                remote across India. Open to a conversation, or anything at the intersection of
+                cloud infrastructure and GenAI tooling.
               </p>
             </Reveal>
 
@@ -54,10 +55,6 @@ const Contact = () => {
                   {copied ? 'Copied' : 'Copy'}
                 </MagneticButton>
               </div>
-            </Reveal>
-
-            <Reveal delay={0.3}>
-              <p className="font-mono text-sm text-muted-foreground mt-6">+91-9511977521</p>
             </Reveal>
 
             <Reveal delay={0.35}>

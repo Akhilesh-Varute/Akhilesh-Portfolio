@@ -2,15 +2,16 @@ import { Reveal, Stagger, StaggerItem } from '@/components/motion/Reveal';
 import DeployPipelineScene from '@/components/workspace/DeployPipelineScene';
 
 const experience = {
-  role: 'Software Developer (Cloud Solutions)',
-  company: 'ASCP GPUonCLOUD',
+  role: 'Software Developer',
+  company: 'Expert Cloud Consulting (ASCP GPUonCLOUD Pvt Ltd)',
   location: 'Pune, Maharashtra, India',
-  period: 'Nov 2024 — Present',
+  period: 'Jun 2024 — Present',
   highlights: [
-    'Architected GenAI-powered platform (AI Cloud Insights) using AWS Bedrock to automate infrastructure health monitoring.',
-    'Engineered multi-tenant microservices backends with Node.js, Python, AWS Lambda, and EventBridge.',
-    'Built AWS CloudFormation templates to automate client environment provisioning timelines.',
-    'Containerized core microservices using Docker and deployed on Amazon ECS Fargate.',
+    'Built and launched AI Cloud Insights, a GenAI platform on AWS Bedrock that automates AWS infrastructure monitoring and cost management. Sole engineer from day one; onboarded and led 3 developers ahead of public launch.',
+    'Ship to production about 13 times a week with a 3.6-minute median deploy time through CI/CD (160+ merged PRs).',
+    'Built GenAI bots (SecurityBot, CostBot, Activity Assistant) that use LLM function calling to invoke cloud APIs and answer natural-language queries.',
+    'Engineered multi-tenant microservices in Node.js and Python, with serverless event-driven flows on AWS Lambda and EventBridge.',
+    'Containerized a service with Docker and deployed it on Amazon ECS with AWS Fargate; wrote CloudFormation templates that shortened client environment provisioning.',
   ],
 };
 
