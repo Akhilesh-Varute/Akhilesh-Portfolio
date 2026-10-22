@@ -6,10 +6,10 @@ import ThemeToggle from '@/components/workspace/ThemeToggle';
 import { MagneticLink } from '@/components/motion/Magnetic';
 
 const navItems = [
-  { label: 'Welcome', href: '#hero' },
-  { label: 'Work', href: '#work' },
-  { label: 'AI', href: '#ai' },
-  { label: 'Profile', href: '#about' },
+  { label: 'Work', href: '#work', external: false },
+  { label: 'Experience', href: '#experience', external: false },
+  { label: 'Skills', href: '#skills', external: false },
+  { label: 'Resume', href: '/Akhilesh_Varute_Resume.pdf', external: true },
 ];
 
 const scrambleOnHover = (e: MouseEvent<HTMLAnchorElement>) => {
@@ -102,6 +102,7 @@ const Navigation = () => {
             <li key={item.label}>
               <a
                 href={item.href}
+                {...(item.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                 onMouseEnter={reduceMotion ? undefined : scrambleOnHover}
                 className="font-mono text-sm hover:text-primary transition-colors"
               >
@@ -142,6 +143,7 @@ const Navigation = () => {
                 <a
                   key={item.label}
                   href={item.href}
+                  {...(item.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                   onClick={() => setMenuOpen(false)}
                   className="block font-mono text-sm"
                 >
