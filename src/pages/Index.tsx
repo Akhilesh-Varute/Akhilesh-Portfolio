@@ -1,10 +1,8 @@
 import { useEffect } from 'react';
-import { Reveal } from '@/components/motion/Reveal';
 import CustomCursor from '@/components/workspace/CustomCursor';
 import SmoothScroll from '@/components/SmoothScroll';
 import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
-import CloudArchitectureCanvas from '@/components/workspace/CloudArchitectureCanvas';
 import AiWorkflow from '@/components/workspace/AiWorkflow';
 import StatBars from '@/components/workspace/StatBars';
 import Projects from '@/components/Projects';
@@ -32,23 +30,6 @@ const Index = () => {
       <main>
         <Hero />
         <About />
-
-        <section className="py-20 rule">
-          <div className="wrap">
-            <p className="eyebrow mb-4">System design</p>
-            <h2 className="font-display font-bold text-4xl md:text-6xl mb-3">
-              A high-availability system, <span className="text-muted-foreground">designed to prove it out.</span>
-            </h2>
-            <p className="font-mono text-sm text-muted-foreground max-w-lg mb-10">
-              Two-AZ VPC, ALB and NAT Gateway per public subnet, an nginx/app Auto Scaling
-              Group, and a MongoDB replica set — designed independently to practice
-              high-availability patterns. Drag the blocks.
-            </p>
-            <Reveal>
-              <CloudArchitectureCanvas />
-            </Reveal>
-          </div>
-        </section>
 
         <AiWorkflow />
         <StatBars />

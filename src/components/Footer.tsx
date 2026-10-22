@@ -11,7 +11,7 @@ const Footer = () => (
           </a>
 
           <p className="font-mono text-xs text-muted-foreground text-center">
-            Pune, Maharashtra, India · Product engineering · Cloud · AI
+            Pune, Maharashtra, India · Product engineering · AI · Backend
             <span className="mx-2 text-border">|</span>
             <a href="https://akhileshvarute.me" className="link-hover hover:text-primary">
               akhileshvarute.me

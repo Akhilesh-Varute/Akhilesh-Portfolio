@@ -73,7 +73,7 @@ const blocks = [
     // Entry point — where a request first lands. Slides in from the left,
     // opposite QUEUE, so the two "ends" of the request flow read as a pair.
     id: 'api',
-    name: 'API',
+    name: 'PROMPT',
     faces: isoBoxFaces(-0.6, 4.0, 1.2, 5.6, 0, 0.9),
     labelP: project(-0.6, 4.0, 0.9),
     labelAnchor: 'start' as const,
@@ -88,7 +88,7 @@ const blocks = [
     // its north corner is where GUARDRAIL sits (it caps this block from
     // above).
     id: 'ai',
-    name: 'AI',
+    name: 'LLM',
     faces: isoBoxFaces(1.0, 0.3, 4.0, 3.0, 0, 1.4),
     labelP: project(1.0, 3.0, 1.4),
     labelAnchor: 'end' as const,
@@ -117,7 +117,7 @@ const blocks = [
     // Persistence layer, opposite corner from API — the state AI/guardrail
     // read and write, not just a request/response pair with nothing behind it.
     id: 'store',
-    name: 'STORE',
+    name: 'TOOLS',
     faces: isoBoxFaces(5.3, -0.4, 7.5, 1.2, 0, 1.1),
     labelP: project(5.3, -0.4, 1.1),
     labelAnchor: 'start' as const,
@@ -131,7 +131,7 @@ const blocks = [
     // Placed clear of every other block's screen footprint, so it doesn't
     // read as nested inside them.
     id: 'queue',
-    name: 'QUEUE',
+    name: 'RETRY',
     faces: isoBoxFaces(5.2, 4.2, 7.2, 5.8, 0, 0.9),
     labelP: project(5.2, 4.2, 0.9),
     labelAnchor: 'start' as const,
@@ -143,7 +143,7 @@ const blocks = [
   },
 ] as const;
 
-const labels = [{ text: 'BUILD', p: project(PLATE.x1, PLATE.y1, 0), dx: 8, dy: 4, anchor: 'start' as const }];
+const labels = [{ text: 'AGENT', p: project(PLATE.x1, PLATE.y1, 0), dx: 8, dy: 4, anchor: 'start' as const }];
 
 // A small pulse orbiting a fixed point between API and QUEUE — the "event
 // loop" isn't a static label, it's this: something actually moving,
@@ -365,7 +365,7 @@ const HeroBuildScene = () => {
               letterSpacing: '0.08em',
             }}
           >
-            EVENT · LOOP
+            TOOL-CALL · LOOP
           </text>
         </g>
       </svg>

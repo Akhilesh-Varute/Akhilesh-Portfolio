@@ -29,26 +29,26 @@ const projects: Project[] = [
     tagline: 'Multi-Cloud GenAI Infrastructure Monitoring & Cost Optimization Platform',
     status: 'ACTIVE · LIVE',
     isCompanyProject: true,
-    company: 'ASCP GPUonCLOUD',
+    company: 'Expert Cloud Consulting',
     providers: ['AWS', 'Azure', 'GCP'],
     stack: ['AWS Bedrock', 'Multi-Cloud APIs', 'AWS Lambda', 'EventBridge', 'Node.js', 'Python', 'Amazon ECS'],
     problem:
-      'Managing cost optimization and monitoring across multi-cloud environments required logging into 3 separate provider consoles, creating fragmented data silos and severe operational overhead.',
+      'Monitoring infrastructure health and finding cost savings across cloud accounts meant working through separate provider consoles, with fragmented data and heavy manual effort.',
     solution:
-      'Architected and deployed a multi-tenant GenAI platform that unifies billing and resource monitoring metrics across AWS, Azure, and GCP into a single dashboard powered by AWS Bedrock for natural language queries.',
+      'Architected and deployed a multi-tenant GenAI platform that unifies billing and resource monitoring across AWS, Azure and GCP into a single dashboard, with AWS Bedrock powering natural-language queries.',
     impact: [
-      'Eliminated 3-console context switching by consolidating AWS, Azure, and GCP infrastructure visibility under one roof.',
-      'Engineered automated GenAI bots (SecurityBot, CostBot) to process natural language queries across multi-cloud billing and health APIs.',
-      'Reduced assessment overhead by 40% and drove 20–30% cloud cost savings across client workloads.',
+      'Built the platform end to end as the sole engineer, then onboarded and led 3 developers ahead of its public launch.',
+      'Engineered GenAI bots (SecurityBot, CostBot, Activity Assistant) that use LLM function calling to answer natural-language queries over cloud billing and health APIs.',
+      'Ships to production about 13 times a week with a 3.6-minute median deploy time through CI/CD.',
     ],
-    links: [],
-    note: 'Proprietary enterprise software built for ASCP GPUonCLOUD',
+    links: [{ label: 'Live site', href: 'https://aicloudinsights.ai' }],
+    note: 'Proprietary software built at Expert Cloud Consulting (ASCP GPUonCLOUD Pvt Ltd)',
   },
   {
     number: '02',
     title: 'Agentic-Gate',
     tagline: 'Deterministic Guardrails & Schema Validation Engine for LLM Agents',
-    status: 'PACKAGE · npm + PyPI',
+    status: 'OPEN SOURCE · npm v1.4.0 + PyPI',
     stack: ['TypeScript', 'Python', 'Zod', 'Pydantic', 'GitHub Actions'],
     problem:
       'Non-deterministic tool calling in LLM agents causes execution loops, invalid argument passing, and unnecessary cloud API token expenses.',
@@ -57,7 +57,7 @@ const projects: Project[] = [
     impact: [
       'Eliminated agent loops by failing fast on invalid LLM tool arguments.',
       'Cut cloud API overhead by reducing unnecessary downstream tool invocations.',
-      'Automated dual-registry releases to npm and PyPI via GitHub Actions Trusted Publishers, with 100% test coverage.',
+      'Automated dual-registry releases to npm and PyPI via GitHub Actions Trusted Publishers, with automated tests and CI.',
     ],
     links: [
       { label: 'GitHub', href: 'https://github.com/Akhilesh-Varute/agentic-gate' },
@@ -68,19 +68,36 @@ const projects: Project[] = [
   {
     number: '03',
     title: 'EcoScheduler',
-    tagline: 'Multi-Tenant AWS FinOps SaaS Platform',
-    status: 'ACTIVE · 2025',
-    stack: ['AWS Lambda', 'API Gateway', 'DynamoDB', 'AWS SDK', 'STS AssumeRole', 'Node.js', 'TypeScript'],
+    tagline: 'Serverless AWS EC2 Cost-Optimization Scheduler',
+    status: 'SIDE PROJECT · 2026',
+    stack: ['Python', 'AWS Lambda', 'API Gateway', 'DynamoDB', 'EventBridge', 'STS AssumeRole', 'Next.js', 'TypeScript', 'CloudFormation'],
     problem:
       'Unmanaged non-production EC2 instances running 24/7 across multiple client AWS accounts waste compute budgets, while existing tools lack secure cross-account RBAC and dry-run safety modes.',
     solution:
-      'Built a multi-tenant serverless FinOps SaaS on AWS Lambda, API Gateway, and DynamoDB that automates cross-account EC2 lifecycle schedules while maintaining strict security audit trails.',
+      'Built a multi-tenant serverless scheduler: a Python backend on AWS Lambda, API Gateway, DynamoDB and EventBridge, with a Next.js dashboard, that automates cross-account EC2 stop/start schedules with a full audit trail.',
     impact: [
-      'Engineered secure cross-account EC2 access using AWS STS AssumeRole policies and dynamic account onboarding.',
-      'Architected a 3-tier RBAC system (Admin, Developer, Finance) with JWT authorization, dry-run evaluation, and audit logging.',
-      'Remediated critical edge cases during cloud integration testing, including EventBridge UTC schedule sync, Lambda resource policies, and DynamoDB attribute serialization.',
+      'Cross-account EC2 access through AWS STS AssumeRole, with self-service account onboarding via a CloudFormation template (no long-lived credentials).',
+      'Three-role RBAC (admin, developer, finance) with a custom JWT Lambda authorizer, per-schedule dry-run mode and audit logging.',
+      'Debugged real integration issues along the way: EventBridge UTC schedule sync, Lambda resource policies and DynamoDB attribute serialization.',
     ],
     links: [{ label: 'GitHub', href: 'https://github.com/Akhilesh-Varute/ecoscheduler' }],
+  },
+  {
+    number: '04',
+    title: 'Nock',
+    tagline: 'A Tiny Native Notch and Top Bar for Windows',
+    status: 'OPEN SOURCE · RELEASED · Windows 10/11',
+    stack: ['Rust (AI-assisted)', 'GitHub Actions', 'Inno Setup'],
+    problem:
+      'Windows has no lightweight, native take on the macOS notch and menu bar. Existing options tend to pull in a webview or a runtime, and sit idle burning CPU and memory.',
+    solution:
+      'Designed and shipped a native Windows notch and top bar. I chose Rust for its tiny footprint and built it with AI coding tools, directing the design and testing. No webview, framework or runtime; it ships as a single small .exe or a per-user installer, with media controls, Wi-Fi and Bluetooth dropdowns, a focus timer, clipboard history and an app launcher.',
+    impact: [
+      'Event-driven design with no polling loop: about 0% CPU and about 32 MB of memory while idle, in a download of roughly 1 MB.',
+      'Automated release pipeline on GitHub Actions that builds the installer on every version tag, with an in-app update check.',
+      'Published under the MIT license with a demo, install guide and public issue tracker.',
+    ],
+    links: [{ label: 'GitHub', href: 'https://github.com/Akhilesh-Varute/Nock' }],
   },
 ];
 
@@ -177,8 +194,7 @@ const Projects = () => (
         Built this way, <span className="text-muted-foreground">and running.</span>
       </h2>
       <p className="font-mono text-sm text-muted-foreground max-w-lg mt-4 mb-14">
-        Not experiments. Each of these is in production, published to a registry, or running a
-        client's infrastructure.
+        Not tutorials. A live product, published packages and shipped releases.
       </p>
 
       <div className="space-y-8">

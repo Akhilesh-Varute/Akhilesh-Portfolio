@@ -42,7 +42,7 @@ const Words = ({ text, className }: { text: string; className?: string }) => {
   return (
     <span className={className}>
       {words.map((w, i) => (
-        <span key={i} className="inline-block overflow-hidden align-top pb-[0.1em]">
+        <span key={i} className="inline-block overflow-hidden align-top pb-[0.2em] -mb-[0.1em]">
           <motion.span variants={word} className="inline-block">
             {w}
             {i < words.length - 1 ? ' ' : ''}
@@ -104,7 +104,7 @@ const Hero = () => {
               <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-primary" />
             </span>
             <span className="font-mono text-[11px] text-muted-foreground tracking-wide">
-              Available for Cloud &amp; AI Engineering roles
+              Open to AI/LLM &amp; Backend Engineering roles · Pune / Remote
             </span>
           </motion.div>
 
@@ -125,14 +125,15 @@ const Hero = () => {
             animate="show"
             className="font-display font-bold text-4xl md:text-6xl leading-[1.08]"
           >
-            <Words text="I build cloud systems that run themselves," />{' '}
-            <Words text="and AI that only does what it's validated to do." className="text-muted-foreground" />
+            <Words text="I build LLM-powered products," />{' '}
+            <Words text="and the guardrails that keep them reliable." className="text-muted-foreground" />
           </motion.h1>
 
           <motion.div variants={item}>
             <p className="font-mono text-sm text-muted-foreground leading-relaxed">
-              Event-driven architecture, deterministic AI guardrails, production from day one.
-              2+ years shipping cloud platforms teams actually run on. AWS Certified Developer.
+              AI/LLM and backend engineer. Built a GenAI platform from zero to public launch, and an
+              open-source library that validates LLM tool calls before they touch real systems.
+              AWS Certified Developer.
             </p>
 
             <div className="flex flex-wrap items-center gap-3 mt-6">

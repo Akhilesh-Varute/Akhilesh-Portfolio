@@ -7,7 +7,7 @@ const categories = [
     items: [
       'AWS Bedrock', 'AWS Lambda', 'Amazon ECS Fargate', 'AWS S3', 'CloudFront',
       'Amazon EC2', 'AWS IAM', 'Security Hub', 'CloudFormation', 'Docker',
-      'Kubernetes', 'CI/CD (GitHub Actions)', 'Infrastructure as Code (IaC)',
+      'CI/CD (GitHub Actions)', 'Infrastructure as Code (IaC)',
     ],
   },
   {

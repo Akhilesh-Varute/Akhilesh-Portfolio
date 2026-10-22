@@ -20,8 +20,8 @@ export const Reveal = ({ children, delay = 0, y = 28, className, once = true }: 
       className={className}
       initial={{ opacity: 0, y: reduceMotion ? 0 : y }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once, margin: '-80px' }}
-      transition={{ duration: 0.7, delay, ease: EASE }}
+      viewport={{ once, margin: '-40px' }}
+      transition={{ duration: 0.55, delay, ease: EASE }}
     >
       {children}
     </motion.div>
