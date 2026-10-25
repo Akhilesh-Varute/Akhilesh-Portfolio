@@ -20,6 +20,7 @@ interface Project {
   impact: string[];
   links: ProjectLink[];
   note?: string;
+  video?: { src: string; poster: string; caption: string };
 }
 
 const projects: Project[] = [
@@ -59,6 +60,11 @@ const projects: Project[] = [
       'Cut cloud API overhead by reducing unnecessary downstream tool invocations.',
       'Automated dual-registry releases to npm and PyPI via GitHub Actions Trusted Publishers, with automated tests and CI.',
     ],
+    video: {
+      src: '/videos/agentic-gate-promo.mp4',
+      poster: '/videos/agentic-gate-poster.jpg',
+      caption: 'agentic-gate in about a minute: the problem, the fix and a reproducible benchmark.',
+    },
     links: [
       { label: 'GitHub', href: 'https://github.com/Akhilesh-Varute/agentic-gate' },
       { label: 'npm', href: 'https://www.npmjs.com/package/agentic-gate' },
@@ -97,6 +103,11 @@ const projects: Project[] = [
       'Automated release pipeline on GitHub Actions that builds the installer on every version tag, with an in-app update check.',
       'Published under the MIT license with a demo, install guide and public issue tracker.',
     ],
+    video: {
+      src: '/videos/nock-demo.mp4',
+      poster: '/videos/nock-poster.jpg',
+      caption: 'Nock running on Windows 11: media, focus timer, Wi-Fi and Bluetooth, clipboard.',
+    },
     links: [{ label: 'GitHub', href: 'https://github.com/Akhilesh-Varute/Nock' }],
   },
 ];
@@ -145,6 +156,21 @@ const ProjectCard = ({ project }: { project: Project }) => (
             <p className="font-mono text-sm text-foreground/85 leading-relaxed">{project.solution}</p>
           </div>
         </div>
+
+        {project.video && (
+          <figure className="mb-6">
+            <video
+              className="w-full aspect-video border border-border bg-black"
+              src={project.video.src}
+              poster={project.video.poster}
+              controls
+              playsInline
+              preload="none"
+              aria-label={project.video.caption}
+            />
+            <figcaption className="font-mono text-[11px] text-muted-foreground mt-2">{project.video.caption}</figcaption>
+          </figure>
+        )}
 
         <ul className="space-y-2 mb-6">
           {project.impact.map((point, i) => (
