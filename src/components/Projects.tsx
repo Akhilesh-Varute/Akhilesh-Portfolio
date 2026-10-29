@@ -108,7 +108,10 @@ const projects: Project[] = [
       poster: '/videos/nock-poster.jpg',
       caption: 'Nock running on Windows 11: media, focus timer, Wi-Fi and Bluetooth, clipboard.',
     },
-    links: [{ label: 'GitHub', href: 'https://github.com/Akhilesh-Varute/Nock' }],
+    links: [
+      { label: 'Live', href: 'https://nock.akhileshvarute.me/' },
+      { label: 'GitHub', href: 'https://github.com/Akhilesh-Varute/Nock' },
+    ],
   },
 ];
 
