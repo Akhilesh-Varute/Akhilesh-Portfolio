@@ -1,16 +1,16 @@
-import { useEffect } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import CustomCursor from '@/components/workspace/CustomCursor';
 import SmoothScroll from '@/components/SmoothScroll';
 import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
-import AiWorkflow from '@/components/workspace/AiWorkflow';
-import StatBars from '@/components/workspace/StatBars';
-import Projects from '@/components/Projects';
+const AiWorkflow = lazy(() => import('@/components/workspace/AiWorkflow'));
+const StatBars = lazy(() => import('@/components/workspace/StatBars'));
+const Projects = lazy(() => import('@/components/Projects'));
 import About from '@/components/About';
-import Experience from '@/components/Experience';
-import Skills from '@/components/Skills';
-import EducationCertifications from '@/components/EducationCertifications';
-import Contact from '@/components/Contact';
+const Experience = lazy(() => import('@/components/Experience'));
+const Skills = lazy(() => import('@/components/Skills'));
+const EducationCertifications = lazy(() => import('@/components/EducationCertifications'));
+const Contact = lazy(() => import('@/components/Contact'));
 import Footer from '@/components/Footer';
 
 const Index = () => {
@@ -31,15 +31,19 @@ const Index = () => {
         <Hero />
         <About />
 
-        <AiWorkflow />
-        <StatBars />
-        <Projects />
-        <Experience />
-        <Skills />
-        <EducationCertifications />
+        <Suspense fallback={null}>
+          <AiWorkflow />
+          <StatBars />
+          <Projects />
+          <Experience />
+          <Skills />
+          <EducationCertifications />
+        </Suspense>
       </main>
 
-      <Contact />
+      <Suspense fallback={null}>
+        <Contact />
+      </Suspense>
       <Footer />
     </div>
   );

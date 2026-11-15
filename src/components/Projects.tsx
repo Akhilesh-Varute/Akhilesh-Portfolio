@@ -49,7 +49,7 @@ const projects: Project[] = [
     number: '02',
     title: 'Agentic-Gate',
     tagline: 'Deterministic Guardrails & Schema Validation Engine for LLM Agents',
-    status: 'OPEN SOURCE · npm v1.4.0 + PyPI',
+    status: 'OPEN SOURCE · npm v1.5.0 + PyPI',
     stack: ['TypeScript', 'Python', 'Zod', 'Pydantic', 'GitHub Actions'],
     problem:
       'Non-deterministic tool calling in LLM agents causes execution loops, invalid argument passing, and unnecessary cloud API token expenses.',
